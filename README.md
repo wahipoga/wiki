@@ -1,5 +1,5 @@
-- ENGLISH: This post is translated into English and Spanish; scroll down to find your desired language. 
-- ESPAÑOL: Esta publicación está traducida al inglés y al español; desplácese hacia abajo para encontrar el idioma que desee.
+- **ENGLISH**: This post is translated into English and Spanish; scroll down to find your desired language. 
+- **ESPAÑOL**: Esta publicación está traducida al inglés y al español; desplácese hacia abajo para encontrar el idioma que desee.
 ---
 # PORTUGUÊS:
 Código-fonte da **Wiki Laços Profanos**, uma wiki dedicada ao universo de Laços Profanos.
