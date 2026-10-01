@@ -1,0 +1,24 @@
+{
+  "nome": "Nome do Personagem",
+  "imagem": "https://exemplo.com/imagem.jpg",
+  "infobox": {
+    "titulo": "Informações",
+    "campos": [
+      { "label": "Nome completo", "valor": "" },
+      { "label": "Idade", "valor": "" },
+      { "label": "Gênero", "valor": "" },
+      { "label": "Espécie", "valor": "" },
+      { "label": "Data de nascimento", "valor": "" }
+    ],
+    "relacionamentos": [
+      { "nome": "", "slug": "", "nota": "" }
+    ],
+    "historias": {
+      "titulo": "Histórias / Aparições",
+      "campos": [
+        { "label": "História", "valor": "" },
+        { "label": "Papel", "valor": "" }
+      ]
+    }
+  }
+}
