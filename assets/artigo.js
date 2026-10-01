@@ -37,6 +37,9 @@
             const tituloEl = document.getElementById('artigoTitulo');
             if (tituloEl) tituloEl.textContent = meta.nome;
 
+            const nomeBoxEl = document.getElementById('artigoNomeBox');
+            if (nomeBoxEl) nomeBoxEl.textContent = meta.nome;
+
             const imgTopoEl = document.getElementById('artigoImagemTopo');
             if (imgTopoEl && meta.imagem) {
                 imgTopoEl.innerHTML = `<img src="${meta.imagem}" alt="${meta.nome}">`;
@@ -46,19 +49,33 @@
                 sidebarEl.innerHTML = renderInfobox(meta.infobox, tipo);
             }
 
+            const temGaleria = !!galeriaData.imagens?.length;
+
             if (conteudoEl) {
                 if (typeof marked !== 'undefined') {
                     marked.setOptions({ breaks: true, gfm: true });
                     conteudoEl.innerHTML = marked.parse(md);
-                    gerarIndice(conteudoEl);
-                    converterLinksInternos(conteudoEl, tipo);
+
+                    // Tudo antes do primeiro H2 vira a introdução
+                    const introEl = document.getElementById('artigoIntro');
+                    if (introEl) {
+                        const primeiroH2 = conteudoEl.querySelector('h2');
+                        while (conteudoEl.firstChild && conteudoEl.firstChild !== primeiroH2) {
+                            introEl.appendChild(conteudoEl.firstChild);
+                        }
+                    }
+
+                    gerarIndice(conteudoEl, meta.nome, temGaleria);
+                    converterLinksInternos(document.querySelector('.artigo-conteudo'), tipo);
                 } else {
                     conteudoEl.innerHTML = '<p class="vazio">Erro: marked.js não carregado.</p>';
                 }
             }
 
             const galeriaEl = document.getElementById('artigoGaleria');
-            if (galeriaEl && galeriaData.imagens?.length) {
+            if (galeriaEl && temGaleria) {
+                const galeriaTitulo = document.getElementById('galeria-titulo');
+                if (galeriaTitulo) galeriaTitulo.style.display = '';
                 galeriaEl.innerHTML = renderGaleria(galeriaData.imagens);
                 setupGaleria();
             }
@@ -73,9 +90,8 @@
         if (!info) return '';
         let html = '<div class="wiki-container">';
 
-        if (info.titulo) {
-            html += `<div class="wiki-header-box">${info.titulo}</div>`;
-        }
+        html += `<div class="wiki-header-box">${info.titulo || 'Informações'}</div>`;
+
         (info.campos || []).forEach(c => {
             html += `<div class="wiki-item"><strong>${c.label}:</strong> ${c.valor}`;
             if (c.nota) html += ` <span class="wiki-note">${c.nota}</span>`;
@@ -97,7 +113,7 @@
         }
 
         if (info.historias) {
-            html += `<div class="wiki-header-box">${info.historias.titulo || 'Histórias'}</div>`;
+            html += `<div class="wiki-header-box">${info.historias.titulo || 'Histórias / Aparições'}</div>`;
             (info.historias.campos || []).forEach(c => {
                 html += `<div class="wiki-item"><strong>${c.label}:</strong> ${c.valor}</div>`;
             });
@@ -107,23 +123,25 @@
         return html;
     }
 
-    function gerarIndice(container) {
+    function gerarIndice(container, nome, temGaleria) {
         const indiceEl = document.getElementById('artigoIndice');
         if (!indiceEl) return;
         const h2s = container.querySelectorAll('h2');
-        if (!h2s.length) { indiceEl.style.display = 'none'; return; }
+        if (!h2s.length && !temGaleria) { indiceEl.style.display = 'none'; return; }
 
-        let html = '<h3>Índice</h3><ul>';
+        const itens = [`<li><a href="#artigoTitulo">${nome}</a></li>`];
         h2s.forEach((h2, i) => {
             const id = 'secao-' + i;
             h2.id = id;
-            html += `<li><a href="#${id}">${h2.textContent}</a></li>`;
+            itens.push(`<li><a href="#${id}">${h2.textContent}</a></li>`);
         });
-        html += '</ul>';
-        indiceEl.innerHTML = html;
+        if (temGaleria) itens.push('<li><a href="#galeria-titulo">Galeria:</a></li>');
+
+        indiceEl.innerHTML = `<h3>índice:</h3><ul>${itens.join('')}</ul>`;
     }
 
     function converterLinksInternos(container, tipo) {
+        if (!container) return;
         container.querySelectorAll('a').forEach(a => {
             const href = a.getAttribute('href') || '';
             if (/^[a-z0-9-]+$/i.test(href)) {
