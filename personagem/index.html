@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="lang-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personagens — Wiki Laços Profanos</title>
+    <link rel="icon" href="https://i.imgur.com/mgxXSto.png" type="image/png">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">Laços Profanos</a>
+        <div class="language-dropdown" id="languageDropdown">
+            <button class="language-btn" id="languageBtn">
+                <i class="fas fa-globe"></i>
+                <span id="current-language">Português</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-content" id="dropdownContent"></div>
+        </div>
+        <ul class="nav-menu" id="navMenu"></ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<main class="container">
+    <h1 class="page-title">Personagens</h1>
+    <p class="page-subtitle">Todos os personagens do universo de Laços Profanos.</p>
+
+    <div class="toolbar">
+        <input type="search" id="filtroLocal" placeholder="Filtrar personagens..." autocomplete="off">
+        <button id="toggleAZ">Ordem alfabética</button>
+    </div>
+
+    <div class="artigos-grid" id="artigosGrid">
+        <p class="vazio">Carregando...</p>
+    </div>
+</main>
+
+<footer>
+    <p>Wiki Laços Profanos — <a href="/contribua.html">Contribua</a></p>
+</footer>
+
+<script src="/assets/app.js"></script>
+<script>
+    window.CATEGORIA_SLUG = 'personagem';
+    window.CATEGORIA_JSON = '/personagem/personagens.json';
+</script>
+<script src="/assets/listar.js"></script>
+
+</body>
+</html>
