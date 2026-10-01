@@ -1,9 +1,5 @@
 [
   { "label": "Início", "link": "/", "icon": "fa-home" },
-  { "label": "Personagens", "link": "/personagem/", "icon": "fa-users" },
-  { "label": "Bestiário", "link": "/bestiario/", "icon": "fa-dragon" },
-  { "label": "Universo", "link": "/universo/", "icon": "fa-globe" },
-  { "label": "Símbolos", "link": "/simbolos/", "icon": "fa-shapes" },
-  { "label": "Organizações", "link": "/organizacoes/", "icon": "fa-sitemap" },
-  { "label": "Contribua", "link": "/contribua.html", "icon": "fa-hands-helping" }
+  { "label": "Contribua pra wiki", "link": "/contribua.html", "icon": "fa-hands-helping" },
+  { "label": "Site principal", "link": "https://lacosprofanos.com.br/", "icon": "fa-home" },
 ]
