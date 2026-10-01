@@ -1,0 +1,24 @@
+{
+  "nome": "Wahi",
+  "imagem": "https://placehold.co/400x400/1a1a1a/f01b85?text=Wahi",
+  "infobox": {
+    "titulo": "Informações",
+    "campos": [
+      { "label": "Nome completo", "valor": "Wahipogo" },
+      { "label": "Idade", "valor": "??" },
+      { "label": "Gênero", "valor": "Indefinido" },
+      { "label": "Espécie", "valor": "Metamorfa" },
+      { "label": "Data de nascimento", "valor": "07 de abril" }
+    ],
+    "relacionamentos": [
+      { "nome": "Yaziell", "slug": "yaziell", "nota": "amigo de infância" }
+    ],
+    "historias": {
+      "titulo": "Histórias / Aparições",
+      "campos": [
+        { "label": "História", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Papel", "valor": "Protagonista" }
+      ]
+    }
+  }
+}
