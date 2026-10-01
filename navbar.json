@@ -1,5 +1,7 @@
-[
-  { "label": "Início", "link": "/", "icon": "fa-home" },
-  { "label": "Contribua pra wiki", "link": "/contribua.html", "icon": "fa-hands-helping" },
-  { "label": "Site principal", "link": "https://lacosprofanos.com.br/", "icon": "fa-home" },
-]
+{
+  "pt": [
+    { "icon": "fa-home", "label": "Início", "link": "/", "enable": true },
+    { "icon": "fa-hands-helping", "label": "Contribua pra wiki", "link": "/contribua.html", "enable": true },
+    { "icon": "fa-external-link-alt", "label": "Site principal", "link": "https://lacosprofanos.com.br/", "enable": true }
+  ]
+}
