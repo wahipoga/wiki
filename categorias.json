@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "universo",
+    "nome": "universo",
+    "imagem": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72s-6BUv78sZ7_DB3dEijjCNIGF6aWpdGY3WpGocuIo84PWU4Umuez7z68Bj1_VF9WyXvRzAYttcn_2AZsmwm-EOYFLWdIYNk503RuhQSvDVqJ-0zx74QyjHA2e4HKLmSyNpxn7Lh49BhddDmrzn6u9u_mS-CkDKuIWVpO0dhPmrJCprKnd35Et2tR9M9QQ=w1280",
+    "descricao": "Continentes, climas e características do mundo"
+  },
+  {
+    "slug": "personagem",
+    "nome": "Personagens",
+    "imagem": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72vRu4mdAvx8UNI7_crPAvvopTg_SesVfePmiEqOfEDbmeZkXS5KJ-jtuinznMHC3XcBZipb78JKGeQmSoxM5azXuqL8KI22qGR0vq_5SklnXycp-lXkJRit3Mzmduf-XCDSZEfl_n1gaIADrksc3OOg3JaJaYNOWk39YCVyeZeucmZeu_T0uLPJayJ4=w1280",
+    "descricao": "Todos os personagens do universo de Laços Profanos"
+  },
+  {
+    "slug": "bestiario",
+    "nome": "Bestiário",
+    "imagem": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72sIW-JAvkvJL6Zph47JKWLkLFP4tWVUvKvEnDFOVjVFmzvbLsUL34QJOejpZ6ewBfomSYPKpasPbKFxpxPHQrICNcZ_UDDU13IT0OckM2wtZO0GX49zU97ZqkTCe0Gw7bh9jzg0dmQdq4EqNMw9QstUNQ1EYj-X-W014GJdd0E4G_BoFXshJHQHXko1bSg=w1280",
+    "descricao": "Todas as criaturas que habitam esse mundo"
+  },
+  {
+    "slug": "simbolos",
+    "nome": "Símbolos",
+    "imagem": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72u46GJtl8rSSFxC0GbiheahtGDEAb37pDI1EGfqh94XL8X4l1UOCyxDekfeFI5KUjL6YxxpbjUffqZMVLKyQXXxvxEMvzj1qJvdtTP6pUzrMAsMoQEQ6ebZqUqN819iggtbHisTHMZDNl_aCMF1sWGR2bEsv5AdpFPg7G_XubQRMKm1tLlHEls1qpFid6g=w1280",
+    "descricao": "Símbolos e signos importantes"
+  },
+  {
+    "slug": "organizacoes",
+    "nome": "Organizações",
+    "imagem": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72uSXHbwIF4ddCWVAX9W7sNZ7ysEK1GCa89R7t2i6vqCBHx2SMSjVG973gFv-It_PKzrlzpnUsq_A9t_0FOSLxpTjmXqUVx0dCZz6kuWM-AZeMd5aq-y4KjQ-atvW4fiYgXp_4BeurCdRc_d5XNMsQPHdouDBAluFmUrTJ9jKhZDnNXjqiQyZ-ddyw=w1280",
+    "descricao": "Grupos, facções e instituições"
+  }
+]
