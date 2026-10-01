@@ -34,11 +34,8 @@
 
             document.title = `${meta.nome} — Wiki Laços Profanos`;
 
-            const tituloEl = document.getElementById('artigoTitulo');
-            if (tituloEl) tituloEl.textContent = meta.nome;
-
-            const nomeBoxEl = document.getElementById('artigoNomeBox');
-            if (nomeBoxEl) nomeBoxEl.textContent = meta.nome;
+            const nomeEl = document.getElementById('artigoNome');
+            if (nomeEl) nomeEl.textContent = meta.nome;
 
             const imgTopoEl = document.getElementById('artigoImagemTopo');
             if (imgTopoEl && meta.imagem) {
@@ -129,15 +126,15 @@
         const h2s = container.querySelectorAll('h2');
         if (!h2s.length && !temGaleria) { indiceEl.style.display = 'none'; return; }
 
-        const itens = [`<li><a href="#artigoTitulo">${nome}</a></li>`];
+        const itens = [`<li><a href="#artigoNome">${nome}</a></li>`];
         h2s.forEach((h2, i) => {
             const id = 'secao-' + i;
             h2.id = id;
             itens.push(`<li><a href="#${id}">${h2.textContent}</a></li>`);
         });
-        if (temGaleria) itens.push('<li><a href="#galeria-titulo">Galeria:</a></li>');
+        if (temGaleria) itens.push('<li><a href="#galeria-titulo">Galeria</a></li>');
 
-        indiceEl.innerHTML = `<h3>índice:</h3><ul>${itens.join('')}</ul>`;
+        indiceEl.innerHTML = `<h3>Índice</h3><ul>${itens.join('')}</ul>`;
     }
 
     function converterLinksInternos(container, tipo) {
