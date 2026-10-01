@@ -10,6 +10,17 @@
     }
 
     // ============================================
+    // NORMALIZA PATH — remove .html, barra final, minúsculas
+    // ============================================
+    function normalizar(path) {
+        if (!path) return '/';
+        return path
+            .replace(/\.html$/, '')
+            .replace(/\/$/, '')
+            .toLowerCase() || '/';
+    }
+
+    // ============================================
     // NAVBAR
     // ============================================
     async function carregarNavbar() {
@@ -25,16 +36,16 @@
 
             if (!items.length) { navMenu.innerHTML = ''; return; }
 
-            const path = location.pathname;
+            const pathAtual = normalizar(location.pathname);
             const host = location.host;
 
             navMenu.innerHTML = items.map(item => {
                 let ativo = false;
                 try {
                     const url = new URL(item.link);
-                    ativo = url.host === host && url.pathname === path;
+                    ativo = url.host === host && normalizar(url.pathname) === pathAtual;
                 } catch (_) {
-                    ativo = item.link === path;
+                    ativo = normalizar(item.link) === pathAtual;
                 }
                 const classe = ativo ? 'disabled' : '';
                 return `<li class="nav-item">
@@ -150,19 +161,11 @@
 
     // ============================================
     // TROCAR IDIOMA
-    // PT = "" (sem sufixo)
-    // EN = "/en"
-    // ES = "/es"
-    // A página PT é index.html; EN é en.html; etc.
     // ============================================
     function trocarIdioma(novoLang) {
-        let base = location.pathname;
-
-        // Remove sufixo /en ou /es
-        base = base.replace(/\/(en|es)\/?$/, '/');
+        let base = location.pathname.replace(/\/(en|es)\/?$/, '/');
         if (!base.endsWith('/')) base += '/';
 
-        // PT = raiz. EN/ES = sufixo
         if (novoLang === 'pt') {
             location.href = base;
         } else {
