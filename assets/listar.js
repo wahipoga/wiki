@@ -1,13 +1,16 @@
 (function () {
     'use strict';
 
-    // Esta função é usada em /personagem/index.html, /bestiario/index.html, etc.
-    // Ela espera:
-    //   - window.CATEGORIA_SLUG = "personagem" (definido na página HTML)
-    //   - window.CATEGORIA_JSON = "/personagem/personagens.json" (definido na página HTML)
+    // Espera:
+    //   window.CATEGORIA_SLUG = "personagem"
+    //   window.CATEGORIA_JSON = "/personagem/personagens.json"
 
     let artigos = [];
     let ordem = 'padrao';
+
+    function getIdiomaAtual() {
+        return (document.documentElement.id || 'lang-pt').replace('lang-', '');
+    }
 
     async function carregar() {
         const grid = document.getElementById('artigosGrid');
@@ -17,10 +20,9 @@
             const lista = await fetch(window.CATEGORIA_JSON + '?v=' + Date.now())
                 .then(r => r.json());
 
-            // Suporta { "itens": [...] } ou array direto
             const slugs = Array.isArray(lista) ? lista : (lista.itens || []);
-
             const base = '/' + window.CATEGORIA_SLUG + '/';
+
             artigos = (await Promise.all(
                 slugs.map(slug =>
                     fetch(`${base}${slug}/${slug}.json?v=` + Date.now())
@@ -39,17 +41,14 @@
 
     function render() {
         const grid = document.getElementById('artigosGrid');
-        const buscaLocal = document.getElementById('filtroLocal');
-        const termo = (buscaLocal?.value || '').toLowerCase().trim();
+        const filtro = document.getElementById('filtroLocal');
+        const termo = (filtro?.value || '').toLowerCase().trim();
+        const idioma = getIdiomaAtual();
 
         let lista = [...artigos];
-
         if (termo) {
-            lista = lista.filter(a =>
-                (a.nome || '').toLowerCase().includes(termo)
-            );
+            lista = lista.filter(a => (a.nome || '').toLowerCase().includes(termo));
         }
-
         if (ordem === 'az') {
             lista.sort((a, b) => (a.nome || '').localeCompare(b.nome || '', 'pt-BR'));
         }
@@ -59,14 +58,19 @@
             return;
         }
 
-        grid.innerHTML = lista.map(a => `
-            <a class="artigo-card" href="/${window.CATEGORIA_SLUG}/${a.slug}/">
-                <img src="${a.imagem || 'https://placehold.co/300/1a1a1a/666?text=?'}"
-                     alt="${a.nome}" loading="lazy"
-                     onerror="this.src='https://placehold.co/300/1a1a1a/666?text=?'">
-                <h3>${a.nome}</h3>
-            </a>
-        `).join('');
+        grid.innerHTML = lista.map(a => {
+            // Link do card aponta pro idioma certo
+            const sufixo = idioma === 'pt' ? '' : `${idioma}`;
+            const href = `/${window.CATEGORIA_SLUG}/${a.slug}/${sufixo}`;
+            return `
+                <a class="artigo-card" href="${href}">
+                    <img src="${a.imagem || 'https://placehold.co/300/1a1a1a/666?text=?'}"
+                         alt="${a.nome}" loading="lazy"
+                         onerror="this.src='https://placehold.co/300/1a1a1a/666?text=?'">
+                    <h3>${a.nome}</h3>
+                </a>
+            `;
+        }).join('');
     }
 
     function setupControles() {
