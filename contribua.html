@@ -3,11 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contribua — Wiki Laços Profanos</title>
+    <title>Como contribuir — Wiki Laços Profanos</title>
     <link rel="icon" href="https://i.imgur.com/mgxXSto.png" type="image/png">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        .doc-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(240, 27, 133, 0.15);
+        }
+        .doc-section:last-child {
+            border-bottom: none;
+        }
+        .doc-section h2 {
+            font-size: 1.5rem;
+            color: #f01b85;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .doc-section h2 .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #f01b85;
+            color: #000;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .doc-section h3 {
+            font-size: 1.05rem;
+            color: #fff;
+            margin: 24px 0 10px;
+            font-weight: 700;
+            padding-left: 12px;
+            border-left: 3px solid #f01b85;
+        }
+        .doc-section p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #ddd;
+            margin-bottom: 12px;
+        }
+        .doc-section ul, .doc-section ol {
+            margin: 0 0 16px 24px;
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .doc-section li {
+            margin-bottom: 6px;
+        }
+        .doc-section a {
+            color: #f01b85;
+            text-decoration: underline;
+        }
+        .doc-section a:hover {
+            color: #ff4da6;
+        }
+        .doc-section code {
+            background: rgba(240, 27, 133, 0.1);
+            color: #f01b85;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            border: 1px solid rgba(240, 27, 133, 0.2);
+        }
+        .doc-section pre {
+            background: #111;
+            border: 1px solid rgba(240, 27, 133, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        .doc-section pre code {
+            background: none;
+            border: none;
+            color: #f0f0f0;
+            padding: 0;
+            font-size: 1em;
+        }
+        .doc-callout {
+            background: rgba(240, 27, 133, 0.08);
+            border-left: 4px solid #f01b85;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 0.9rem;
+            color: #eee;
+        }
+        .doc-callout strong {
+            color: #f01b85;
+        }
+        .doc-callout.warn {
+            background: rgba(255, 23, 68, 0.08);
+            border-left-color: #ff1744;
+        }
+        .doc-callout.warn strong {
+            color: #ff6b6b;
+        }
+        .doc-callout.ok {
+            background: rgba(0, 200, 83, 0.08);
+            border-left-color: #00c853;
+        }
+        .doc-callout.ok strong {
+            color: #4caf50;
+        }
+        .doc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f01b85;
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 8px;
+            transition: all 0.3s;
+        }
+        .doc-btn:hover {
+            background: #ff4da6;
+            color: #000;
+            transform: translateY(-2px);
+        }
+        .doc-btn i {
+            font-size: 1.1rem;
+        }
+        .doc-index {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(240, 27, 133, 0.2);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+        }
+        .doc-index h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #f01b85;
+            margin-bottom: 12px;
+            border-left: none;
+            padding-left: 0;
+            font-weight: 700;
+        }
+        .doc-index ol {
+            margin: 0 0 0 20px;
+            padding: 0;
+        }
+        .doc-index li {
+            margin-bottom: 6px;
+        }
+        .doc-index a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.92rem;
+        }
+        .doc-index a:hover {
+            color: #f01b85;
+        }
+        .regra-bloqueada {
+            list-style: none;
+            padding-left: 0;
+            margin-left: 0;
+        }
+        .regra-bloqueada li {
+            padding-left: 28px;
+            position: relative;
+        }
+        .regra-bloqueada li::before {
+            content: '✕';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #ff1744;
+            font-weight: 800;
+        }
+        .regra-permitida {
+            list-style: none;
+            padding-left: 0;
+            margin-left: 0;
+        }
+        .regra-permitida li {
+            padding-left: 28px;
+            position: relative;
+        }
+        .regra-permitida li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #00c853;
+            font-weight: 800;
+        }
+    </style>
 </head>
 <body>
 
@@ -31,37 +231,495 @@
 
 <main class="container">
     <h1 class="page-title">Como contribuir</h1>
-    <p class="page-subtitle">Quer ajudar a wiki? Você não precisa saber programar.</p>
+    <p class="page-subtitle">
+        A wiki é um repositório aberto. Qualquer pessoa pode propor mudanças —
+        você não precisa saber programar, só seguir os passos abaixo.
+    </p>
 
-    <div class="artigo-conteudo">
-        <h2>1. Escolha um tipo de conteúdo</h2>
-        <p>Cada tipo tem um exemplo real já pronto:</p>
-        <ul>
-            <li><a href="/personagem/wahi/">Personagem</a> — exemplo: Wahi</li>
-            <li><a href="/bestiario/metamorfo/">Criatura</a> — exemplo: Metamorfo</li>
-            <li><a href="/simbolos/ressurreicao/">Símbolo</a> — exemplo: Ressurreição</li>
-            <li><a href="/organizacoes/cced/">Organização</a> — exemplo: CCED</li>
-        </ul>
-
-        <h2>2. Copie o modelo</h2>
-        <p>Cada tipo tem um modelo pronto em <code>/_template/</code>. Você copia, renomeia e preenche.</p>
-        <p>Exemplo de personagem novo:</p>
+    <!-- Índice -->
+    <div class="doc-index">
+        <h3>Índice</h3>
         <ol>
-            <li>Copie <code>_template/personagem/</code> para <code>personagem/meu-personagem/</code></li>
-            <li>Renomeie <code>personagem.json</code> para <code>meu-personagem.json</code></li>
-            <li>Preencha <code>meu-personagem.json</code> e <code>conteudo.md</code></li>
-            <li>Adicione <code>"meu-personagem"</code> em <code>personagem/personagens.json</code></li>
-            <li>Commit. Pronto — o site atualiza sozinho.</li>
+            <li><a href="#o-que-e">O que é essa wiki</a></li>
+            <li><a href="#estrutura">Como o repositório está organizado</a></li>
+            <li><a href="#criar-conta">Criando uma conta no GitHub</a></li>
+            <li><a href="#fork">Fazendo um "fork"</a></li>
+            <li><a href="#template">Usando os templates</a></li>
+            <li><a href="#commit">Enviando suas mudanças (commit + push)</a></li>
+            <li><a href="#pull-request">Abrindo um Pull Request</a></li>
+            <li><a href="#revisao">O que acontece depois</a></li>
+            <li><a href="#regras">Regras de contribuição</a></li>
+            <li><a href="#boas-praticas">Boas práticas</a></li>
         </ol>
-
-        <h2>3. Regras</h2>
-        <ul>
-            <li>Português correto</li>
-            <li>Sem spoilers de capítulos não publicados</li>
-            <li>Imagens hospedadas em site externo (Imgur, Drive público, etc)</li>
-            <li>Se tiver dúvida, olhe um exemplo pronto</li>
-        </ul>
     </div>
+
+    <!-- 1 -->
+    <section class="doc-section" id="o-que-e">
+        <h2><span class="num">1</span> O que é essa wiki</h2>
+        <p>
+            A Wiki Laços Profanos é um site estático hospedado no
+            <strong>Cloudflare Pages</strong>, mas todo o conteúdo mora num
+            repositório <strong>GitHub</strong>:
+        </p>
+        <p>
+            <a href="https://github.com/wahipoga/wiki/" target="_blank" rel="noopener">
+                github.com/wahipoga/wiki
+            </a>
+        </p>
+        <p>
+            Ou seja: <strong>editar a wiki = editar arquivos no GitHub</strong>.
+            Quando você salva (faz um "commit"), o Cloudflare percebe e
+            republica o site automaticamente em 1 a 2 minutos. Nada de painel
+            de administração, nada de formulário — é só arquivo de texto.
+        </p>
+        <div class="doc-callout">
+            <strong>Não sabe o que é GitHub?</strong> Pensa nele como um
+            "Google Drive para código". Cada pasta é uma pasta, cada arquivo
+            é um arquivo, e você pode editar tudo pelo navegador.
+        </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="doc-section" id="estrutura">
+        <h2><span class="num">2</span> Como o repositório está organizado</h2>
+        <p>
+            Cada categoria tem sua própria pasta. Dentro dela, cada artigo tem
+            sua própria subpasta. Por exemplo:
+        </p>
+        <pre><code>wiki/
+├── categorias.json              ← lista as categorias (usado pela home)
+├── navbar.json                  ← menu de navegação
+├── lang.json                    ← idiomas disponíveis
+├── index.html                   ← página inicial
+├── contribua.html               ← esta página
+├── 404.html                     ← página de erro
+│
+├── personagem/
+│   ├── index.html               ← lista de personagens
+│   ├── personagens.json         ← quais personagens existem
+│   └── wahi/
+│       ├── index.html           ← página do Wahi
+│       ├── wahi.json            ← dados do Wahi
+│       ├── conteudo.md          ← texto do Wahi
+│       └── galeria.json         ← imagens do Wahi
+│
+├── bestiario/
+├── simbolos/
+├── organizacoes/
+│
+├── assets/                      ← css e javascript (não mexa sem motivo)
+└── _template/                   ← modelos para copiar
+</code></pre>
+        <p>
+            Você só precisa mexer em 3 coisas:
+        </p>
+        <ul>
+            <li><code>&lt;slug&gt;.json</code> — os dados (nome, imagem, infobox)</li>
+            <li><code>conteudo.md</code> — o texto do artigo</li>
+            <li><code>galeria.json</code> — as URLs das imagens</li>
+        </ul>
+        <p>
+            E adicionar o slug no arquivo <code>&lt;categoria&gt;.json</code>
+            (ex: <code>personagem/personagens.json</code>).
+        </p>
+    </section>
+
+    <!-- 3 -->
+    <section class="doc-section" id="criar-conta">
+        <h2><span class="num">3</span> Criando uma conta no GitHub</h2>
+        <p>
+            Se você ainda não tem conta, vai em
+            <a href="https://github.com/signup" target="_blank" rel="noopener">
+                github.com/signup
+            </a>
+            e cria. É grátis, leva 1 minuto, só precisa de email.
+        </p>
+        <p>
+            Depois de criar, configura um nome de usuário simples (sem espaços,
+            só letras e números). É esse nome que vai aparecer como autor das
+            suas contribuições.
+        </p>
+    </section>
+
+    <!-- 4 -->
+    <section class="doc-section" id="fork">
+        <h2><span class="num">4</span> Fazendo um "fork"</h2>
+        <p>
+            "Fork" é uma cópia do repositório pra sua conta. Você mexe na sua
+            cópia sem risco de quebrar o original, e depois pede pra juntar.
+        </p>
+        <ol>
+            <li>
+                Acessa <a href="https://github.com/wahipoga/wiki/" target="_blank" rel="noopener">
+                    github.com/wahipoga/wiki
+                </a>
+            </li>
+            <li>No canto superior direito, clica em <strong>Fork</strong></li>
+            <li>Confirma. Agora você tem <code>github.com/SEU-USER/wiki</code></li>
+        </ol>
+        <div class="doc-callout">
+            <strong>Alternativa:</strong> se você já tem acesso de escrita ao
+            repositório original (é colaborador oficial), pode editar direto
+            sem fork. Nesse caso pula essa etapa.
+        </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="doc-section" id="template">
+        <h2><span class="num">5</span> Usando os templates</h2>
+        <p>
+            A pasta <code>/_template/</code> existe só pra te dar um modelo
+            pronto. <strong>Você copia o conteúdo dela e cola onde precisa</strong>,
+            ela mesma não é a página final.
+        </p>
+        <p>Exemplo: criar um personagem novo chamado <code>luke</code></p>
+        <ol>
+            <li>
+                Vai na pasta <code>/personagem/</code> do seu fork
+            </li>
+            <li>
+                Clica em <strong>Add file → Create new file</strong>
+            </li>
+            <li>
+                No nome do arquivo, escreve
+                <code>luke/index.html</code> (o GitHub cria a pasta sozinho)
+            </li>
+            <li>
+                Copia o conteúdo de <code>/personagem/wahi/index.html</code>
+                (que é o exemplo funcional)
+            </li>
+            <li>
+                Cola e troca <code>window.ARTIGO_SLUG = 'wahi';</code> por
+                <code>window.ARTIGO_SLUG = 'luke';</code>
+            </li>
+            <li>Commita (ver próxima seção)</li>
+        </ol>
+        <p>Repete pra:</p>
+        <ul>
+            <li><code>luke/luke.json</code> — copia de <code>wahi/wahi.json</code></li>
+            <li><code>luke/conteudo.md</code> — copia de <code>wahi/conteudo.md</code></li>
+            <li><code>luke/galeria.json</code> — copia de <code>wahi/galeria.json</code></li>
+        </ul>
+        <p>
+            Depois edita <code>personagem/personagens.json</code> e adiciona
+            <code>"luke"</code> na lista:
+        </p>
+        <pre><code>{
+  "itens": ["wahi", "luke"]
+}</code></pre>
+    </section>
+
+    <!-- 6 -->
+    <section class="doc-section" id="commit">
+        <h2><span class="num">6</span> Enviando suas mudanças (commit + push)</h2>
+        <p>
+            <strong>Commit</strong> é salvar uma mudança no repositório.
+            <strong>Push</strong> é enviar essa mudança pro GitHub.
+        </p>
+
+        <h3>Jeito mais fácil: pelo navegador</h3>
+        <ol>
+            <li>Você editou um arquivo (pelo próprio GitHub, clicando no lápis)</li>
+            <li>Rolou até o fim da página</li>
+            <li>Escreveu uma mensagem descritiva no campo <strong>"Commit changes"</strong></li>
+            <li>Clicou em <strong>Commit changes</strong></li>
+        </ol>
+        <p>
+            Pronto. Isso já é commit + push ao mesmo tempo (o GitHub faz os
+            dois). Você vai ver o arquivo atualizado no repositório.
+        </p>
+        <div class="doc-callout">
+            <strong>Mensagens de commit boas:</strong> descrevem o que você
+            fez, não como. Exemplos:
+            <ul style="margin-top:8px;">
+                <li>✅ <code>Adiciona personagem Luke</code></li>
+                <li>✅ <code>Corrige data de nascimento do Wahi</code></li>
+                <li>❌ <code>update</code></li>
+                <li>❌ <code>mudei coisas</code></li>
+            </ul>
+        </div>
+
+        <h3>Jeito pra quem quer usar Git no computador</h3>
+        <pre><code># Clona seu fork
+git clone https://github.com/SEU-USER/wiki.git
+cd wiki
+
+# Faz uma mudança (cria/edita arquivos)
+
+# Adiciona o que mudou
+git add personagem/luke/
+
+# Commita com uma mensagem
+git commit -m "Adiciona personagem Luke"
+
+# Envia pro GitHub
+git push origin main</code></pre>
+    </section>
+
+    <!-- 7 -->
+    <section class="doc-section" id="pull-request">
+        <h2><span class="num">7</span> Abrindo um Pull Request</h2>
+        <p>
+            Se você fez fork, suas mudanças estão na <em>sua</em> cópia. Pra
+            juntar na wiki oficial, precisa de um <strong>Pull Request</strong>
+            (PR): um pedido formal de "por favor, junta isso".
+        </p>
+        <ol>
+            <li>
+                Vai no seu fork: <code>github.com/SEU-USER/wiki</code>
+            </li>
+            <li>
+                O GitHub mostra um banner <strong>"Compare &amp; pull request"</strong>
+                no topo. Clica.
+            </li>
+            <li>
+                Escreve um título curto (ex: <code>Adiciona personagem Luke</code>)
+            </li>
+            <li>
+                Escreve uma descrição: o que você adicionou, por que, e
+                qualquer referência que ajude
+            </li>
+            <li>
+                Clica em <strong>Create pull request</strong>
+            </li>
+        </ol>
+        <p>
+            O PR fica aberto no repositório oficial. Quem mantém a wiki vai
+            revisar, comentar se precisar de ajuste, e eventualmente juntar
+            (fazer <em>merge</em>).
+        </p>
+        <div class="doc-callout">
+            <strong>Não fez fork?</strong> Se você tem acesso direto, as
+            mudanças já vão direto pra wiki. Não precisa de PR.
+        </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="doc-section" id="revisao">
+        <h2><span class="num">8</span> O que acontece depois</h2>
+        <ul>
+            <li>Seu PR é revisado — pode levar alguns dias</li>
+            <li>Se tiver ajuste, quem revisa comenta direto no PR</li>
+            <li>Você corrige, faz novo commit no seu fork, e o PR atualiza sozinho</li>
+            <li>Quando aprovado, o PR é mesclado (<em>merged</em>)</li>
+            <li>O Cloudflare percebe a mudança e republica o site em 1-2 min</li>
+            <li>Sua contribuição aparece na página de commits do repositório</li>
+        </ul>
+        <p>
+            Pra ver quem contribuiu, o GitHub tem a aba
+            <strong>Insights → Contributors</strong> em qualquer repositório.
+        </p>
+    </section>
+
+    <!-- 9 -->
+    <section class="doc-section" id="regras">
+        <h2><span class="num">9</span> Regras de contribuição</h2>
+
+        <h3>Conteúdo permitido</h3>
+        <ul class="regra-permitida">
+            <li>
+                Informações sobre personagens, bestiário, símbolos,
+                organizações e universo de Laços Profanos.
+            </li>
+            <li>
+                Capítulos e eventos oficiais da obra.
+            </li>
+            <li>
+                Curiosidades confirmadas (comentário da autora, entrevista,
+                post oficial).
+            </li>
+            <li>
+                Correções de erros, ortografia, links quebrados e dados
+                desatualizados.
+            </li>
+        </ul>
+
+        <h3>Conteúdo proibido</h3>
+        <ul class="regra-bloqueada">
+            <li>
+                <strong>Conteúdo sexual</strong> de qualquer tipo. A wiki é
+                um espaço público e segue a classificação da obra.
+            </li>
+            <li>
+                <strong>Conteúdo off-topic.</strong> Se não é sobre Laços
+                Profanos, não pertence aqui.
+            </li>
+            <li>
+                <strong>Spoilers de conteúdo recente.</strong> Qualquer coisa
+                (capítulo, personagem, revelação) só pode virar artigo após
+                <strong>1 mês do lançamento</strong>.
+            </li>
+            <li>
+                <strong>Fanfic, fanon ou teoria apresentada como fato.</strong>
+                Se for teoria, marque claramente como "Teoria" e justifique.
+            </li>
+            <li>
+                <strong>Opinião pessoal.</strong> O artigo descreve, não
+                julga ("X é o melhor personagem" não é conteúdo de wiki).
+            </li>
+            <li>
+                <strong>Palavrões, xingamentos ou ataques.</strong> Nem em
+                artigo, nem em discussão de PR. Respeito sempre.
+            </li>
+            <li>
+                <strong>Conteúdo gerado por IA sem revisão.</strong> Você pode
+                usar IA pra ajudar a escrever, mas o texto final tem que ser
+                revisado por você. Não jogue output cru.
+            </li>
+            <li>
+                <strong>Vandalismo.</strong> Apagar artigo inteiro, trocar
+                informação por piada, inserir bobagem — tudo isso é ban
+                imediato.
+            </li>
+        </ul>
+
+        <h3>Spoilers</h3>
+        <p>
+            Se você achar <strong>realmente necessário</strong> adicionar algo
+            recém-lançado (menos de 1 mês), coloca um aviso
+            <strong>gigantesco</strong> no topo:
+        </p>
+        <pre><code>## ⚠️ ATENÇÃO: CONTÉM SPOILERS DE CONTEÚDO RECENTE
+
+Este artigo contém informações reveladas em [capítulo/episódio X],
+lançado em [data]. Leia por sua conta e risco.</code></pre>
+        <div class="doc-callout warn">
+            <strong>Aviso faltando = PR recusado.</strong> Sem exceção. Se não
+            tiver aviso visível no topo, quem revisa vai pedir pra ajustar
+            ou fechar o PR.
+        </div>
+
+        <h3>Código</h3>
+        <ul class="regra-permitida">
+            <li>Melhorar CSS, corrigir bug, adicionar acessibilidade.</li>
+            <li>Corrigir links quebrados, erros de JS, problemas de layout.</li>
+        </ul>
+        <ul class="regra-bloqueada">
+            <li>
+                <strong>Mexer mais do que o necessário.</strong> Não reformata
+                arquivo inteiro, não troca nome de classe sem motivo, não
+                "limpa" código que funciona só porque faria diferente.
+            </li>
+            <li>
+                <strong>Mudança grande sem discussão prévia.</strong> Se for
+                refatorar, criar funcionalidade, mudar layout — abre uma
+                <em>Issue</em> primeiro explicando. A gente conversa antes.
+            </li>
+            <li>
+                <strong>Quebrar compatibilidade.</strong> Não remove
+                funcionalidade existente sem motivo.
+            </li>
+        </ul>
+
+        <h3>Imagens</h3>
+        <ul class="regra-permitida">
+            <li>URLs externas (Imgur, Drive público, servidor próprio).</li>
+            <li>Arte oficial da obra.</li>
+            <li>Arte de fã <strong>com permissão do autor</strong> — cite o
+                nome dele na galeria.</li>
+        </ul>
+        <ul class="regra-bloqueada">
+            <li>
+                <strong>Subir imagem pro repositório.</strong> Usa URL
+                externa. Repo é só pra texto e código.
+            </li>
+            <li>
+                <strong>Usar arte de fã sem permissão.</strong> Se pegou do
+                Twitter/Instagram sem autorização, não coloca.
+            </li>
+            <li>
+                <strong>Imagem com marca d'água de outro site</strong> ou
+                roubada de outra wiki.
+            </li>
+        </ul>
+
+        <h3>Formato</h3>
+        <ul class="regra-permitida">
+            <li>Português correto, sem abreviações de internet.</li>
+            <li>Um artigo por PR — fica mais fácil de revisar.</li>
+            <li>Dúvida? Olha o <a href="/personagem/wahi/">Wahi</a>, que é o
+                exemplo mais completo.</li>
+        </ul>
+        <ul class="regra-bloqueada">
+            <li>"vc", "q", "kkk", "vlw" e afins nos artigos.</li>
+            <li>Copiar e colar de outras wikis sem adaptar.</li>
+            <li>Tradução automática sem revisão.</li>
+        </ul>
+
+        <h3>Fonte da informação</h3>
+        <p>
+            Sempre que possível, cite de onde veio a informação: capítulo,
+            episódio, comentário da autora, post oficial. Isso ajuda quem
+            revisa a confirmar e evita "invenção" ou teoria apresentada como
+            fato.
+        </p>
+
+        <h3>Conduta</h3>
+        <ul class="regra-permitida">
+            <li>Respeito com outros contribuidores.</li>
+            <li>Crítica construtiva em PR — sugere melhoria, não ataca.</li>
+            <li>Se errou, corrige e segue em frente.</li>
+        </ul>
+        <ul class="regra-bloqueada">
+            <li>Briga em comentário de PR ou Issue.</li>
+            <li>Ataque pessoal por causa de gosto (personagem favorito, ship,
+                etc).</li>
+            <li>Editar artigo alheio sem explicar o motivo no commit ou PR.</li>
+        </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="doc-section" id="boas-praticas">
+        <h2><span class="num">10</span> Boas práticas</h2>
+        <p>
+            Não são regras obrigatórias, mas seguindo elas sua contribuição
+            tem muito mais chance de ser aceita rápido:
+        </p>
+        <ul>
+            <li>
+                <strong>PRs pequenos são melhores.</strong> Adicionar 1
+                personagem é melhor que adicionar 5 de uma vez.
+            </li>
+            <li>
+                <strong>Escreve a mensagem do commit ANTES de mexer.</strong>
+                Ajuda a manter o foco no que tá fazendo.
+            </li>
+            <li>
+                <strong>Confere o preview antes de commitar.</strong> Roda
+                o site localmente ou olha o diff no próprio GitHub.
+            </li>
+            <li>
+                <strong>Não deixa PR aberto por meses.</strong> Se não vai
+                continuar, fecha e abre outro quando puder.
+            </li>
+            <li>
+                <strong>Revisa ortografia.</strong> Passa um corretor antes
+                de mandar. Erro bobo atrasa a revisão.
+            </li>
+            <li>
+                <strong>Se tem dúvida, pergunta antes.</strong> Abre uma
+                Issue ou manda no Discord. Melhor perguntar do que fazer
+                errado.
+            </li>
+            <li>
+                <strong>Mantém consistência.</strong> Olha como outros
+                artigos estão formatados e segue o mesmo padrão.
+            </li>
+        </ul>
+
+        <div class="doc-callout ok">
+            <strong>Dica:</strong> se você tá começando, começa corrigindo
+            erros pequenos (ortografia, link quebrado, data errada). Isso
+            te familiariza com o processo de PR antes de você criar um
+            artigo inteiro do zero.
+        </div>
+
+        <p style="margin-top: 30px;">
+            <a href="https://github.com/wahipoga/wiki/" class="doc-btn" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> Abrir repositório no GitHub
+            </a>
+        </p>
+    </section>
 </main>
 
 <footer>
