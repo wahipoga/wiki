@@ -3,12 +3,12 @@
 
     // Espera:
     //   window.ARTIGO_TIPO = "personagem"
-    //   window.ARTIGO_SLUG = "wahi"
+    //   window.ARTIGO_SLUG = "wahi"   (ou "" pra página única na própria pasta)
 
     async function carregar() {
         const tipo = window.ARTIGO_TIPO;
-        const slug = window.ARTIGO_SLUG;
-        if (!tipo || !slug) return;
+        const slug = window.ARTIGO_SLUG ?? '';
+        if (!tipo) return;
 
         const conteudoEl = document.getElementById('artigoConteudo');
         const sidebarEl = document.getElementById('artigoSidebar');
@@ -28,15 +28,21 @@
         if (window.__langReady) await window.__langReady;
 
         const api = window.WikiAPI;
-        const idioma = api.getIdioma();
         const prefixo = api.getPrefixoIdioma();
+
+        // Monta o base:
+        //   slug preenchido → /tipo/slug/
+        //   slug vazio      → /tipo/
+        const caminho = slug ? `/${tipo}/${slug}/` : `/${tipo}/`;
         const base = prefixo
-            ? `/${tipo}/${slug}${prefixo}/`
-            : `/${tipo}/${slug}/`;
+            ? caminho.replace(/\/$/, '') + prefixo + '/'
+            : caminho;
+
+        // Arquivo JSON: slug.json (se tem slug) ou tipo.json (se não tem)
+        const jsonFile = slug ? `${slug}.json` : `${tipo}.json`;
 
         try {
-            // JSON do artigo é OPCIONAL
-            const meta = await fetch(base + slug + '.json?v=' + Date.now())
+            const meta = await fetch(base + jsonFile + '?v=' + Date.now())
                 .then(r => r.ok ? r.json() : {})
                 .catch(() => ({}));
 
@@ -48,8 +54,8 @@
                 .then(r => r.ok ? r.json() : { imagens: [] })
                 .catch(() => ({ imagens: [] }));
 
-            // Título — usa meta.nome se existir, senão capitaliza o slug
-            const nome = meta.nome || capitalizar(slug);
+            // Nome: do JSON, senão capitaliza o slug/tipo
+            const nome = meta.nome || capitalizar(slug || tipo);
             const nomeCompleto = api.getTexto('nomeCompleto') || 'Wiki Laços Profanos';
             document.title = `${nome} — ${nomeCompleto}`;
 
