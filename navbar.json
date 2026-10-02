@@ -27,25 +27,13 @@
     {
       "icon": "fa-user",
       "label": "Personagens",
-      "link": "https://wiki.lacosprofanos.com.br/personagens/",
+      "link": "https://wiki.lacosprofanos.com.br/personagem/",
       "active": true
     },
     {
       "icon": "fa-paw",
       "label": "Bestiário",
       "link": "https://wiki.lacosprofanos.com.br/bestiario/",
-      "active": true
-    },
-    {
-      "icon": "fa-shapes",
-      "label": "Símbolos",
-      "link": "https://wiki.lacosprofanos.com.br/simbolos/",
-      "active": true
-    },
-    {
-      "icon": "fa-building",
-      "label": "Organizações",
-      "link": "https://wiki.lacosprofanos.com.br/organizacoes/",
       "active": true
     }
   ]
