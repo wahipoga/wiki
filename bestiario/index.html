@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bestiário — Wiki Laços Profanos</title>
+    <title data-wiki-title="Bestiário">Bestiário — Wiki Laços Profanos</title>
     <link rel="icon" href="https://i.imgur.com/mgxXSto.png" type="image/png">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
@@ -11,27 +11,11 @@
 </head>
 <body>
 
-<nav class="navbar" id="navbar">
-    <div class="nav-container">
-        <a href="/" class="logo">Laços Profanos Wiki</a>
-        <div class="language-dropdown" id="languageDropdown">
-            <button class="language-btn" id="languageBtn">
-                <i class="fas fa-globe"></i>
-                <span id="current-language">Português</span>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-content" id="dropdownContent"></div>
-        </div>
-        <ul class="nav-menu" id="navMenu"></ul>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-</nav>
+<site-header></site-header>
 
 <main class="container">
     <h1 class="page-title">Bestiário</h1>
-    <p class="page-subtitle">Todas as criaturas que habitam o universo de Laços Profanos.</p>
+    <p class="page-subtitle">Criaturas, demônios, dragões e outras entidades do universo.</p>
 
     <div class="toolbar">
         <input type="search" id="filtroLocal" placeholder="Filtrar criaturas..." autocomplete="off">
@@ -43,9 +27,7 @@
     </div>
 </main>
 
-<footer>
-    <p>Wiki Laços Profanos — <a href="https://github.com/wahipoga/wiki/wiki">Contribua</a></p>
-</footer>
+<site-footer></site-footer>
 
 <script src="/assets/app.js"></script>
 <script>
