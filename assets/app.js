@@ -2,6 +2,11 @@
     'use strict';
 
     // ============================================
+    // CONFIG
+    // ============================================
+    const MAX_ITENS_ANTES_HAMBURGER = 5;
+
+    // ============================================
     // IDIOMA ATUAL — lê do <html id="lang-pt">
     // ============================================
     function getIdiomaAtual() {
@@ -25,6 +30,7 @@
     // ============================================
     async function carregarNavbar() {
         const navMenu = document.getElementById('navMenu');
+        const navbar = document.getElementById('navbar');
         if (!navMenu) return;
 
         const currentLang = getIdiomaAtual();
@@ -56,6 +62,14 @@
                 </li>`;
             }).join('');
 
+            // 👇 NOVO: força hambúrguer se passar do limite
+            if (navbar) {
+                navbar.classList.toggle(
+                    'force-hamburger',
+                    items.length > MAX_ITENS_ANTES_HAMBURGER
+                );
+            }
+
             setupHamburger();
         } catch (e) {
             console.warn('Erro navbar:', e);
@@ -83,7 +97,9 @@
 
         navMenu.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', () => {
-                if (window.innerWidth <= 900) {
+                const navbar = document.getElementById('navbar');
+                const forçado = navbar && navbar.classList.contains('force-hamburger');
+                if (window.innerWidth <= 900 || forçado) {
                     hamb.classList.remove('active');
                     navMenu.classList.remove('active');
                 }
@@ -91,7 +107,11 @@
         });
 
         document.addEventListener('click', e => {
-            if (window.innerWidth <= 900
+            const navbar = document.getElementById('navbar');
+            const forçado = navbar && navbar.classList.contains('force-hamburger');
+            const mobile = window.innerWidth <= 900;
+
+            if ((mobile || forçado)
                 && navMenu.classList.contains('active')
                 && !navMenu.contains(e.target)
                 && !hamb.contains(e.target)) {
@@ -184,6 +204,9 @@
         onScroll();
     }
 
+    // ============================================
+    // INIT
+    // ============================================
     document.addEventListener('DOMContentLoaded', () => {
         carregarNavbar();
         carregarIdiomas();
