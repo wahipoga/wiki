@@ -1,0 +1,25 @@
+{
+  "nome": "Emilly",
+  "imagem": "https://cdn.imgchest.com/files/b4069de0cc16.png",
+  "infobox": {
+    "titulo": "Informações",
+    "campos": [
+      { "label": "Nome completo", "valor": "Emilly Tewiah" },
+      { "label": "Idade", "valor": "??" },
+      { "label": "Gênero", "valor": "Cis femenino" },
+      { "label": "Espécie", "valor": "Humana" },
+      { "label": "Data de nascimento", "valor": "11 de junho" }
+    ],
+    "relacionamentos": [
+      { "nome": "Yaziell", "slug": "yaziell", "nota": "ex namorado" },
+      { "nome": "Wahi", "slug": "wahi", "nota": "amiga de infância" }
+    ],
+    "historias": {
+      "titulo": "Histórias / Aparições",
+      "campos": [
+        { "label": "História", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Papel", "valor": "Protagonista" }
+      ]
+    }
+  }
+}
