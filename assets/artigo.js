@@ -13,7 +13,18 @@
         const conteudoEl = document.getElementById('artigoConteudo');
         const sidebarEl = document.getElementById('artigoSidebar');
 
-        // Espera o app.js terminar de carregar o lang.json
+        // Espera a WikiAPI existir (o app.js define ela no DOMContentLoaded)
+        let tentativas = 0;
+        while (!window.WikiAPI && tentativas < 100) {
+            await new Promise(r => setTimeout(r, 10));
+            tentativas++;
+        }
+        if (!window.WikiAPI) {
+            console.warn('WikiAPI não disponível — app.js não carregou?');
+            return;
+        }
+
+        // Espera o lang.json carregar
         if (window.__langReady) await window.__langReady;
 
         const api = window.WikiAPI;
@@ -61,7 +72,6 @@
                     marked.setOptions({ breaks: true, gfm: true });
                     conteudoEl.innerHTML = marked.parse(md);
 
-                    // Tudo antes do primeiro H2 vira a introdução
                     const introEl = document.getElementById('artigoIntro');
                     if (introEl) {
                         const primeiroH2 = conteudoEl.querySelector('h2');
