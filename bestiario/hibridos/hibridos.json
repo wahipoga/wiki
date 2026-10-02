@@ -1,4 +1,10 @@
 {
   "nome": "Híbridos",
-  "imagem": "https://cdn.imgchest.com/files/043a8c1845c3.png"
+  "imagem": "https://cdn.imgchest.com/files/82b2a8f64e33.png",
+  "infobox": {
+    "campos": [
+      { "label": "Tipo", "valor": "Criatura" },
+      { "label": "Origem", "valor": "união entre espécies diferentes" }
+    ]
+  }
 }
