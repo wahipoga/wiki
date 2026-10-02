@@ -377,6 +377,14 @@ main { padding: 30px 0 60px; }
   .artigo-layout { grid-template-columns: 1fr; gap: 24px; }
 }
 
+/* Sidebar vazia → conteúdo ocupa a largura toda */
+.artigo-layout.sem-sidebar {
+  grid-template-columns: 1fr;
+}
+.artigo-layout.sem-sidebar .artigo-sidebar {
+  display: none;
+}
+
 .artigo-sidebar { position: sticky; top: 90px; }
 @media (max-width: 900px) { .artigo-sidebar { position: static; } }
 
