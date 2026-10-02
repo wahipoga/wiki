@@ -1,7 +1,7 @@
 {
   "pt": [
+{ "icon": "fa-globe", "label": "Site principal", "link": "https://lacosprofanos.com.br/", "active": true },
     { "icon": "fa-home", "label": "Início", "link": "/", "active": true },
-    { "icon": "fa-hands-helping", "label": "Contribua pra wiki", "link": "https://github.com/wahipoga/wiki/wiki", "active": true },
-    { "icon": "fa-globe", "label": "Site principal", "link": "https://lacosprofanos.com.br/", "active": true }
+    { "icon": "fa-hands-helping", "label": "Contribua pra wiki", "link": "https://github.com/wahipoga/wiki/wiki", "active": true }
   ]
 }
