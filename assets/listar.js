@@ -8,13 +8,11 @@
     let artigos = [];
     let ordem = 'padrao';
 
-    function getIdiomaAtual() {
-        return (document.documentElement.id || 'lang-pt').replace('lang-', '');
-    }
-
     async function carregar() {
         const grid = document.getElementById('artigosGrid');
         if (!grid) return;
+
+        if (window.__langReady) await window.__langReady;
 
         try {
             const lista = await fetch(window.CATEGORIA_JSON + '?v=' + Date.now())
@@ -26,9 +24,9 @@
             artigos = (await Promise.all(
                 slugs.map(slug =>
                     fetch(`${base}${slug}/${slug}.json?v=` + Date.now())
-                        .then(r => r.json())
-                        .then(data => ({ ...data, slug }))
-                        .catch(() => null)
+                        .then(r => r.ok ? r.json() : null)
+                        .then(data => data ? { ...data, slug } : { slug, nome: capitalizar(slug) })
+                        .catch(() => ({ slug, nome: capitalizar(slug) }))
                 )
             )).filter(Boolean);
 
@@ -39,11 +37,16 @@
         }
     }
 
+    function capitalizar(texto) {
+        return texto
+            .replace(/-/g, ' ')
+            .replace(/\b\w/g, l => l.toUpperCase());
+    }
+
     function render() {
         const grid = document.getElementById('artigosGrid');
         const filtro = document.getElementById('filtroLocal');
         const termo = (filtro?.value || '').toLowerCase().trim();
-        const idioma = getIdiomaAtual();
 
         let lista = [...artigos];
         if (termo) {
@@ -58,10 +61,12 @@
             return;
         }
 
+        const api = window.WikiAPI;
+        const prefixo = api?.getPrefixoIdioma() || '';
+
         grid.innerHTML = lista.map(a => {
-            // Link do card aponta pro idioma certo
-            const sufixo = idioma === 'pt' ? '' : `${idioma}`;
-            const href = `/${window.CATEGORIA_SLUG}/${a.slug}/${sufixo}`;
+            const base = `/${window.CATEGORIA_SLUG}/${a.slug}/`;
+            const href = prefixo ? base.replace(/\/$/, '') + prefixo + '/' : base;
             return `
                 <a class="artigo-card" href="${href}">
                     <img src="${a.imagem || 'https://placehold.co/300/1a1a1a/666?text=?'}"
