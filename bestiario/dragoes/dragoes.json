@@ -1,0 +1,11 @@
+{
+  "nome": "Demônios",
+  "imagem": "https://cdn.imgchest.com/files/34dee6925217.png",
+  "infobox": {
+    "campos": [
+      { "label": "Tipo", "valor": "Criatura" },
+      { "label": "Origem", "valor": "Variada" },
+      { "label": "Dieta", "valor": "Onivoro" }
+    ]
+  }
+}
