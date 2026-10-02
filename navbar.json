@@ -1,13 +1,52 @@
 {
   "pt": [
-    { "icon": "fa-home", "label": "Início", "link": "/", "active": true },
-{ "icon": "fa-globe", "label": "Site principal", "link": "https://lacosprofanos.com.br/", "active": true }
-    { "icon": "fa-hands-helping", "label": "Contribua pra wiki", "link": "https://github.com/wahipoga/wiki/wiki", "active": true },
-{ "icon": "fa-globe", "label": "Site principal", "link": "https://lacosprofanos.com.br/", "active": true },
-{ "icon": "fa-atom", "label": "Universo", "link": "https://wiki.lacosprofanos.com.br/universo/", "active": true },
-{ "icon": "fa-user", "label": "Personagens", "link": "https://wiki.lacosprofanos.com.br/personagens/", "active": true },
-{ "icon": "fa-paw", "label": "Universo", "link": "https://wiki.lacosprofanos.com.br/bestiario/", "active": true },
-{ "icon": "fa-shapes", "label": "Universo", "link": "https://wiki.lacosprofanos.com.br/simbolos/", "active": true },
-{ "icon": "fa-building", "label": "Universo", "link": "https://wiki.lacosprofanos.com.br/organizacoes/", "active": true }
+    {
+      "icon": "fa-home",
+      "label": "Início",
+      "link": "/",
+      "active": true
+    },
+    {
+      "icon": "fa-globe",
+      "label": "Site principal",
+      "link": "https://lacosprofanos.com.br/",
+      "active": true
+    },
+    {
+      "icon": "fa-hands-helping",
+      "label": "Contribua pra wiki",
+      "link": "https://github.com/wahipoga/wiki/wiki",
+      "active": true
+    },
+    {
+      "icon": "fa-atom",
+      "label": "Universo",
+      "link": "https://wiki.lacosprofanos.com.br/universo/",
+      "active": true
+    },
+    {
+      "icon": "fa-user",
+      "label": "Personagens",
+      "link": "https://wiki.lacosprofanos.com.br/personagens/",
+      "active": true
+    },
+    {
+      "icon": "fa-paw",
+      "label": "Bestiário",
+      "link": "https://wiki.lacosprofanos.com.br/bestiario/",
+      "active": true
+    },
+    {
+      "icon": "fa-shapes",
+      "label": "Símbolos",
+      "link": "https://wiki.lacosprofanos.com.br/simbolos/",
+      "active": true
+    },
+    {
+      "icon": "fa-building",
+      "label": "Organizações",
+      "link": "https://wiki.lacosprofanos.com.br/organizacoes/",
+      "active": true
+    }
   ]
 }
