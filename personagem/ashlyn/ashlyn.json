@@ -1,0 +1,21 @@
+{
+  "nome": "Aslyn",
+  "imagem": "https://cdn.imgchest.com/files/b4069de0cc16.png",
+  "infobox": {
+    "titulo": "Informações",
+    "campos": [
+      { "label": "Nome completo", "valor": "Aslyn ????" },
+      { "label": "Idade", "valor": "??" },
+      { "label": "Gênero", "valor": "Cis masculino" },
+      { "label": "Espécie", "valor": "Híbrido humano e demônio" },
+      { "label": "Data de nascimento", "valor": "05 de julho" }
+    ],
+    "historias": {
+      "titulo": "Histórias / Aparições",
+      "campos": [
+        { "label": "História", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Papel", "valor": "Protagonista" }
+      ]
+    }
+  }
+}
