@@ -7,12 +7,6 @@
       "active": true
     },
     {
-      "icon": "fa-globe",
-      "label": "Site principal",
-      "link": "https://lacosprofanos.com.br/",
-      "active": true
-    },
-    {
       "icon": "fa-atom",
       "label": "Universo",
       "link": "https://wiki.lacosprofanos.com.br/universo/",
@@ -28,6 +22,12 @@
       "icon": "fa-paw",
       "label": "Bestiário",
       "link": "https://wiki.lacosprofanos.com.br/bestiario/",
+      "active": true
+    },
+     {
+      "icon": "fa-globe",
+      "label": "Site principal",
+      "link": "https://lacosprofanos.com.br/",
       "active": true
     },
 {
