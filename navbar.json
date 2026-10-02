@@ -13,12 +13,6 @@
       "active": true
     },
     {
-      "icon": "fa-hands-helping",
-      "label": "Contribua pra wiki",
-      "link": "https://github.com/wahipoga/wiki/wiki",
-      "active": true
-    },
-    {
       "icon": "fa-atom",
       "label": "Universo",
       "link": "https://wiki.lacosprofanos.com.br/universo/",
@@ -34,6 +28,12 @@
       "icon": "fa-paw",
       "label": "Bestiário",
       "link": "https://wiki.lacosprofanos.com.br/bestiario/",
+      "active": true
+    },
+{
+      "icon": "fa-hands-helping",
+      "label": "Contribua pra wiki",
+      "link": "https://github.com/wahipoga/wiki/wiki",
       "active": true
     }
   ]
