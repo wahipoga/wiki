@@ -12,7 +12,7 @@
     ],
     "relacionamentos": [
       { "nome": "Wahi", "slug": "wahi", "nota": "amigo de infância" },
-      { "nome": "Emilly", "slug": "emilly", "nota": "ex namorada" },
+      { "nome": "Emilly", "slug": "emilly", "nota": "ex namorada" }
     ],
     "historias": {
       "titulo": "Histórias / Aparições",
