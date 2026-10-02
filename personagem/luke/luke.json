@@ -8,7 +8,8 @@
       { "label": "Idade", "valor": "??" },
       { "label": "Gênero", "valor": "Cis masculino" },
       { "label": "Espécie", "valor": "Humano" },
-      { "label": "Data de nascimento", "valor": "01 de novembro" }
+      { "label": "Data de nascimento", "valor": "01 de novembro" },
+      { "label": "Ocupação", "valor": "Detetive voluntário (conhecido como: 'vigilante')" }
     ],
     "relacionamentos": [
       { "nome": "Sarah", "slug": "sarah", "nota": "esposa" },
