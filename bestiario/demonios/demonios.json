@@ -1,0 +1,12 @@
+{
+  "nome": "Demônioa",
+  "imagem": "https://cdn.imgchest.com/files/d91797c3d685.png",
+  "infobox": {
+    "campos": [
+      { "label": "Tipo", "valor": "Criatura" },
+      { "label": "Origem", "valor": "Variada" },
+      { "label": "Dieta", "valor": "Onivoro" },
+      { "label": "Variações", "valor": "4 conhecidas" }
+    ]
+  }
+}
