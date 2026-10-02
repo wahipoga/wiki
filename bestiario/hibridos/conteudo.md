@@ -4,7 +4,7 @@ Essas características podem variar de acordo com as espécies envolvidas, manif
 
 Alguns exemplos conhecidos na história incluem:
 
-[Ashlyn](/personagem/ashlyn) — híbrida de demônio e humano. Apesar de sua aparência majoritariamente humana, herdou os chifres característicos de sua linhagem demoníaca.
+[Ashlyn](/personagem/ashlyn) — híbrido de demônio e humano. Apesar de sua aparência majoritariamente humana, herdou os chifres, e olhos verticais característicos de sua linhagem demoníaca.
 
 [Yaziell](/personagem/yaziell) — híbrido de dragão e humano. Além dos chifres, possui uma cauda e herdou algumas habilidades próprias dos dragões.
 
