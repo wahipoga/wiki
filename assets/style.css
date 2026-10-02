@@ -1,6 +1,10 @@
 /* ===== RESET ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
+/* Tags customizadas se comportam como blocos */
+site-header, site-footer { display: block; }
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: #0a0a0a;
@@ -176,6 +180,35 @@ input { font-family: inherit; }
 }
 @media (max-width: 480px) {
   .nav-menu { top: 60px; max-height: calc(100vh - 60px); }
+}
+
+/* ===== MODO FORÇADO (hambúrguer no desktop quando > 6 itens) ===== */
+#navbar.force-hamburger .hamburger { display: flex; }
+#navbar.force-hamburger .nav-menu {
+  position: fixed;
+  top: 70px;
+  right: -100%;
+  flex-direction: column;
+  background: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  padding: 20px 0;
+  gap: 0;
+  transition: 0.4s ease;
+  border-top: 1px solid #f01b85;
+  max-height: calc(100vh - 70px);
+  overflow-y: auto;
+  align-items: stretch;
+  margin-left: 0;
+}
+#navbar.force-hamburger .nav-menu.active { right: 0; }
+#navbar.force-hamburger .nav-item { width: 100%; }
+#navbar.force-hamburger .nav-item a {
+  padding: 16px 30px;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  justify-content: flex-start;
+  gap: 15px;
 }
 
 /* ===== CONTAINER ===== */
