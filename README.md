@@ -10,7 +10,7 @@ Este repositório contém o código utilizado para construir e manter o site da 
 
 A Wiki Laços Profanos é um projeto voltado à organização e disponibilização de informações sobre o universo de **Laços Profanos**.
 
-A Wiki é construída para ser colaborativa. Se você quiser contribuir com o projeto, consulte a página **[Contribua](https://wiki-61p.pages.dev/contribua)**, onde estão disponíveis as orientações, regras e informações necessárias para participar.
+A Wiki é construída para ser colaborativa. Se você quiser contribuir com o projeto, consulte a página **[Contribua](https://github.com/wahipoga/wiki/wiki)**, onde estão disponíveis as orientações, regras e informações necessárias para participar.
 
 ## 💻 Código aberto para reutilização
 
@@ -52,7 +52,7 @@ O código, incluindo HTML, CSS e JavaScript, pode ser reutilizado nos termos da 
 
 Contribuições são bem-vindas!
 
-Antes de contribuir, consulte a página **[Contribua](https://wiki-61p.pages.dev/contribua)** para conhecer a estrutura do projeto, as regras de contribuição e as orientações para envio de alterações.
+Antes de contribuir, consulte a página **[Contribua](https://github.com/wahipoga/wiki/wiki)** para conhecer a estrutura do projeto, as regras de contribuição e as orientações para envio de alterações.
 
 Ao contribuir com código, você deve ter os direitos necessários para disponibilizá-lo sob os termos aplicáveis ao projeto.
 
@@ -75,7 +75,7 @@ This repository contains the code used to build and maintain the Wiki website, i
 
 The Laços Profanos Wiki is a project dedicated to organizing and providing information about the **Laços Profanos** universe.
 
-The Wiki is designed to be collaborative. If you would like to contribute to the project, visit the **[Contribute](https://wiki-61p.pages.dev/contribua)** page, where you can find contribution guidelines, rules, and other relevant information.
+The Wiki is designed to be collaborative. If you would like to contribute to the project, visit the **[Contribute](https://github.com/wahipoga/wiki/wiki)** page, where you can find contribution guidelines, rules, and other relevant information.
 
 ## 💻 Open Source Code for Reuse
 
@@ -117,7 +117,7 @@ The code, including HTML, CSS, and JavaScript, may be reused under the terms of 
 
 Contributions are welcome!
 
-Before contributing, please visit the **[Contribute](https://wiki-61p.pages.dev/contribua)** page to learn about the project's structure, contribution rules, and guidelines for submitting changes.
+Before contributing, please visit the **[Contribute](https://github.com/wahipoga/wiki/wiki)** page to learn about the project's structure, contribution rules, and guidelines for submitting changes.
 
 When contributing code, you must have the necessary rights to make it available under the applicable terms of the project.
 
@@ -139,7 +139,7 @@ Este repositorio contiene el código utilizado para crear y mantener el sitio we
 
 La Wiki Laços Profanos es un proyecto dedicado a organizar y proporcionar información sobre el universo de **Laços Profanos**.
 
-La Wiki está diseñada para ser colaborativa. Si quieres contribuir al proyecto, visita la página **[Contribuir](https://wiki-61p.pages.dev/contribua)**, donde encontrarás las instrucciones, reglas y demás información necesaria para participar.
+La Wiki está diseñada para ser colaborativa. Si quieres contribuir al proyecto, visita la página **[Contribuir](https://github.com/wahipoga/wiki/wiki)**, donde encontrarás las instrucciones, reglas y demás información necesaria para participar.
 
 ## 💻 Código abierto para reutilización
 
@@ -181,7 +181,7 @@ El código, incluyendo HTML, CSS y JavaScript, puede reutilizarse de acuerdo con
 
 ¡Las contribuciones son bienvenidas!
 
-Antes de contribuir, consulta la página **[Contribuir](https://wiki-61p.pages.dev/contribua)** para conocer la estructura del proyecto, las reglas de contribución y las instrucciones para enviar cambios.
+Antes de contribuir, consulta la página **[Contribuir](https://github.com/wahipoga/wiki/wiki)** para conocer la estructura del proyecto, las reglas de contribución y las instrucciones para enviar cambios.
 
 Al contribuir con código, debes contar con los derechos necesarios para ponerlo a disposición bajo los términos aplicables al proyecto.
 
