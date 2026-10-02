@@ -12,7 +12,7 @@
     ],
     "relacionamentos": [
       { "nome": "Sarah", "slug": "sarah", "nota": "esposa" },
-      { "nome": "Ethan", "slug": "ethan", "nota": "amigo de infância" },
+      { "nome": "Ethan", "slug": "ethan", "nota": "amigo de infância" }
     ],
     "historias": {
       "titulo": "Histórias / Aparições",
