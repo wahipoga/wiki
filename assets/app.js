@@ -1,68 +1,106 @@
-<!DOCTYPE html>
-<html lang="pt-BR" id="lang-pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-wiki-title="Carregando...">Carregando... — Wiki Laços Profanos</title>
-    <link rel="icon" href="https://i.imgur.com/mgxXSto.png" type="image/png">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
-<body>
+(function () {
+    'use strict';
 
-<nav class="navbar" id="navbar">
-    <div class="nav-container">
-        <a href="/" class="logo" data-wiki="nome">Laços Profanos</a>
-        <div class="language-dropdown" id="languageDropdown">
-            <button class="language-btn" id="languageBtn">
-                <i class="fas fa-globe"></i>
-                <span id="current-language">Português</span>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-content" id="dropdownContent"></div>
-        </div>
-        <ul class="nav-menu" id="navMenu"></ul>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-</nav>
+    // Espera:
+    //   window.CATEGORIA_SLUG = "personagem"
+    //   window.CATEGORIA_JSON = "/personagem/personagens.json"
 
-<main class="container">
-    <div class="artigo-layout">
+    let artigos = [];
+    let ordem = 'padrao';
 
-        <aside class="artigo-sidebar">
-            <div class="artigo-imagem-topo" id="artigoImagemTopo"></div>
-            <div id="artigoSidebar"></div>
-        </aside>
+    async function carregar() {
+        const grid = document.getElementById('artigosGrid');
+        if (!grid) return;
 
-        <article class="artigo-conteudo">
-            <h1 class="artigo-nome" id="artigoNome">Carregando...</h1>
-            <div id="artigoIntro"></div>
-            <div class="artigo-indice" id="artigoIndice"></div>
-            <div id="artigoConteudo"><p class="vazio">Carregando artigo...</p></div>
-            <h2 id="galeria-titulo" style="display:none" data-wiki="galeria">Galeria</h2>
-            <div class="galeria" id="artigoGaleria"></div>
-        </article>
+        if (window.__langReady) await window.__langReady;
 
-    </div>
-</main>
+        try {
+            const lista = await fetch(window.CATEGORIA_JSON + '?v=' + Date.now())
+                .then(r => r.json());
 
-<footer>
-    <p>
-        <span data-wiki="nomeCompleto">Wiki Laços Profanos</span> —
-        <a href="#" data-wiki="contribua" data-wiki-link="contribua">Contribua</a>
-    </p>
-</footer>
+            const slugs = Array.isArray(lista) ? lista : (lista.itens || []);
+            const base = '/' + window.CATEGORIA_SLUG + '/';
 
-<script src="/assets/app.js"></script>
-<script>
-    window.ARTIGO_TIPO = 'personagem';
-    window.ARTIGO_SLUG = 'wahi';
-</script>
-<script src="/assets/artigo.js"></script>
+            artigos = (await Promise.all(
+                slugs.map(slug =>
+                    fetch(`${base}${slug}/${slug}.json?v=` + Date.now())
+                        .then(r => r.ok ? r.json() : null)
+                        .then(data => data ? { ...data, slug } : { slug, nome: capitalizar(slug) })
+                        .catch(() => ({ slug, nome: capitalizar(slug) }))
+                )
+            )).filter(Boolean);
 
-</body>
-</html>
+            render();
+            setupControles();
+        } catch (e) {
+            grid.innerHTML = `<p class="vazio">Erro ao carregar: ${e.message}</p>`;
+        }
+    }
+
+    function capitalizar(texto) {
+        return texto
+            .replace(/-/g, ' ')
+            .replace(/\b\w/g, l => l.toUpperCase());
+    }
+
+    function render() {
+        const grid = document.getElementById('artigosGrid');
+        const filtro = document.getElementById('filtroLocal');
+        const termo = (filtro?.value || '').toLowerCase().trim();
+
+        let lista = [...artigos];
+        if (termo) {
+            lista = lista.filter(a => (a.nome || '').toLowerCase().includes(termo));
+        }
+        if (ordem === 'az') {
+            lista.sort((a, b) => (a.nome || '').localeCompare(b.nome || '', 'pt-BR'));
+        }
+
+        if (!lista.length) {
+            grid.innerHTML = '<p class="vazio">Nenhum artigo encontrado.</p>';
+            return;
+        }
+
+        const api = window.WikiAPI;
+        const prefixo = api?.getPrefixoIdioma() || '';
+
+        grid.innerHTML = lista.map(a => {
+            const base = `/${window.CATEGORIA_SLUG}/${a.slug}/`;
+            const href = prefixo ? base.replace(/\/$/, '') + prefixo + '/' : base;
+            return `
+                <a class="artigo-card" href="${href}">
+                    <img src="${a.imagem || 'https://placehold.co/300/1a1a1a/666?text=?'}"
+                         alt="${a.nome}" loading="lazy"
+                         onerror="this.src='https://placehold.co/300/1a1a1a/666?text=?'">
+                    <h3>${a.nome}</h3>
+                </a>
+            `;
+        }).join('');
+    }
+
+    function setupControles() {
+        const btnAZ = document.getElementById('toggleAZ');
+        const filtro = document.getElementById('filtroLocal');
+
+        if (btnAZ) {
+            btnAZ.addEventListener('click', () => {
+                ordem = ordem === 'padrao' ? 'az' : 'padrao';
+                btnAZ.classList.toggle('ativo', ordem === 'az');
+                btnAZ.textContent = ordem === 'az'
+                    ? 'Ordem: A-Z ✓'
+                    : 'Ordem alfabética';
+                render();
+            });
+        }
+
+        if (filtro) {
+            let t;
+            filtro.addEventListener('input', () => {
+                clearTimeout(t);
+                t = setTimeout(render, 200);
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', carregar);
+})();
