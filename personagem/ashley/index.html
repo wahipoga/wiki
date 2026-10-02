@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carregando... — Wiki Laços Profanos</title>
+    <title data-wiki-title="Carregando...">Carregando... — Wiki Laços Profanos</title>
     <link rel="icon" href="https://i.imgur.com/mgxXSto.png" type="image/png">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 
 <nav class="navbar" id="navbar">
     <div class="nav-container">
-        <a href="/" class="logo">Laços Profanos</a>
+        <a href="/" class="logo" data-wiki="nome">Laços Profanos</a>
         <div class="language-dropdown" id="languageDropdown">
             <button class="language-btn" id="languageBtn">
                 <i class="fas fa-globe"></i>
@@ -43,7 +43,7 @@
             <div id="artigoIntro"></div>
             <div class="artigo-indice" id="artigoIndice"></div>
             <div id="artigoConteudo"><p class="vazio">Carregando artigo...</p></div>
-            <h2 id="galeria-titulo" style="display:none">Galeria</h2>
+            <h2 id="galeria-titulo" style="display:none" data-wiki="galeria">Galeria</h2>
             <div class="galeria" id="artigoGaleria"></div>
         </article>
 
@@ -51,7 +51,10 @@
 </main>
 
 <footer>
-    <p>Wiki Laços Profanos — <a href="/contribua.html">Contribua</a></p>
+    <p>
+        <span data-wiki="nomeCompleto">Wiki Laços Profanos</span> —
+        <a href="/contribua.html" data-wiki="contribua">Contribua</a>
+    </p>
 </footer>
 
 <script src="/assets/app.js"></script>
