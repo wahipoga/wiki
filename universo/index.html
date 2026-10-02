@@ -3,191 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universo — Wiki Laços Profanos</title>
+    <title data-wiki-title="Universo">Universo — Wiki Laços Profanos</title>
     <link rel="icon" href="https://i.imgur.com/mgxXSto.png" type="image/png">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/style.css">
-    <style>
-        .universo-intro {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #ddd;
-            max-width: 900px;
-            margin: 0 0 30px 0;
-        }
-        .universo-intro p {
-            margin-bottom: 14px;
-        }
-        .universo-intro strong {
-            color: #fff;
-        }
-
-        .universo-imagem-principal {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 2px solid rgba(240, 27, 133, 0.3);
-            margin-bottom: 40px;
-        }
-        .universo-imagem-principal img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .continente {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 30px;
-            align-items: start;
-            margin-bottom: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(240, 27, 133, 0.15);
-        }
-        .continente:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-        @media (max-width: 768px) {
-            .continente {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-        }
-
-        .continente-imagem {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 2px solid rgba(240, 27, 133, 0.3);
-        }
-        .continente-imagem img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .continente-texto h2 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #f01b85;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-        @media (max-width: 768px) {
-            .continente-texto h2 { font-size: 1.5rem; }
-        }
-        .continente-texto p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #ddd;
-            margin-bottom: 12px;
-        }
-        .continente-texto strong {
-            color: #f01b85;
-            font-weight: 700;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
-<nav class="navbar" id="navbar">
-    <div class="nav-container">
-        <a href="/" class="logo">Laços Profanos</a>
-        <div class="language-dropdown" id="languageDropdown">
-            <button class="language-btn" id="languageBtn">
-                <i class="fas fa-globe"></i>
-                <span id="current-language">Português</span>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-content" id="dropdownContent"></div>
-        </div>
-        <ul class="nav-menu" id="navMenu"></ul>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-</nav>
+<site-header></site-header>
 
 <main class="container">
-    <h1 class="page-title">Universo</h1>
+    <div class="artigo-layout">
 
-    <div class="universo-intro">
-        <p>
-            <strong>Laços Profanos</strong> se passa em uma versão alternativa
-            da Terra, composta por três continentes distintos, cada um com seu
-            clima, regras e características próprias.
-        </p>
-    </div>
+        <aside class="artigo-sidebar">
+            <div class="artigo-imagem-topo" id="artigoImagemTopo"></div>
+            <div id="artigoSidebar"></div>
+        </aside>
 
-    <div class="universo-imagem-principal">
-        <img src="https://cdn.imgchest.com/files/e50becbe507d.jpg" alt="Mapa do universo de Laços Profanos">
-    </div>
+        <article class="artigo-conteudo">
+            <h1 class="artigo-nome" id="artigoNome">Carregando...</h1>
+            <div id="artigoIntro"></div>
+            <div class="artigo-indice" id="artigoIndice"></div>
+            <div id="artigoConteudo"><p class="vazio">Carregando artigo...</p></div>
+            <h2 id="galeria-titulo" style="display:none"></h2>
+            <div class="galeria" id="artigoGaleria"></div>
+        </article>
 
-    <div class="continente">
-        <div class="continente-imagem">
-            <img src="https://cdn.imgchest.com/files/27411c7c18ab.jpg" alt="Clifton">
-        </div>
-        <div class="continente-texto">
-            <h2>Clifton</h2>
-            <p>
-                Clifton é um continente quente e abrasador, onde vastos desertos
-                dominam cerca de 30% do território. Ainda assim, a vida encontrou
-                maneiras de florescer: oásis escondidos, rios subterrâneos e
-                comunidades adaptadas às condições áridas tornam a sobrevivência
-                possível. A dificuldade de viver aqui é <strong>mediana</strong>;
-                com recursos limitados e calor constante, cada viagem ou exploração
-                exige planejamento cuidadoso. O sol parece mais intenso, e até as
-                noites carregam o resquício do calor do dia, moldando costumes e
-                culturas resilientes.
-            </p>
-        </div>
-    </div>
-
-    <div class="continente">
-        <div class="continente-imagem">
-            <img src="https://cdn.imgchest.com/files/162591419cfd.jpg" alt="Molton">
-        </div>
-        <div class="continente-texto">
-            <h2>Molton</h2>
-            <p>
-                Molton é o oposto de Clifton: um continente temperado e fértil,
-                coberto por densas florestas, planícies verdes e rios sinuosos.
-                Aqui, a natureza predomina e a vida floresce com relativa
-                facilidade. As comunidades humanas e animais coexistem em
-                harmonia com o ambiente, aproveitando a abundância de recursos.
-                Molton transmite uma sensação de segurança e equilíbrio, mas não
-                deixa de ter seus perigos — florestas densas podem engolir
-                viajantes desavisados e tempestades repentinas são comuns.
-            </p>
-        </div>
-    </div>
-
-    <div class="continente">
-        <div class="continente-imagem">
-            <img src="https://cdn.imgchest.com/files/9c52b12eb87c.jpg" alt="Kelster">
-        </div>
-        <div class="continente-texto">
-            <h2>Kelster</h2>
-            <p>
-                Kelster é o continente do gelo e das montanhas. Neve cobre quase
-                toda a terra, e ventos cortantes desafiam qualquer ser que tente
-                atravessá-lo. Sobreviver aqui é uma tarefa árdua, exigindo
-                resistência e inteligência; ainda assim, sociedades se
-                desenvolveram, construindo cidades protegidas do frio e adaptando
-                suas vidas às duras condições. O silêncio gelado das planícies
-                nevadas contrasta com a movimentação intensa das comunidades que
-                lutam para prosperar em meio ao frio implacável.
-            </p>
-        </div>
     </div>
 </main>
 
-<footer>
-    <p>Wiki Laços Profanos — <a href="/contribua.html">Contribua</a></p>
-</footer>
+<site-footer></site-footer>
 
 <script src="/assets/app.js"></script>
+<script>
+    window.ARTIGO_TIPO = 'universo';
+    window.ARTIGO_SLUG = '';   // vazio = a própria pasta (universo/universo.json)
+</script>
+<script src="/assets/artigo.js"></script>
+
 </body>
 </html>
