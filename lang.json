@@ -1,7 +1,16 @@
 {
   "pt": {
     "name": "Português",
-    "url": "/",
-    "active": true
+    "active": true,
+    "prefix": "",
+    "wiki": {
+      "nome": "Laços Profanos",
+      "nomeCompleto": "Wiki Laços Profanos",
+      "logo": "https://i.imgur.com/mgxXSto.png",
+      "galeria": "Galeria"
+    },
+    "links": {
+      "contribua": "https://docs.lacosprofanos.com.br"
+    }
   }
 }
