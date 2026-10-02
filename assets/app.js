@@ -2,11 +2,6 @@
     'use strict';
 
     // ============================================
-    // CONFIG
-    // ============================================
-    const MAX_ITENS_ANTES_HAMBURGER = 5;
-
-    // ============================================
     // IDIOMA ATUAL — lê do <html id="lang-pt">
     // ============================================
     function getIdiomaAtual() {
@@ -23,6 +18,59 @@
             .replace(/\.html$/, '')
             .replace(/\/$/, '')
             .toLowerCase() || '/';
+    }
+
+    // ============================================
+    // CARREGA LANG.JSON (uma vez, guarda em cache)
+    // ============================================
+    let __langCache = null;
+
+    async function carregarLangData() {
+        if (__langCache) return __langCache;
+        try {
+            __langCache = await fetch('/lang.json?v=' + Date.now()).then(r => r.json());
+            window.__langData = __langCache;
+            return __langCache;
+        } catch (e) {
+            console.warn('Erro lang.json:', e);
+            __langCache = {};
+            window.__langData = {};
+            return {};
+        }
+    }
+
+    // ============================================
+    // NORMALIZAR TEXTOS — nome, logo, contribua, título
+    // ============================================
+    async function normalizarTextos() {
+        const lang = getIdiomaAtual();
+        const langData = await carregarLangData();
+        const cfg = langData[lang]?.wiki;
+        if (!cfg) return;
+
+        document.querySelectorAll('[data-wiki]').forEach(el => {
+            const chave = el.dataset.wiki;
+            const valor = cfg[chave];
+            if (valor === undefined) return;
+
+            if (el.tagName === 'IMG') {
+                el.src = valor;
+            } else if (el.tagName === 'A') {
+                const img = el.querySelector('img');
+                if (img) {
+                    img.src = valor;
+                } else {
+                    el.textContent = valor;
+                }
+            } else {
+                el.textContent = valor;
+            }
+        });
+
+        const titleEl = document.querySelector('title[data-wiki-title]');
+        if (titleEl) {
+            titleEl.textContent = `${titleEl.dataset.wikiTitle} — ${cfg.nomeCompleto}`;
+        }
     }
 
     // ============================================
@@ -62,11 +110,10 @@
                 </li>`;
             }).join('');
 
-            // 👇 NOVO: força hambúrguer se passar do limite
             if (navbar) {
                 navbar.classList.toggle(
                     'force-hamburger',
-                    items.length > MAX_ITENS_ANTES_HAMBURGER
+                    items.length > 5
                 );
             }
 
@@ -98,8 +145,8 @@
         navMenu.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', () => {
                 const navbar = document.getElementById('navbar');
-                const forçado = navbar && navbar.classList.contains('force-hamburger');
-                if (window.innerWidth <= 900 || forçado) {
+                const forcado = navbar && navbar.classList.contains('force-hamburger');
+                if (window.innerWidth <= 900 || forcado) {
                     hamb.classList.remove('active');
                     navMenu.classList.remove('active');
                 }
@@ -108,10 +155,10 @@
 
         document.addEventListener('click', e => {
             const navbar = document.getElementById('navbar');
-            const forçado = navbar && navbar.classList.contains('force-hamburger');
+            const forcado = navbar && navbar.classList.contains('force-hamburger');
             const mobile = window.innerWidth <= 900;
 
-            if ((mobile || forçado)
+            if ((mobile || forcado)
                 && navMenu.classList.contains('active')
                 && !navMenu.contains(e.target)
                 && !hamb.contains(e.target)) {
@@ -122,7 +169,7 @@
     }
 
     // ============================================
-    // IDIOMAS
+    // IDIOMAS — DROPDOWN
     // ============================================
     async function carregarIdiomas() {
         const wrap = document.getElementById('languageDropdown');
@@ -133,10 +180,9 @@
         const currentLang = getIdiomaAtual();
 
         try {
-            const langData = await fetch('/lang.json?v=' + Date.now()).then(r => r.json());
+            const langData = await carregarLangData();
             const ativos = Object.entries(langData).filter(([_, l]) => l.active !== false);
 
-            // Só 1 idioma ativo → esconde o dropdown
             if (ativos.length <= 1) {
                 wrap.style.display = 'none';
                 return;
@@ -180,17 +226,17 @@
     }
 
     // ============================================
-    // TROCAR IDIOMA
+    // TROCAR IDIOMA — usa prefix do lang.json
     // ============================================
     function trocarIdioma(novoLang) {
+        const langData = window.__langData || {};
+        const prefix = langData[novoLang]?.prefix ?? '';
+
+        // remove prefixo antigo do path (ex.: /en, /es)
         let base = location.pathname.replace(/\/(en|es)\/?$/, '/');
         if (!base.endsWith('/')) base += '/';
 
-        if (novoLang === 'pt') {
-            location.href = base;
-        } else {
-            location.href = base + novoLang;
-        }
+        location.href = base + prefix.replace(/^\//, '');
     }
 
     // ============================================
@@ -207,7 +253,8 @@
     // ============================================
     // INIT
     // ============================================
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+        await normalizarTextos();
         carregarNavbar();
         carregarIdiomas();
         setupScroll();
