@@ -247,5 +247,8 @@
         });
     }
 
+if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', carregar);
-})();
+} else {
+    carregar();
+}})();
