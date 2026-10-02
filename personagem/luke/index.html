@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="lang-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregando... — Wiki Laços Profanos</title>
+    <link rel="icon" href="https://i.imgur.com/mgxXSto.png" type="image/png">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">Laços Profanos</a>
+        <div class="language-dropdown" id="languageDropdown">
+            <button class="language-btn" id="languageBtn">
+                <i class="fas fa-globe"></i>
+                <span id="current-language">Português</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-content" id="dropdownContent"></div>
+        </div>
+        <ul class="nav-menu" id="navMenu"></ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<main class="container">
+    <div class="artigo-layout">
+
+        <aside class="artigo-sidebar">
+            <div class="artigo-imagem-topo" id="artigoImagemTopo"></div>
+            <div id="artigoSidebar"></div>
+        </aside>
+
+        <article class="artigo-conteudo">
+            <h1 class="artigo-nome" id="artigoNome">Carregando...</h1>
+            <div id="artigoIntro"></div>
+            <div class="artigo-indice" id="artigoIndice"></div>
+            <div id="artigoConteudo"><p class="vazio">Carregando artigo...</p></div>
+            <h2 id="galeria-titulo" style="display:none">Galeria</h2>
+            <div class="galeria" id="artigoGaleria"></div>
+        </article>
+
+    </div>
+</main>
+
+<footer>
+    <p>Wiki Laços Profanos — <a href="/contribua.html">Contribua</a></p>
+</footer>
+
+<script src="/assets/app.js"></script>
+<script>
+    window.ARTIGO_TIPO = 'personagem';
+    window.ARTIGO_SLUG = 'luke';
+</script>
+<script src="/assets/artigo.js"></script>
+
+</body>
+</html>
