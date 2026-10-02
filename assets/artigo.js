@@ -19,30 +19,40 @@
         const conteudoEl = document.getElementById('artigoConteudo');
         const sidebarEl = document.getElementById('artigoSidebar');
 
+        // Espera o lang.json carregar (vem do app.js)
+        if (window.__langReady) await window.__langReady;
+
         try {
             // Conteúdo por idioma: PT = conteudo.md, EN = conteudo-en.md
             const mdFile = idioma === 'pt' ? 'conteudo.md' : `conteudo-${idioma}.md`;
 
-            const [meta, md, galeriaData] = await Promise.all([
-                fetch(base + slug + '.json?v=' + Date.now()).then(r => r.json()),
-                fetch(base + mdFile + '?v=' + Date.now())
-                    .then(r => r.ok ? r.text() : fetch(base + 'conteudo.md').then(r2 => r2.text()))
-                    .catch(() => ''),
-                fetch(base + 'galeria.json?v=' + Date.now())
-                    .then(r => r.json()).catch(() => ({ imagens: [] }))
-            ]);
+            // JSON do artigo é OPCIONAL
+            const meta = await fetch(base + slug + '.json?v=' + Date.now())
+                .then(r => r.ok ? r.json() : {})
+                .catch(() => ({}));
 
-            document.title = `${meta.nome} — Wiki Laços Profanos`;
+            const md = await fetch(base + mdFile + '?v=' + Date.now())
+                .then(r => r.ok ? r.text() : fetch(base + 'conteudo.md').then(r2 => r2.ok ? r2.text() : ''))
+                .catch(() => '');
+
+            const galeriaData = await fetch(base + 'galeria.json?v=' + Date.now())
+                .then(r => r.ok ? r.json() : { imagens: [] })
+                .catch(() => ({ imagens: [] }));
+
+            // Título — usa meta.nome se existir, senão usa o slug capitalizado
+            const nome = meta.nome || capitalizar(slug);
+            const nomeCompleto = window.__langData?.[idioma]?.wiki?.nomeCompleto || 'Wiki Laços Profanos';
+            document.title = `${nome} — ${nomeCompleto}`;
 
             const nomeEl = document.getElementById('artigoNome');
-            if (nomeEl) nomeEl.textContent = meta.nome;
+            if (nomeEl) nomeEl.textContent = nome;
 
             const imgTopoEl = document.getElementById('artigoImagemTopo');
             if (imgTopoEl && meta.imagem) {
-                imgTopoEl.innerHTML = `<img src="${meta.imagem}" alt="${meta.nome}">`;
+                imgTopoEl.innerHTML = `<img src="${meta.imagem}" alt="${nome}">`;
             }
 
-            if (sidebarEl) {
+            if (sidebarEl && meta.infobox) {
                 sidebarEl.innerHTML = renderInfobox(meta.infobox, tipo);
             }
 
@@ -62,7 +72,7 @@
                         }
                     }
 
-                    gerarIndice(conteudoEl, meta.nome, temGaleria);
+                    gerarIndice(conteudoEl, nome, temGaleria);
                     converterLinksInternos(document.querySelector('.artigo-conteudo'), tipo);
                 } else {
                     conteudoEl.innerHTML = '<p class="vazio">Erro: marked.js não carregado.</p>';
@@ -81,6 +91,12 @@
                 conteudoEl.innerHTML = `<p class="vazio">Erro ao carregar artigo: ${e.message}</p>`;
             }
         }
+    }
+
+    function capitalizar(texto) {
+        return texto
+            .replace(/-/g, ' ')
+            .replace(/\b\w/g, l => l.toUpperCase());
     }
 
     function renderInfobox(info, tipoAtual) {
