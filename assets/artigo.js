@@ -5,43 +5,41 @@
     //   window.ARTIGO_TIPO = "personagem"
     //   window.ARTIGO_SLUG = "wahi"
 
-    function getIdiomaAtual() {
-        return (document.documentElement.id || 'lang-pt').replace('lang-', '');
-    }
-
     async function carregar() {
         const tipo = window.ARTIGO_TIPO;
         const slug = window.ARTIGO_SLUG;
         if (!tipo || !slug) return;
 
-        const idioma = getIdiomaAtual();
-        const base = `/${tipo}/${slug}/`;
         const conteudoEl = document.getElementById('artigoConteudo');
         const sidebarEl = document.getElementById('artigoSidebar');
 
-        // Espera o lang.json carregar (vem do app.js)
+        // Espera o app.js terminar de carregar o lang.json
         if (window.__langReady) await window.__langReady;
 
-        try {
-            // Conteúdo por idioma: PT = conteudo.md, EN = conteudo-en.md
-            const mdFile = idioma === 'pt' ? 'conteudo.md' : `conteudo-${idioma}.md`;
+        const api = window.WikiAPI;
+        const idioma = api.getIdioma();
+        const prefixo = api.getPrefixoIdioma();
+        const base = prefixo
+            ? `/${tipo}/${slug}${prefixo}/`
+            : `/${tipo}/${slug}/`;
 
+        try {
             // JSON do artigo é OPCIONAL
             const meta = await fetch(base + slug + '.json?v=' + Date.now())
                 .then(r => r.ok ? r.json() : {})
                 .catch(() => ({}));
 
-            const md = await fetch(base + mdFile + '?v=' + Date.now())
-                .then(r => r.ok ? r.text() : fetch(base + 'conteudo.md').then(r2 => r2.ok ? r2.text() : ''))
+            const md = await fetch(base + 'conteudo.md?v=' + Date.now())
+                .then(r => r.ok ? r.text() : '')
                 .catch(() => '');
 
             const galeriaData = await fetch(base + 'galeria.json?v=' + Date.now())
                 .then(r => r.ok ? r.json() : { imagens: [] })
                 .catch(() => ({ imagens: [] }));
 
-            // Título — usa meta.nome se existir, senão usa o slug capitalizado
+            // Título — usa meta.nome se existir, senão capitaliza o slug
             const nome = meta.nome || capitalizar(slug);
-            const nomeCompleto = window.__langData?.[idioma]?.wiki?.nomeCompleto || 'Wiki Laços Profanos';
+            const nomeCompleto = api.getTexto('nomeCompleto') || 'Wiki Laços Profanos';
             document.title = `${nome} — ${nomeCompleto}`;
 
             const nomeEl = document.getElementById('artigoNome');
@@ -80,9 +78,12 @@
             }
 
             const galeriaEl = document.getElementById('artigoGaleria');
+            const galeriaTitulo = document.getElementById('galeria-titulo');
             if (galeriaEl && temGaleria) {
-                const galeriaTitulo = document.getElementById('galeria-titulo');
-                if (galeriaTitulo) galeriaTitulo.style.display = '';
+                if (galeriaTitulo) {
+                    galeriaTitulo.textContent = api.getTexto('galeria') || 'Galeria';
+                    galeriaTitulo.style.display = '';
+                }
                 galeriaEl.innerHTML = renderGaleria(galeriaData.imagens);
                 setupGaleria();
             }
@@ -142,23 +143,30 @@
         const h2s = container.querySelectorAll('h2');
         if (!h2s.length && !temGaleria) { indiceEl.style.display = 'none'; return; }
 
+        const api = window.WikiAPI;
+        const tituloGaleria = api?.getTexto('galeria') || 'Galeria';
+
         const itens = [`<li><a href="#artigoNome">${nome}</a></li>`];
         h2s.forEach((h2, i) => {
             const id = 'secao-' + i;
             h2.id = id;
             itens.push(`<li><a href="#${id}">${h2.textContent}</a></li>`);
         });
-        if (temGaleria) itens.push('<li><a href="#galeria-titulo">Galeria</a></li>');
+        if (temGaleria) itens.push(`<li><a href="#galeria-titulo">${tituloGaleria}</a></li>`);
 
-        indiceEl.innerHTML = `<h3>Índice</h3><ul>${itens.join('')}</ul>`;
+        const tituloIndice = api?.getTexto('indice') || 'Índice';
+        indiceEl.innerHTML = `<h3>${tituloIndice}</h3><ul>${itens.join('')}</ul>`;
     }
 
     function converterLinksInternos(container, tipo) {
         if (!container) return;
+        const api = window.WikiAPI;
+        const prefixo = api?.getPrefixoIdioma() || '';
         container.querySelectorAll('a').forEach(a => {
             const href = a.getAttribute('href') || '';
             if (/^[a-z0-9-]+$/i.test(href)) {
-                a.setAttribute('href', `/${tipo}/${href}/`);
+                const base = `/${tipo}/${href}/`;
+                a.setAttribute('href', prefixo ? base.replace(/\/$/, '') + prefixo + '/' : base);
             }
         });
     }
