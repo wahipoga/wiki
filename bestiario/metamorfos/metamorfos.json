@@ -1,0 +1,10 @@
+{
+  "nome": "Metamorfos",
+  "imagem": "https://cdn.imgchest.com/files/0aec0823877a.png",
+  "infobox": {
+    "campos": [
+      { "label": "Tipo", "valor": "Criatura" },
+      { "label": "Variações", "valor": "2 conhecidas" }
+    ]
+  }
+}
