@@ -67,8 +67,16 @@
                 imgTopoEl.innerHTML = `<img src="${meta.imagem}" alt="${nome}">`;
             }
 
+            // Preenche a sidebar (só se tiver infobox)
             if (sidebarEl && meta.infobox) {
                 sidebarEl.innerHTML = renderInfobox(meta.infobox, tipo);
+            }
+
+            // Se não tem nem infobox nem imagem, esconde a sidebar e expande o conteúdo
+            const temInfobox = !!meta.infobox;
+            const temImagem = !!meta.imagem;
+            if (!temInfobox && !temImagem) {
+                document.querySelector('.artigo-layout')?.classList.add('sem-sidebar');
             }
 
             const temGaleria = !!galeriaData.imagens?.length;
