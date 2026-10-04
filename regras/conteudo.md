@@ -9,7 +9,7 @@
 > ⚠️ **Aviso:** As regras são a única parte do site que você **não pode e não deve tentar alterar diretamente ou sugerir alterações por meio de commits**.
 >
 > Caso tenha uma sugestão de nova regra, alteração ou melhoria nas regras existentes, **envie uma Issue** no repositório. A sugestão será analisada antes de qualquer alteração.
----
+
 ## Conteúdo
 
 Ao adicionar conteúdo à Wiki, dê preferência a informações **oficiais ou canônicas** do universo de Laços Profanos.
@@ -58,3 +58,14 @@ Se um artigo não tiver relação com Laços Profanos, ele não serve para a Wik
 É **proibido descumprir as Regras da Comunidade de Laços Profanos**.
 
 As regras da comunidade também se aplicam a todo conteúdo adicionado à Wiki.
+
+## Contribuições rejeitadas imediatamente
+
+Adições, alterações ou commits que tenham qualquer um dos seguintes objetivos serão **rejeitados imediatamente pela equipe oficial**:
+
+- Quebrar as Regras da Comunidade;
+- Vandalizar qualquer artigo ou outra parte da Wiki;
+- Adicionar autopromoção ou aut
+  divulgação;
+- Apresentar informações criadas por fãs como se fossem informações oficiais ou canônicas;
+- Descumprir qualquer outra proibição estabelecida nestas regras, **independentemente de qual seja**.
