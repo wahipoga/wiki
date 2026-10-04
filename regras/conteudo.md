@@ -2,9 +2,7 @@
 - É de sua responsabilidade manter-se ciente das regras.
 - As regras não são versionadas e não haverá atualização pública quando forem alteradas.
 - Novas regras ou adições às regras existentes terão um prazo de **30 dias (1 mês)** antes de se tornarem aplicáveis.
-- As **Regras da Comunidade de Laços Profanos** também se aplicam aqui:
-  - Regras gerais: https://shre.ink/7GCS
-  - Regras de Arte: https://shre.ink/artelp
+- Leia a documentação antes de colaborar: https://wahipogo.gitbook.io/wiki
 
 > ⚠️ **Aviso:** As regras são a única parte do site que você **não pode e não deve tentar alterar diretamente ou sugerir alterações por meio de commits**.
 >
@@ -18,6 +16,10 @@ Ao adicionar conteúdo à Wiki, dê preferência a informações **oficiais ou c
 
 A adição de fontes é opcional, mas é recomendada quando houver uma fonte disponível para a informação adicionada.
 
+### Verificabilidade
+
+Informações controversas, pouco conhecidas ou contestáveis devem, sempre que possível, vir acompanhadas de fonte ou referência.
+
 ### Conteúdo feito por fãs
 
 É permitida a adição de conteúdo feito por fãs, como:
@@ -29,15 +31,7 @@ A adição de fontes é opcional, mas é recomendada quando houver uma fonte dis
 
 Porém, deve ficar **claramente indicado que o conteúdo foi criado por fãs e não é oficial**.
 
-### Imagens
-
-Dê preferência a **imagens oficiais** ao adicionar imagens aos artigos.
-
-Imagens feitas por fãs só podem ser adicionadas quando você **possuir permissão para utilizá-las**.
-
-Sempre que possível, envie prints ou outra forma de comprovar a permissão para utilização da imagem.
-
-### Conteúdo recente:
+### Conteúdo recente
 
 Não adicione imediatamente atualizações muito recentes sobre Laços Profanos.
 
@@ -47,26 +41,214 @@ Por exemplo: se algo novo de Laços Profanos for lançado hoje, não adicione au
 
 Dependendo do conteúdo que estiver sendo versionado, pode ser necessário aguardar **um período maior**.
 
-**Conteúdo fora do tema:**
+### Conteúdo fora do tema
 
 É **completamente proibido adicionar conteúdo fora do tema da Wiki**.
 
 Se um artigo não tiver relação com Laços Profanos, ele não serve para a Wiki, independentemente de o conteúdo ser interessante, bem escrito ou relevante por outros motivos.
 
-### Regras da Comunidade
+## Estilo e redação
 
-É **proibido descumprir as Regras da Comunidade de Laços Profanos**.
+### Neutralidade
 
-As regras da comunidade também se aplicam a todo conteúdo adicionado à Wiki.
+Artigos devem ser escritos em **tom neutro**, sem opiniões pessoais, juízos de valor ou linguagem emocional.
+
+### Clareza e objetividade
+
+Artigos devem ser escritos de forma clara, direta e objetiva, evitando prolixidade, redundância ou linguagem confusa.
+
+### Traduções automáticas
+
+Não adicione traduções feitas por máquina sem revisão humana.
+
+## Respeito acima de tudo
+
+Não trate mal, nem desrespeite os outros membros.
+
+Laços Profanos é uma comunidade inclusiva, onde todos são bem-vindos e devem ser respeitados independentemente de quem sejam ou no que acreditem.
+
+Isso inclui, mas não se limita a:
+
+- Discriminação ou desrespeito por etnia, orientação sexual, identidade de gênero ou condição econômica;
+- Discurso de ódio, assédio, perseguição ou “caça às bruxas”;
+- Linguagem desnecessariamente imprópria ou ofensiva;
+- Incentivo, menção ou piadas relacionadas a suicídio ou autolesão;
+- Qualquer forma de fomento a conflitos dentro da comunidade.
+
+### Proteção a menores e conteúdo sensível
+
+Com o acolhimento de menores de idade, é **terminantemente proibido**:
+
+- Mídia sensível, conteúdo adulto/NSFW, sexual ou desnecessariamente sugestivo;
+- Extremismo ou ideologias extremistas, mesmo que em tom de ironia ou meme;
+- “Humor negro”, “humor ácido” ou “humor pesado” — esse tipo de conteúdo não é bem-vindo aqui.
+
+### Acessibilidade e fotossensibilidade
+
+É **obrigatório** o uso da ferramenta de spoiler para qualquer conteúdo que contenha:
+
+- Cores muito vibrantes;
+- Luzes piscantes;
+- Movimentos bruscos.
+
+Isso visa proteger pessoas fotossensíveis e garantir um espaço seguro para todos.
+
+## Privacidade e segurança dos membros
+
+### Dados pessoais
+
+Não peça nem compartilhe informações pessoais de nenhum membro, incluindo:
+
+- Idade;
+- Fotos (exceto de figuras públicas);
+- Endereço;
+- Número de telefone;
+- Entre outros.
+
+Você poderá ser moderado se for identificado que não está seguro com suas próprias informações ou está tentando obter dados pessoais de terceiros.
+
+### Ataques e segurança
+
+É **estritamente proibido** efetuar ou tentar efetuar ataques contra a segurança do servidor ou de seus membros, incluindo, mas não se limitando a:
+
+- Phishing, IP-grabbers ou coleta de dados indevida;
+- Exploração de vulnerabilidades da plataforma;
+- Compra e venda de informações pessoais ou credenciais;
+- Invasões, raids ou qualquer forma de ataque coordenado.
+
+### Links e canais externos
+
+Não entre em canais ou links externos não validados.
+
+Não nos responsabilizamos se você entrar em servidores, sites, grupos, entre outros, que não sejam de Laços Profanos.
+
+Você pode se comunicar conosco em:
+
+**suporte@lacosprofanos.com.br**
+
+## Regras de Arte
+
+Estas regras se aplicam a **toda arte ou imagem adicionada à Wiki**, seja em artigos, galerias, infoboxes ou qualquer outra seção.
+
+### Preferência por imagens oficiais
+
+Dê preferência a **imagens oficiais** ao adicionar imagens aos artigos.
+
+Imagens feitas por fãs só podem ser adicionadas quando você **possuir permissão para utilizá-las**.
+
+### Crédito obrigatório
+
+Se você usou **base, referência, pose, fundo, imagem ou qualquer elemento** que não seja de sua autoria, você **deve**:
+
+- Colocar o nome do artista original junto da sua arte ou imagem;
+- Sempre que possível, incluir o link da obra original;
+- Deixar claro o que foi usado (base, pose, referência, imagem etc.);
+- Enviar prints ou outra forma de comprovar a permissão de uso, quando aplicável.
+
+**Arte ou imagem sem crédito adequado pode ser removida da Wiki.**
+
+### Tracing e Heavy Reference
+
+É **proibido** adicionar à Wiki artes feitas com **tracing** ou **heavy reference** sem a devida atribuição.
+
+- **Tracing:** copiar diretamente por cima de uma imagem existente.
+- **Heavy Reference:** usar uma obra de outra pessoa como base estrutural próxima demais, mesmo com modificações.
+
+**Exceção:** referências liberadas explicitamente pela equipe (ex.: bases free to use, referências oficiais de Laços Profanos) podem ser usadas, **desde que o artista original seja creditado**.
+
+### Proibição de artes ou imagens roubadas ou plagiadas
+
+Não adicione à Wiki artes ou imagens que:
+
+- Não sejam de sua autoria;
+- Tenham sido copiadas de outros artistas sem permissão;
+- Sejam plágio, tracing ou heavy reference não creditado.
+
+A equipe pode remover a arte ou imagem e aplicar punições conforme as regras da Wiki.
+
+### Permissão para uso de arte ou imagem de terceiros
+
+Se você **não é o autor** da arte ou imagem e deseja adicioná-la à Wiki:
+
+- Você **precisa de permissão explícita** do artista;
+- Sempre que possível, envie print ou outra forma de comprovar a permissão;
+- O crédito ao artista original é **obrigatório**.
+
+**Arte ou imagem de terceiros sem permissão será removida.**
+
+### Proibição de imagens geradas por IA
+
+Não adicione à Wiki imagens geradas por **inteligência artificial**, salvo se:
+
+- Forem **claramente identificadas** como geradas por IA;
+- Não substituírem arte oficial;
+- Não forem apresentadas como arte feita por fãs humanos.
+
+### Conteúdo adulto e violência
+
+Não é permitido adicionar à Wiki artes ou imagens com:
+
+- **Nudez** ou **pornografia**;
+- **Violência extrema** (gore explícito, mutilação, etc.).
+
+**Violência leve** (arranhões, cortes superficiais, pequenas quantidades de sangue) é permitida, desde que **moderada** e adequada ao contexto da Wiki.
+
+Qualquer conteúdo que ultrapasse esses limites será removido.
+
+### Respeito entre artistas
+
+A Wiki é um espaço de documentação, mas também de convivência entre artistas.
+
+- Não zombe do trabalho dos outros;
+- Não desencoraje colegas iniciantes;
+- Ajude quem está evoluindo.
+
+Artes ou imagens adicionadas com intuito de humilhar, provocar ou atacar outros artistas serão removidas.
+
+### Qualidade e adequação
+
+Dê preferência a artes ou imagens:
+
+- **Nítidas**, sem borrões excessivos ou baixa resolução;
+- **Relevantes** para o artigo em que estão sendo inseridas;
+- **Adequadas** ao tom da Wiki.
+
+Artes ou imagens de baixa qualidade ou fora do tema podem ser removidas ou substituídas.
+
+### Separação entre arte oficial e arte de fã
+
+Artes feitas por fãs devem ser **claramente identificadas** como **fanart**, em seção própria ou com aviso visível.
+
+Não misture arte de fã com arte oficial sem sinalização.
+
+### Consequências
+
+Artes ou imagens que violem estas regras podem ser:
+
+- **Removidas** sem aviso prévio em casos graves;
+- **Rejeitadas** em commits ou edições;
+- **Reportadas** à equipe oficial, com possíveis punições conforme as regras da Wiki.
+
+## Issues
+
+### Objetividade
+
+Ao abrir uma Issue, descreva claramente o problema, a sugestão ou a dúvida, com contexto e, se possível, exemplos.
+
+### Spam
+
+Não abra Issues repetidas, vagas ou sem relação com a Wiki.
+
+### Off-topic
+
+Discussões em Issues devem se limitar ao tema proposto.
 
 ## Contribuições rejeitadas imediatamente
 
 Adições, alterações ou commits que tenham qualquer um dos seguintes objetivos serão **rejeitados imediatamente pela equipe oficial**:
 
-- Quebrar as Regras da Comunidade;
 - Vandalizar qualquer artigo ou outra parte da Wiki;
-- Adicionar autopromoção ou auto
-  divulgação;
+- Adicionar autopromoção ou autodivulgação;
 - Apresentar informações criadas por fãs como se fossem informações oficiais ou canônicas;
 - Descumprir qualquer outra proibição estabelecida nestas regras, **independentemente de qual seja**.
 
@@ -103,3 +285,13 @@ Isso inclui, especialmente, scripts, códigos ou arquivos que possam comprometer
 Não remova ou altere conteúdo oficial sem justificativa.
 
 Alterações em informações oficiais devem ter uma justificativa adequada e seguir as demais regras e orientações da documentação.
+
+### Spam e autopromoção
+
+Não utilize a Wiki para spam ou autopromoção.
+
+Isso inclui, mas não se limita a:
+
+- Divulgação excessiva de redes sociais, comissões ou projetos pessoais;
+- Links repetidos sem relação com o conteúdo do artigo;
+- Comentários promocionais em edições ou Issues.
