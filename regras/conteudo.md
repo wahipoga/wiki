@@ -65,7 +65,7 @@ Adições, alterações ou commits que tenham qualquer um dos seguintes objetivo
 
 - Quebrar as Regras da Comunidade;
 - Vandalizar qualquer artigo ou outra parte da Wiki;
-- Adicionar autopromoção ou aut
+- Adicionar autopromoção ou auto
   divulgação;
 - Apresentar informações criadas por fãs como se fossem informações oficiais ou canônicas;
 - Descumprir qualquer outra proibição estabelecida nestas regras, **independentemente de qual seja**.
