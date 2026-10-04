@@ -61,11 +61,11 @@ Artigos devem ser escritos de forma clara, direta e objetiva, evitando prolixida
 
 Não adicione traduções feitas por máquina sem revisão humana.
 
-## Respeito acima de tudo
+## Respeito e convivência
 
-Não trate mal, nem desrespeite os outros membros.
+Não desrespeite outros colaboradores.
 
-Laços Profanos é uma comunidade inclusiva, onde todos são bem-vindos e devem ser respeitados independentemente de quem sejam ou no que acreditem.
+A Wiki de Laços Profanos é um espaço colaborativo, onde todos devem ser tratados com respeito, independentemente de quem sejam ou no que acreditem.
 
 Isso inclui, mas não se limita a:
 
@@ -73,31 +73,31 @@ Isso inclui, mas não se limita a:
 - Discurso de ódio, assédio, perseguição ou “caça às bruxas”;
 - Linguagem desnecessariamente imprópria ou ofensiva;
 - Incentivo, menção ou piadas relacionadas a suicídio ou autolesão;
-- Qualquer forma de fomento a conflitos dentro da comunidade.
+- Qualquer forma de fomento a conflitos entre colaboradores.
 
 ### Proteção a menores e conteúdo sensível
 
-Com o acolhimento de menores de idade, é **terminantemente proibido**:
+Como a Wiki pode ser acessada por menores de idade, é **terminantemente proibido** adicionar:
 
 - Mídia sensível, conteúdo adulto/NSFW, sexual ou desnecessariamente sugestivo;
 - Extremismo ou ideologias extremistas, mesmo que em tom de ironia ou meme;
-- “Humor negro”, “humor ácido” ou “humor pesado” — esse tipo de conteúdo não é bem-vindo aqui.
+- “Humor negro”, “humor ácido” ou “humor pesado”.
 
 ### Acessibilidade e fotossensibilidade
 
-É **obrigatório** o uso da ferramenta de spoiler para qualquer conteúdo que contenha:
+Conteúdos que possam afetar pessoas fotossensíveis devem ser tratados com cuidado.
+
+Quando o formato do artigo permitir, utilize recursos de **aviso, recolhimento ou spoiler** para conteúdos que contenham:
 
 - Cores muito vibrantes;
 - Luzes piscantes;
 - Movimentos bruscos.
 
-Isso visa proteger pessoas fotossensíveis e garantir um espaço seguro para todos.
-
-## Privacidade e segurança dos membros
+## Privacidade e segurança
 
 ### Dados pessoais
 
-Não peça nem compartilhe informações pessoais de nenhum membro, incluindo:
+Não publique nem solicite informações pessoais de terceiros, incluindo:
 
 - Idade;
 - Fotos (exceto de figuras públicas);
@@ -105,24 +105,24 @@ Não peça nem compartilhe informações pessoais de nenhum membro, incluindo:
 - Número de telefone;
 - Entre outros.
 
-Você poderá ser moderado se for identificado que não está seguro com suas próprias informações ou está tentando obter dados pessoais de terceiros.
+Informações pessoais de colaboradores ou de terceiros não devem ser adicionadas à Wiki sem consentimento explícito.
 
-### Ataques e segurança
+### Conteúdo malicioso e ataques
 
-É **estritamente proibido** efetuar ou tentar efetuar ataques contra a segurança do servidor ou de seus membros, incluindo, mas não se limitando a:
+É **estritamente proibido** adicionar à Wiki ou ao repositório qualquer conteúdo que possa comprometer a segurança do site, do repositório ou de seus usuários, incluindo, mas não se limitando a:
 
-- Phishing, IP-grabbers ou coleta de dados indevida;
-- Exploração de vulnerabilidades da plataforma;
-- Compra e venda de informações pessoais ou credenciais;
-- Invasões, raids ou qualquer forma de ataque coordenado.
+- Scripts, códigos ou arquivos maliciosos;
+- Links para phishing, coleta indevida de dados ou conteúdo ilegal;
+- Tentativas de exploração de vulnerabilidades da plataforma;
+- Invasões, spam coordenado ou qualquer forma de ataque ao repositório.
 
-### Links e canais externos
+### Links externos
 
-Não entre em canais ou links externos não validados.
+Não adicione links para canais, sites ou grupos externos não validados.
 
-Não nos responsabilizamos se você entrar em servidores, sites, grupos, entre outros, que não sejam de Laços Profanos.
+A Wiki não se responsabiliza por conteúdos externos acessados a partir de links presentes em seus artigos.
 
-Você pode se comunicar conosco em:
+Em caso de dúvidas ou problemas, entre em contato pelo canal oficial:
 
 **suporte@lacosprofanos.com.br**
 
@@ -164,7 +164,7 @@ Não adicione à Wiki artes ou imagens que:
 - Tenham sido copiadas de outros artistas sem permissão;
 - Sejam plágio, tracing ou heavy reference não creditado.
 
-A equipe pode remover a arte ou imagem e aplicar punições conforme as regras da Wiki.
+A equipe pode remover a arte ou imagem e aplicar as medidas cabíveis conforme as regras da Wiki.
 
 ### Permissão para uso de arte ou imagem de terceiros
 
@@ -227,7 +227,7 @@ Artes ou imagens que violem estas regras podem ser:
 
 - **Removidas** sem aviso prévio em casos graves;
 - **Rejeitadas** em commits ou edições;
-- **Reportadas** à equipe oficial, com possíveis punições conforme as regras da Wiki.
+- **Reportadas** à equipe oficial, com possíveis medidas conforme as regras da Wiki.
 
 ## Issues
 
@@ -258,7 +258,7 @@ Adições, alterações ou commits que tenham qualquer um dos seguintes objetivo
 
 Não utilize a Wiki para discussões ou conflitos pessoais.
 
-A Wiki deve ser utilizada para documentar o universo de Laços Profanos, e não para expor, atacar, provocar ou responder a conflitos entre membros da comunidade.
+A Wiki deve ser utilizada para documentar o universo de Laços Profanos, e não para expor, atacar, provocar ou responder a conflitos entre colaboradores.
 
 ### Alterações na estrutura do projeto
 
@@ -273,12 +273,6 @@ Se você tiver uma sugestão de mudança desse tipo, **abra uma Issue para discu
 Não crie artigos duplicados.
 
 Antes de criar um novo artigo, procure verificar se o conteúdo que você deseja adicionar já existe em algum lugar da Wiki.
-
-### Conteúdo malicioso
-
-Não adicione conteúdo malicioso à Wiki.
-
-Isso inclui, especialmente, scripts, códigos ou arquivos que possam comprometer o funcionamento ou a segurança do site (e/ou de seus usuários).
 
 ### Alteração de conteúdo oficial
 
