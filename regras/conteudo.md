@@ -69,3 +69,37 @@ Adições, alterações ou commits que tenham qualquer um dos seguintes objetivo
   divulgação;
 - Apresentar informações criadas por fãs como se fossem informações oficiais ou canônicas;
 - Descumprir qualquer outra proibição estabelecida nestas regras, **independentemente de qual seja**.
+
+## Outras proibições
+
+### Conflitos pessoais
+
+Não utilize a Wiki para discussões ou conflitos pessoais.
+
+A Wiki deve ser utilizada para documentar o universo de Laços Profanos, e não para expor, atacar, provocar ou responder a conflitos entre membros da comunidade.
+
+### Alterações na estrutura do projeto
+
+Não altere a estrutura do projeto sem necessidade.
+
+Mudanças estruturais que possam afetar outros artigos ou o funcionamento do site devem ser discutidas antes de serem implementadas.
+
+Se você tiver uma sugestão de mudança desse tipo, **abra uma Issue para discutir se a alteração é necessária**, conforme orientado na documentação.
+
+### Artigos duplicados
+
+Não crie artigos duplicados.
+
+Antes de criar um novo artigo, procure verificar se o conteúdo que você deseja adicionar já existe em algum lugar da Wiki.
+
+### Conteúdo malicioso
+
+Não adicione conteúdo malicioso à Wiki.
+
+Isso inclui, especialmente, scripts, códigos ou arquivos que possam comprometer o funcionamento ou a segurança do site (e/ou de seus usuários).
+
+### Alteração de conteúdo oficial
+
+Não remova ou altere conteúdo oficial sem justificativa.
+
+Alterações em informações oficiais devem ter uma justificativa adequada e seguir as demais regras e orientações da documentação.
