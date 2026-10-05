@@ -3,6 +3,7 @@
 - As regras não são versionadas e não haverá atualização pública quando forem alteradas.
 - Novas regras ou adições às regras existentes terão um prazo de **30 dias (1 mês)** antes de se tornarem aplicáveis.
 - Leia a documentação antes de colaborar: https://wahipogo.gitbook.io/wiki
+- Central com todos os links importantes pra wiki: https://lacosprofanos.com.br/go/wiki-links
 
 > ⚠️ **Aviso:** As regras são a única parte do site que você **não pode e não deve tentar alterar diretamente ou sugerir alterações por meio de commits**.
 >
