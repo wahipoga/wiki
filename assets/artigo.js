@@ -54,7 +54,14 @@
                 .then(r => r.ok ? r.json() : { imagens: [] })
                 .catch(() => ({ imagens: [] }));
 
-            // Nome: do JSON, senão capitaliza o slug/tipo
+// 👇 Pré-conecta os hosts de imagem do artigo
+if (window.preconnectDeConteudo) {
+    window.preconnectDeConteudo(meta);
+    window.preconnectDeConteudo(md);
+    if (galeriaData?.imagens) window.preconnectDeConteudo(galeriaData.imagens);
+}
+
+           // Nome: do JSON, senão capitaliza o slug/tipo
             const nome = meta.nome || capitalizar(slug || tipo);
             const nomeCompleto = api.getTexto('nomeCompleto') || 'Wiki Laços Profanos';
             document.title = `${nome} — ${nomeCompleto}`;
