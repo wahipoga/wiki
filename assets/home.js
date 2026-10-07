@@ -11,6 +11,11 @@
             const categorias = await fetch('/categorias.json?v=' + Date.now())
                 .then(r => r.json());
 
+            // 👇 ADICIONADO — pré-conecta os hosts das imagens das categorias
+            if (window.preconnectDeConteudo) {
+                window.preconnectDeConteudo(categorias);
+            }
+
             if (!categorias.length) {
                 grid.innerHTML = '<p class="vazio">Nenhuma categoria cadastrada.</p>';
                 return;
