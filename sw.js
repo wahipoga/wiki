@@ -1,15 +1,36 @@
 /* =========================================================
    Service Worker — Wiki Laços Profanos
-   Cache universal de imagens externas + JSONs do site
+   Cache universal de imagens + JSONs do site
+   Corrige Content-Type de imagens sem CORS (opaque)
    ========================================================= */
 
-const CACHE_NAME = 'lacos-cache-v4'; // ⚠️ v4 → limpa cache antigo
+const CACHE_NAME = 'lacos-cache-v5'; // ⚠️ v5 → limpa cache antigo
 
 const TTL_IMAGEM = 24 * 60 * 60 * 1000; // 24h
 const TTL_JSON   = 60 * 1000;            // 1min
 
-// Extensões reconhecidas como imagem (fallback quando o host não manda Content-Type)
 const EXT_IMG = /\.(png|jpe?g|gif|webp|svg|avif|ico|bmp|tiff?)(\?.*)?$/i;
+
+// Mapa extensão → Content-Type (usado quando o host não manda header)
+const MIME_POR_EXT = {
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  gif: 'image/gif',
+  webp: 'image/webp',
+  svg: 'image/svg+xml',
+  avif: 'image/avif',
+  ico: 'image/x-icon',
+  bmp: 'image/bmp',
+  tif: 'image/tiff',
+  tiff: 'image/tiff',
+};
+
+function mimePorUrl(url) {
+  const m = url.pathname.match(/\.([a-z0-9]+)$/i);
+  if (!m) return null;
+  return MIME_POR_EXT[m[1].toLowerCase()] || null;
+}
 
 /* ---------- classificação ---------- */
 function classificar(req) {
@@ -19,24 +40,15 @@ function classificar(req) {
 
   const mesmoDominio = u.origin === self.location.origin;
 
-  // 1. JSON do próprio domínio → cacheia com TTL curto
   if (mesmoDominio && u.pathname.endsWith('.json')) {
     return { tipo: 'json', ttl: TTL_JSON };
   }
-
-  // 2. Qualquer coisa que PAREÇA imagem (por extensão) → cacheia
-  //    Cobre i.imgur.com, cdn.imgchest.com, images.unsplash.com, etc.
   if (EXT_IMG.test(u.pathname)) {
-    return { tipo: 'imagem', ttl: TTL_IMAGEM };
+    return { tipo: 'imagem', ttl: TTL_IMAGEM, mime: mimePorUrl(u) };
   }
-
-  // 3. URLs externas sem extensão clara (ex: Unsplash com ?w=800)
-  //    → também cacheia como imagem, mas só se for externo.
-  //    O Content-Type da resposta vai confirmar depois.
   if (!mesmoDominio && req.destination === 'image') {
-    return { tipo: 'imagem', ttl: TTL_IMAGEM };
+    return { tipo: 'imagem', ttl: TTL_IMAGEM, mime: mimePorUrl(u) };
   }
-
   return null;
 }
 
@@ -74,30 +86,19 @@ async function responder(req, info) {
   if (cached) {
     const quando = Number(cached.headers.get('x-cached-at') || 0);
     if (Date.now() - quando < info.ttl) return cached;
-    revalidar(cache, req).catch(() => {});
+
+    revalidar(cache, req, info).catch(() => {});
     return cached;
   }
 
   try {
-    // ⚠️ NUNCA força mode/credentials — herda da request original
-    // (é isso que faz hosts sem CORS funcionarem)
     const resp = await fetch(req);
     if (!resp) return resp;
 
-    // Confirma que é imagem antes de guardar (quando dá pra ler o header)
-    const ct = resp.headers.get('Content-Type') || '';
-    const pareceImagem = info.tipo === 'imagem' && (
-      ct.startsWith('image/') ||
-      resp.type === 'opaque' // não dá pra ler header, confia na extensão
-    );
-
     if (resp.ok || resp.type === 'opaque') {
-      // Só cacheia se for imagem ou se for JSON (evita guardar HTML por engano)
-      if (info.tipo === 'json' || pareceImagem) {
-        const clone = await comTimestamp(resp);
-        cache.put(req, clone.clone());
-        return clone;
-      }
+      const clone = await comTimestamp(resp, info);
+      cache.put(req, clone.clone());
+      return clone;
     }
     return resp;
   } catch (err) {
@@ -107,31 +108,36 @@ async function responder(req, info) {
   }
 }
 
-async function revalidar(cache, req) {
+async function revalidar(cache, req, info) {
   try {
     const resp = await fetch(req);
     if (!resp) return;
     if (resp.ok || resp.type === 'opaque') {
-      const ct = resp.headers.get('Content-Type') || '';
-      if (ct.startsWith('image/') || resp.type === 'opaque' || req.url.endsWith('.json')) {
-        const clone = await comTimestamp(resp);
-        await cache.put(req, clone);
-      }
+      const clone = await comTimestamp(resp, info);
+      await cache.put(req, clone);
     }
   } catch { /* silencioso */ }
 }
 
-/* ---------- utilitário ---------- */
-async function comTimestamp(resp) {
+/* ---------- utilitário: SEMPRE define Content-Type ---------- */
+async function comTimestamp(resp, info) {
   const blob = await resp.blob();
+
   const headers = new Headers();
+  // Copia o que der pra copiar (em opaque, quase nada vem)
   for (const [k, v] of resp.headers.entries()) {
     try { headers.set(k, v); } catch {}
   }
-  headers.set('x-cached-at', String(Date.now()));
-  if (!headers.get('Content-Type') && blob.type) {
-    headers.set('Content-Type', blob.type);
+
+  // 🔑 RESOLVE O BUG: se for imagem e não veio Content-Type, usa o da URL
+  let ct = headers.get('Content-Type') || blob.type || '';
+  if (!ct && info?.tipo === 'imagem') {
+    ct = info.mime || 'image/jpeg'; // fallback seguro
   }
+  if (ct) headers.set('Content-Type', ct);
+
+  headers.set('x-cached-at', String(Date.now()));
+
   return new Response(blob, {
     status: resp.status === 0 ? 200 : resp.status,
     statusText: resp.statusText || 'OK',
