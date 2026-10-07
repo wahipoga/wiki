@@ -54,14 +54,14 @@
                 .then(r => r.ok ? r.json() : { imagens: [] })
                 .catch(() => ({ imagens: [] }));
 
-// 👇 Pré-conecta os hosts de imagem do artigo
-if (window.preconnectDeConteudo) {
-    window.preconnectDeConteudo(meta);
-    window.preconnectDeConteudo(md);
-    if (galeriaData?.imagens) window.preconnectDeConteudo(galeriaData.imagens);
-}
+            // 👇 ADICIONADO — pré-conecta os hosts de imagem ANTES de montar o HTML
+            if (window.preconnectDeConteudo) {
+                window.preconnectDeConteudo(meta);
+                window.preconnectDeConteudo(md);
+                if (galeriaData?.imagens) window.preconnectDeConteudo(galeriaData.imagens);
+            }
 
-           // Nome: do JSON, senão capitaliza o slug/tipo
+            // Nome: do JSON, senão capitaliza o slug/tipo
             const nome = meta.nome || capitalizar(slug || tipo);
             const nomeCompleto = api.getTexto('nomeCompleto') || 'Wiki Laços Profanos';
             document.title = `${nome} — ${nomeCompleto}`;
@@ -71,7 +71,8 @@ if (window.preconnectDeConteudo) {
 
             const imgTopoEl = document.getElementById('artigoImagemTopo');
             if (imgTopoEl && meta.imagem) {
-                imgTopoEl.innerHTML = `<img src="${meta.imagem}" alt="${nome}">`;
+                // 👇 ADICIONADO — fetchpriority="high" na imagem de topo
+                imgTopoEl.innerHTML = `<img src="${meta.imagem}" alt="${nome}" fetchpriority="high">`;
             }
 
             // Preenche a sidebar (só se tiver infobox)
@@ -92,6 +93,12 @@ if (window.preconnectDeConteudo) {
                 if (typeof marked !== 'undefined') {
                     marked.setOptions({ breaks: true, gfm: true });
                     conteudoEl.innerHTML = marked.parse(md);
+
+                    // 👇 ADICIONADO — lazy loading nas imagens do markdown
+                    conteudoEl.querySelectorAll('img').forEach(img => {
+                        img.loading = 'lazy';
+                        img.decoding = 'async';
+                    });
 
                     const introEl = document.getElementById('artigoIntro');
                     if (introEl) {
