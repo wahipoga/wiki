@@ -1,4 +1,5 @@
 (function () {
+    'use strict';
 
     // ============================================
     // ESTADO GLOBAL
@@ -350,65 +351,68 @@
         onScroll();
     }
 
-// ============================================
-// PRECONNECT DINÂMICO
-// ============================================
-const __hostsPreconectados = new Set();
+    // ============================================
+    // 👇 ADICIONADO — PRECONNECT DINÂMICO
+    // Descobre hosts de imagem nos JSONs/markdown
+    // e injeta <link rel="preconnect"> automaticamente
+    // ============================================
+    const __hostsPreconectados = new Set();
 
-function preconnectHost(url) {
-    try {
-        const u = new URL(url, location.href);
-        if (!/^https?:$/.test(u.protocol)) return;
-        if (u.origin === location.origin) return;
-        if (__hostsPreconectados.has(u.origin)) return;
-        __hostsPreconectados.add(u.origin);
+    function preconnectHost(url) {
+        try {
+            const u = new URL(url, location.href);
+            if (!/^https?:$/.test(u.protocol)) return;
+            if (u.origin === location.origin) return;
+            if (__hostsPreconectados.has(u.origin)) return;
+            __hostsPreconectados.add(u.origin);
 
-        const l1 = document.createElement('link');
-        l1.rel = 'preconnect';
-        l1.href = u.origin;
-        l1.crossOrigin = 'anonymous';
-        document.head.appendChild(l1);
+            const l1 = document.createElement('link');
+            l1.rel = 'preconnect';
+            l1.href = u.origin;
+            l1.crossOrigin = 'anonymous';
+            document.head.appendChild(l1);
 
-        const l2 = document.createElement('link');
-        l2.rel = 'dns-prefetch';
-        l2.href = u.origin;
-        document.head.appendChild(l2);
-    } catch { /* ignora URLs inválidas */ }
-}
-
-function preconnectDeConteudo(dados) {
-    const urls = [];
-
-    if (typeof dados === 'string') {
-        const reMd = /!\[[^\]]*\]\(([^)]+)\)/g;
-        const reHtml = /<img[^>]+src=["']([^"']+)["']/gi;
-        let m;
-        while ((m = reMd.exec(dados))) urls.push(m[1]);
-        while ((m = reHtml.exec(dados))) urls.push(m[1]);
-    } else if (dados && typeof dados === 'object') {
-        const varrer = (obj, chave) => {
-            if (!obj) return;
-            if (typeof obj === 'string') {
-                if (/imagem|image|img|foto|photo|capa|cover|thumb|avatar|banner/i.test(chave || '') ||
-                    /^https?:\/\/.+\.(png|jpe?g|gif|webp|svg|avif|bmp)(\?.*)?$/i.test(obj)) {
-                    urls.push(obj);
-                }
-                return;
-            }
-            if (Array.isArray(obj)) {
-                obj.forEach(v => varrer(v, chave));
-                return;
-            }
-            for (const k in obj) varrer(obj[k], k);
-        };
-        varrer(dados, '');
+            const l2 = document.createElement('link');
+            l2.rel = 'dns-prefetch';
+            l2.href = u.origin;
+            document.head.appendChild(l2);
+        } catch { /* ignora URLs inválidas */ }
     }
 
-    urls.forEach(preconnectHost);
-}
+    function preconnectDeConteudo(dados) {
+        const urls = [];
 
-window.preconnectHost = preconnectHost;
-window.preconnectDeConteudo = preconnectDeConteudo;
+        if (typeof dados === 'string') {
+            const reMd = /!\[[^\]]*\]\(([^)]+)\)/g;
+            const reHtml = /<img[^>]+src=["']([^"']+)["']/gi;
+            let m;
+            while ((m = reMd.exec(dados))) urls.push(m[1]);
+            while ((m = reHtml.exec(dados))) urls.push(m[1]);
+        } else if (dados && typeof dados === 'object') {
+            const varrer = (obj, chave) => {
+                if (!obj) return;
+                if (typeof obj === 'string') {
+                    if (/imagem|image|img|foto|photo|capa|cover|thumb|avatar|banner/i.test(chave || '') ||
+                        /^https?:\/\/.+\.(png|jpe?g|gif|webp|svg|avif|bmp)(\?.*)?$/i.test(obj)) {
+                        urls.push(obj);
+                    }
+                    return;
+                }
+                if (Array.isArray(obj)) {
+                    obj.forEach(v => varrer(v, chave));
+                    return;
+                }
+                for (const k in obj) varrer(obj[k], k);
+            };
+            varrer(dados, '');
+        }
+
+        urls.forEach(preconnectHost);
+    }
+
+    window.preconnectHost = preconnectHost;
+    window.preconnectDeConteudo = preconnectDeConteudo;
+    // 👆 FIM DO BLOCO ADICIONADO
 
     // ============================================
     // INIT
