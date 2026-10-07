@@ -30,9 +30,10 @@
                 )
             )).filter(Boolean);
 
-if (window.preconnectDeConteudo) {
-    window.preconnectDeConteudo(artigos);
-}
+            // 👇 ADICIONADO — pré-conecta os hosts das imagens dos cards
+            if (window.preconnectDeConteudo) {
+                window.preconnectDeConteudo(artigos);
+            }
 
             render();
             setupControles();
