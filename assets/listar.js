@@ -30,6 +30,10 @@
                 )
             )).filter(Boolean);
 
+if (window.preconnectDeConteudo) {
+    window.preconnectDeConteudo(artigos);
+}
+
             render();
             setupControles();
         } catch (e) {
