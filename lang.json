@@ -12,5 +12,19 @@
     "links": {
       "contribua": "https://wahipogo.gitbook.io/wiki"
     }
+  },
+  "en": {
+    "name": "English",
+    "active": false,
+    "prefix": "en",
+    "wiki": {
+      "nome": "Profane Bonds Wiki",
+      "nomeCompleto": "Profane Bonds Wiki",
+      "logo": "https://i.imgur.com/mgxXSto.png",
+      "galeria": "Galeria"
+    },
+    "links": {
+      "contribua": "https://wahipogo.gitbook.io/wiki"
+    }
   }
 }
