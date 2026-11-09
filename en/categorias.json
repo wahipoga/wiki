@@ -1,0 +1,38 @@
+[
+{
+"slug": "universe",
+"nome": "Universe",
+"imagem": "https://cdn.imgchest.com/files/e50becbe507d.jpg",
+"descricao": "Continents, climates, and characteristics of the world"
+},
+{
+"slug": "characters",
+"nome": "Characters",
+"imagem": "https://cdn.imgchest.com/files/599a800e63d5.jpg",
+"descricao": "All the characters from the main story of Laços Profanos"
+},
+{
+"slug": "bestiary",
+"nome": "Bestiary",
+"imagem": "https://i.imgur.com/IHCgQPS.png",
+"descricao": "All the creatures that inhabit this world"
+},
+{
+"slug": "symbols",
+"nome": "Symbols",
+"imagem": "https://i.imgur.com/mgxXSto.png",
+"descricao": "Important symbols and signs"
+},
+{
+"slug": "organizations",
+"nome": "Organizations",
+"imagem": "https://i.imgur.com/bLyiGCu.png",
+"descricao": "Groups, factions, and institutions"
+},
+{
+"slug": "spin-offs",
+"nome": "Spin-offs",
+"imagem": "https://i.imgur.com/RA2LetQ.png",
+"descricao": "Stories that expand the universe of Laços Profanos (some canonical, others not)"
+}
+]
