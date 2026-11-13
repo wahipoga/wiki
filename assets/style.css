@@ -56,6 +56,20 @@ input { font-family: inherit; }
   font-weight: 800;
   letter-spacing: 0.5px;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
+  height: 100%;
+}
+.logo span {
+  display: inline-block;
+  line-height: 1;
+}
+.logo img {
+  height: 36px;
+  width: auto;
+  display: block;
 }
 @media (max-width: 480px) { .logo { font-size: 1rem; } }
 
