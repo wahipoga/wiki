@@ -2,20 +2,20 @@
   "nome": "Ashley",
   "imagem": "https://cdn.imgchest.com/files/d94b28f0f929.png",
   "infobox": {
-    "titulo": "Informações",
+    "titulo": "Information",
     "campos": [
-      { "label": "Nome completo", "valor": "Ashley ?????" },
-      { "label": "Idade", "valor": "??" },
-      { "label": "Gênero", "valor": "Cis feminino" },
-      { "label": "Espécie", "valor": "Humana" },
-      { "label": "Data de nascimento", "valor": "01 de janeiro" },
-      { "label": "Ocupação", "valor": "Líder da CCED", "slug": "cced", "tipo": "organizacoes" }
+      { "label": "Full name", "valor": "Ashley ?????" },
+      { "label": "Age", "valor": "??" },
+      { "label": "Gender", "valor": "Cis female" },
+      { "label": "Species", "valor": "Human" },
+      { "label": "Date of birth", "valor": "January 1st" },
+      { "label": "Occupation", "valor": "Leader of the CCED", "slug": "cced", "tipo": "organizacoes" }
     ],
     "historias": {
-      "titulo": "Histórias / Aparições",
+      "titulo": "Stories / Appearances",
       "campos": [
-        { "label": "História", "valor": "Laços Profanos: O fardo da profecia" },
-        { "label": "Papel", "valor": "Vilã" }
+        { "label": "Story", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Role", "valor": "Villain" }
       ]
     }
   }
