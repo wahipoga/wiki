@@ -1,7 +1,7 @@
 {
-  "home":       { "pt": "https://wiki.lacosprofanos.com.br/",         "en": "https://wiki.lacosprofanos.com.br/en/" },
-  "universe":   { "pt": "https://wiki.lacosprofanos.com.br/universo/",   "en": "https://wiki.lacosprofanos.com.br/en/universe/" },
-  "characters": { "pt": "https://wiki.lacosprofanos.com.br/personagem/", "en": "https://wiki.lacosprofanos.com.br/en/characters/" },
-  "bestiary":   { "pt": "https://wiki.lacosprofanos.com.br/bestiario/",  "en": "https://wiki.lacosprofanos.com.br/en/bestiary/" },
+  "home":       { "pt": "/",         "en": "/en/" },
+  "universe":   { "pt": "universo/",   "en": "en/universe/" },
+  "characters": { "pt": "personagem/", "en": "/en/characters/" },
+  "bestiary":   { "pt": "bestiario/",  "en": "en/bestiary/" },
   "main":       { "pt": "https://lacosprofanos.com.br/",             "en": "https://lacosprofanos.com.br/en" }
 }
