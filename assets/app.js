@@ -25,7 +25,6 @@
 
     // ============================================
     // LÊ O PREFIXO DO IDIOMA — aceita "url" OU "prefix"
-    // (compatível com lang.json antigo e novo)
     // ============================================
     function getPrefixoDoIdioma(lang) {
         const cfg = window.__langData?.[lang];
@@ -34,16 +33,14 @@
     }
 
     // ============================================
-    // NORMALIZA PATH
-    // Aceita path relativo OU URL absoluta (extrai só o pathname)
-    // Remove .html, barra final e força minúsculas
+    // NORMALIZA PATH PARA COMPARAÇÃO (lowercase, sem barra final, sem .html)
+    // NÃO usar para reconstruir URL — só para comparar.
     // ============================================
     function normalizarPath(path) {
         if (!path) return '/';
 
         let p = String(path);
 
-        // Se for URL absoluta, extrai só o pathname
         try {
             if (/^https?:\/\//i.test(p)) {
                 p = new URL(p).pathname;
@@ -51,47 +48,90 @@
         } catch (_) { /* mantém como está */ }
 
         return p
-            .replace(/\.html$/, '')
-            .replace(/\/$/, '')
+            .replace(/\.html$/i, '')
+            .replace(/\/+$/, '')
             .toLowerCase() || '/';
     }
 
     // ============================================
+    // EXTRAI PATHNAME CRU (preserva case), sem .html, sem barra final
+    // ============================================
+    function pathCru(path) {
+        let p = String(path || '/');
+        try {
+            if (/^https?:\/\//i.test(p)) p = new URL(p).pathname;
+        } catch (_) { /* mantém */ }
+        p = p.replace(/\.html$/i, '').replace(/\/+$/, '');
+        return p || '/';
+    }
+
+    // ============================================
+    // COMPARA POR SEGMENTOS (evita "/personagens" casar com "/personagem")
+    // ============================================
+    function segmentos(path) {
+        return normalizarPath(path).split('/').filter(Boolean);
+    }
+
+    function prefixoBate(segPre, segPath) {
+        if (segPre.length > segPath.length) return false;
+        for (let i = 0; i < segPre.length; i++) {
+            if (segPre[i] !== segPath[i]) return false;
+        }
+        return true;
+    }
+
+    // ============================================
     // MATCH DE PADRÃO COM {slug}
-    // "/en/characters/{slug}/" vs "/en/characters/ashley/" → { slug: "ashley" }
-    // Template sem {slug} → match literal normalizado
+    // - Template absoluto (http...) → nunca casa (é redirect externo)
+    // - Template sem {slug} → match literal por segmentos
+    // - Template com {slug} → match por segmentos + slug preservando case
     // ============================================
     function matchComSlug(template, path) {
-        const p = normalizarPath(path);
         const t = String(template);
 
+        // URLs absolutas não participam do roteamento interno
+        if (/^https?:\/\//i.test(t)) return null;
+
+        const pRaw = pathCru(path);
+        const pSegs = segmentos(pRaw);
+
         if (!t.includes('{slug}')) {
-            return normalizarPath(t) === p ? {} : null;
+            const tSegs = segmentos(t);
+            if (tSegs.length !== pSegs.length) return null;
+            for (let i = 0; i < tSegs.length; i++) {
+                if (tSegs[i] !== pSegs[i]) return null;
+            }
+            return {};
         }
 
         const [pre, pos] = t.split('{slug}');
+        const preSegs = segmentos(pre);
+        const posSegs = segmentos(pos || '');
 
-        // normaliza e trata "/" como vazio (normalizarPath("/") === "/")
-        const limpa = (s) => {
-            const n = normalizarPath(s);
-            return n === '/' ? '' : n;
-        };
+        // path precisa ter pelo menos 1 segmento (o slug) entre pre e pos
+        if (pSegs.length < preSegs.length + posSegs.length + 1) return null;
 
-        const preN = limpa(pre);
-        const posN = limpa(pos || '');
+        // prefixo
+        if (!prefixoBate(preSegs, pSegs)) return null;
 
-        if (preN && !p.startsWith(preN)) return null;
-
-        let resto = p.slice(preN.length);
-        if (posN) {
-            if (!resto.endsWith(posN)) return null;
-            resto = resto.slice(0, resto.length - posN.length);
+        // sufixo (compara de trás pra frente)
+        const pathFim = pSegs.slice(pSegs.length - posSegs.length);
+        for (let i = 0; i < posSegs.length; i++) {
+            if (pathFim[i] !== posSegs[i]) return null;
         }
 
-        const slug = resto.replace(/^\/+|\/+$/g, '');
-        if (!slug || slug.includes('/')) return null;
+        // slug = segmento do meio (só 1 segmento é permitido)
+        const meio = pSegs.slice(preSegs.length, pSegs.length - posSegs.length);
+        if (meio.length !== 1) return null;
 
-        return { slug };
+        // Extrai o slug do path CRU (preserva case e caracteres originais)
+        // Percorre pRaw por segmentos para achar o mesmo índice.
+        const pRawSegs = pRaw.split('/').filter(Boolean);
+        // pRawSegs tem o mesmo tamanho que pSegs (mesma estrutura), então:
+        const slugOriginal = pRawSegs[preSegs.length];
+
+        if (!slugOriginal) return null;
+        return { slug: slugOriginal };
     }
 
     // ============================================
@@ -112,9 +152,7 @@
     }
 
     // ============================================
-    // CARREGA KEYS.JSON (mapa de correlação de slugs)
-    // Aceita paths relativos ou URLs completas em cada entrada.
-    // Suporta {slug} como placeholder nas rotas de conteúdo.
+    // CARREGA KEYS.JSON
     // ============================================
     async function carregarKeysData() {
         if (window.__keysCache) return window.__keysCache;
@@ -142,7 +180,6 @@
         window.WikiAPI = {
             getIdioma: getIdiomaAtual,
 
-            // "" ou "en", "ja", "ar" — SEM barras
             getPrefixoIdioma: getPrefixoLimpo,
 
             getTexto: (chave) => {
@@ -155,7 +192,6 @@
                 return window.__langData?.[lang]?.links?.[chave] || '';
             },
 
-            // Prefixo NO INÍCIO: /en/personagem/wahi/
             montarUrl: (caminho) => {
                 const p = getPrefixoLimpo();
                 let base = caminho.startsWith('/') ? caminho : '/' + caminho;
@@ -163,7 +199,10 @@
                 return p ? `/${p}${base}` : base;
             },
 
-            normalizarPath
+            normalizarPath,
+
+            // Útil para debug
+            matchComSlug
         };
     }
 
@@ -350,7 +389,7 @@
     }
 
     // ============================================
-    // IDIOMAS — DROPDOWN (N idiomas, sem lista fixa)
+    // IDIOMAS — DROPDOWN
     // ============================================
     async function carregarIdiomas() {
         const wrap = document.getElementById('languageDropdown');
@@ -407,9 +446,34 @@
     }
 
     // ============================================
+    // ORDENA CHAVES DO KEYS.JSON PARA MATCH
+    // 1. literais (sem {slug}) primeiro
+    // 2. entre literais, mais específicos (mais longos) primeiro
+    // 3. templates com {slug} por último
+    // Templates absolutos (http...) vão pro fim e não casam.
+    // ============================================
+    function ordenarChaves(keys, langAtual) {
+        return Object.keys(keys).sort((a, b) => {
+            const va = String(keys[a]?.[langAtual] ?? '');
+            const vb = String(keys[b]?.[langAtual] ?? '');
+            const absA = /^https?:\/\//i.test(va) ? 1 : 0;
+            const absB = /^https?:\/\//i.test(vb) ? 1 : 0;
+            if (absA !== absB) return absA - absB;
+
+            const tplA = va.includes('{slug}') ? 1 : 0;
+            const tplB = vb.includes('{slug}') ? 1 : 0;
+            if (tplA !== tplB) return tplA - tplB;
+
+            // literais: mais longos primeiro (mais específicos)
+            // templates: também por comprimento, mas em geral empatam
+            return vb.length - va.length;
+        });
+    }
+
+    // ============================================
     // TROCAR IDIOMA
-    // 1. keys.json com {slug} → match por padrão (conteúdo)
-    // 2. keys.json literal → match exato (institucional)
+    // 1. keys.json literal → match literal por segmentos
+    // 2. keys.json com {slug} → match por padrão (conteúdo)
     // 3. fallback → só troca o prefixo
     // ============================================
     async function trocarIdioma(novoLang) {
@@ -419,13 +483,7 @@
 
         try {
             const keys = await carregarKeysData();
-
-            // Específicas (com ":") antes das genéricas
-            const chaves = Object.keys(keys).sort((a, b) => {
-                const aEsp = a.includes(':') ? 0 : 1;
-                const bEsp = b.includes(':') ? 0 : 1;
-                return aEsp - bEsp;
-            });
+            const chaves = ordenarChaves(keys, langAtual);
 
             for (const key of chaves) {
                 const entry = keys[key];
@@ -437,6 +495,7 @@
                 const alvo = entry[novoLang];
                 if (!alvo) continue;
 
+                // Destino absoluto (http...) → vai direto
                 const destino = alvo.includes('{slug}')
                     ? alvo.replace('{slug}', m.slug)
                     : alvo;
