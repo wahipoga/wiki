@@ -4,6 +4,6 @@
   "characters":   { "pt": "/personagem/{slug}/",    "en": "/en/characters/{slug}/" },
   "characters_":  { "pt": "/personagem/",          "en": "/en/characters/" },
   "bestiary":     { "pt": "/bestiario/{slug}/",     "en": "/en/bestiary/{slug}/" },
-  "bestiary_":    { "pt": "/bestiarios/",           "en": "/en/bestiary/" },
+  "bestiary_":    { "pt": "/bestiario/",           "en": "/en/bestiary/" },
   "main":         { "pt": "https://lacosprofanos.com.br/", "en": "https://lacosprofanos.com.br/en/" }
 }
