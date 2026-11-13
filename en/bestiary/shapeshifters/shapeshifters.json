@@ -1,0 +1,10 @@
+{
+  "nome": "Shapeshifters",
+  "imagem": "https://cdn.imgchest.com/files/0aec0823877a.png",
+  "infobox": {
+    "campos": [
+      { "label": "Type", "valor": "Creature" },
+      { "label": "Variations", "valor": "2 known" }
+    ]
+  }
+}
