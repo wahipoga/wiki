@@ -15,7 +15,7 @@
   },
   "en": {
     "name": "English",
-    "active": false,
+    "active": true,
     "prefix": "en",
     "wiki": {
       "nome": "Profane Bonds Wiki",
