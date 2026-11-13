@@ -4,20 +4,20 @@
   "infobox": {
     "titulo": "Informações",
     "campos": [
-      { "label": "Full name", "valor": "Wahipogo" },
-      { "label": "Age", "valor": "??" },
-      { "label": "Gender", "valor": "Undefined" },
-      { "label": "Species", "valor": "Shapeshifter" },
-      { "label": "Date of birth", "valor": "April 7" }
+      { "label": "Nome completo", "valor": "Wahipogo" },
+      { "label": "Idade", "valor": "??" },
+      { "label": "Gênero", "valor": "Indefinido" },
+      { "label": "Espécie", "valor": "Metamorfa" },
+      { "label": "Data de nascimento", "valor": "07 de abril" }
     ],
     "relacionamentos": [
-      { "nome": "Yaziell", "slug": "yaziell", "nota": "childhood friend" }
+      { "nome": "Yaziell", "slug": "yaziell", "nota": "amigo de infância" }
     ],
     "historias": {
       "titulo": "Histórias / Aparições",
       "campos": [
-        { "label": "Story", "valor": "Laços Profanos: O fardo da profecia" },
-        { "label": "Role", "valor": "Protagonist" }
+        { "label": "História", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Papel", "valor": "Protagonista" }
       ]
     }
   }
