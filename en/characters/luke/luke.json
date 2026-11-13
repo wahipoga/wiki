@@ -1,0 +1,26 @@
+{
+  "nome": "Luke",
+  "imagem": "https://cdn.imgchest.com/files/0a460937caab.png",
+  "infobox": {
+    "titulo": "Informações",
+    "campos": [
+      { "label": "Full name", "valor": "Luke Zequeri" },
+      { "label": "Age", "valor": "??" },
+      { "label": "Gender", "valor": "Cis male" },
+      { "label": "Species", "valor": "Human" },
+      { "label": "Date of birth", "valor": "November 1" },
+      { "label": "Occupation", "valor": "Volunteer detective (known as: 'vigilante')" }
+    ],
+    "relacionamentos": [
+      { "nome": "Sarah", "slug": "sarah", "nota": "wife" },
+      { "nome": "Ethan", "slug": "ethan", "nota": "childhood friend" }
+    ],
+    "historias": {
+      "titulo": "Histórias / Aparições",
+      "campos": [
+        { "label": "Story", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Role", "valor": "backstory character" }
+      ]
+    }
+  }
+}
