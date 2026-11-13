@@ -1,0 +1,12 @@
+{
+  "nome": "Demons",
+  "imagem": "https://cdn.imgchest.com/files/09d893b256f1.png",
+  "infobox": {
+    "campos": [
+      { "label": "Type", "valor": "Creature" },
+      { "label": "Origin", "valor": "Varied" },
+      { "label": "Diet", "valor": "Omnivore" },
+      { "label": "Variations", "valor": "4 known" }
+    ]
+  }
+}
