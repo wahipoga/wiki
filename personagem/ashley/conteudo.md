@@ -1,25 +1,25 @@
-**Ashley ????? (surname unknown)** is the main antagonist of *Laços Profanos: O Fardo da Profecia* (*Profane Bonds: The Burden of Prophecy*). Throughout the story, she is also known by the nicknames and titles of Ash, Masked Woman, Boss, and The Leader.
+shley ????? (sobrenome desconhecido) é a principal antagonista de Laços Profanos: O Fardo da Profecia. Ao longo da história, também é conhecida pelos apelidos e títulos de Ash, Mulher Mascarada, Patroa e A Líder.
 
-Little is known about her origin, past, or true identity. Ashley holds the position of leader of the CCED, an organization whose original mission was altered under her command. The reasons behind this change remain unknown.
+Pouco se sabe sobre sua origem, passado ou identidade verdadeira. Ashley ocupa a posição de líder da CCED, organização cuja missão original foi alterada sob seu comando. As razões por trás dessa mudança permanecem desconhecidas.
 
-Feared by her subordinates and adversaries, Ashley is known for her cold, cruel, and ruthless personality. She believes in the supremacy of the human race over all other species, an ideology that directly influences the CCED's current actions and objectives.
+Temida por seus subordinados e adversários, Ashley é conhecida por sua personalidade fria, cruel e impiedosa. Ela acredita na supremacia da raça humana sobre todas as demais espécies, ideologia que influencia diretamente as ações e os objetivos atuais da CCED.
 
-Despite her great influence on the events of the story, many details about her life and her true intentions remain shrouded in mystery.
+Apesar de sua grande influência nos acontecimentos da história, muitos detalhes sobre sua vida e suas verdadeiras intenções continuam envoltos em mistério.
 
-## Characteristics and traits
+## Características e traços
 
-Ashley is a woman with fair skin and a height of 1.70 m. She has deep-toned black hair. She has a unique and characteristic hairstyle, with a small ahoge standing out at the top of her head, contributing to her unusual appearance.
+Ashley é uma mulher de pele clara e 1,70 m de altura. Possui cabelos negros de tonalidade profunda, Ele possui um penteado único e característico com um pequeno ahoge se destaca no topo da cabeça, contribuindo para sua aparência incomum.
 
-Her face is hidden by a mask split vertically into two halves. The left side is white, with no opening for the eye, and has a single white horn projecting outward. The right side is black and contains an opening that reveals her only visible eye, whose color matches her hair.
+Seu rosto é ocultado por uma máscara dividida verticalmente em duas metades. O lado esquerdo é branco, sem abertura para o olho, e possui um único chifre branco projetando-se para fora. O lado direito é preto e contém uma abertura que revela seu único olho visível, cuja a cor é a mesma de seus cabelos.
 
-Her attire consists of a white dress shirt with a raised collar. One sleeve remains folded up to the elbow, while the other completely covers her arm. She completes the look with black trousers and white sneakers, forming a contrast similar to that of her mask.
+Seu vestuário consiste em uma camisa social branca de gola levantada. Uma das mangas permanece dobrada até o cotovelo, enquanto a outra cobre completamente o braço. Completa o visual com uma calça preta e tênis brancos, formando um contraste semelhante ao de sua máscara.
 
-Little is known about her true personality. Most information about Ashley comes from third-party accounts and from her actions as leader of the CCED. Still, she is often described as a ruthless, cold, and inflexible person, willing to do anything to achieve her goals.
+Pouco se sabe sobre sua verdadeira personalidade. A maioria das informações sobre Ashley provém de relatos de terceiros e de sua atuação como líder da CCED. Ainda assim, ela é frequentemente descrita como uma pessoa impiedosa, fria e inflexível, disposta a fazer qualquer coisa para alcançar seus objetivos.
 
-## Biography
+## Biografia
 
-Little is known about Ashley's life before her rise to command of the CCED. Her origin, her past, and even her identity remain unknown to most people.
+Pouco se sabe sobre a vida de Ashley antes de sua ascensão ao comando da CCED. Sua origem, seu passado e até mesmo sua identidade permanecem desconhecidos para a maioria das pessoas.
 
-At some point, Ashley took over the leadership of the organization and significantly altered its original objectives, leading the CCED along a different path from the one envisioned by its founders. The reasons for this change were never publicly clarified.
+Em algum momento, Ashley assumiu a liderança da organização e alterou significativamente seus objetivos originais, conduzindo a CCED por um caminho diferente daquele idealizado por seus fundadores. As razões para essa mudança nunca foram esclarecidas publicamente.
 
-Due to her habit of hiding her face behind a mask and rarely appearing in public, Ashley became a figure surrounded by rumors and speculation. To many, she is merely a distant voice exercising absolute control over the organization. Still, her influence over the events of *Laços Profanos* is undeniable.
+Devido ao hábito de ocultar o rosto atrás de uma máscara e de raramente aparecer em público, Ashley tornou-se uma figura cercada por rumores e especulações. Para muitos, ela é apenas uma voz distante que exerce controle absoluto sobre a organização. Ainda assim, sua influência sobre os acontecimentos de Laços Profanos é inegável.
