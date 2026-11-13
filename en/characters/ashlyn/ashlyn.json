@@ -2,19 +2,19 @@
   "nome": "Ashlyn",
   "imagem": "https://cdn.imgchest.com/files/bdf9c0d3fd58.jpg",
   "infobox": {
-    "title": "Information",
-    "fields": [
-      { "label": "Full name", "value": "Ashlyn ????" },
-      { "label": "Age", "value": "??" },
-      { "label": "Gender", "value": "Cis male" },
-      { "label": "Species", "value": "Human-demon hybrid" },
-      { "label": "Date of birth", "value": "July 5" }
+    "titulo": "Information",
+    "campos": [
+      { "label": "Full name", "valor": "Ashlyn ????" },
+      { "label": "Age", "valor": "??" },
+      { "label": "Gender", "valor": "Cis male" },
+      { "label": "Species", "valor": "Human-demon hybrid" },
+      { "label": "Date of birth", "valor": "July 5" }
     ],
-    "stories": {
-      "title": "Stories / Appearances",
-      "fields": [
-        { "label": "Story", "value": "Profane Bonds: The Burden of Prophecy" },
-        { "label": "Role", "value": "Protagonist" }
+    "historias": {
+      "titulo": "Stories / Appearances",
+      "campos": [
+        { "label": "Story", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Role", "valor": "Protagonist" }
       ]
     }
   }
