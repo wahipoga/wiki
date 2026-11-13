@@ -2,7 +2,7 @@
   "home":         { "pt": "/",                      "en": "/en/" },
   "universe":     { "pt": "/universo/",             "en": "/en/universe/" },
   "characters":   { "pt": "/personagem/{slug}/",    "en": "/en/characters/{slug}/" },
-  "characters_":  { "pt": "/personagens/",          "en": "/en/characters/" },
+  "characters_":  { "pt": "/personagem/",          "en": "/en/characters/" },
   "bestiary":     { "pt": "/bestiario/{slug}/",     "en": "/en/bestiary/{slug}/" },
   "bestiary_":    { "pt": "/bestiarios/",           "en": "/en/bestiary/" },
   "main":         { "pt": "https://lacosprofanos.com.br/", "en": "https://lacosprofanos.com.br/en/" }
