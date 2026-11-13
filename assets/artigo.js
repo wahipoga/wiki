@@ -242,27 +242,46 @@
         if (!carrossel) return;
         const slides = carrossel.querySelector('.galeria-slides');
         const dots = carrossel.querySelectorAll('.galeria-dot');
+        const dotsBox = carrossel.querySelector('.galeria-dots');
         const prev = carrossel.querySelector('.galeria-prev');
         const next = carrossel.querySelector('.galeria-next');
         const imgs = slides.querySelectorAll('img');
         let atual = 0;
 
+        function larguraContainer() {
+            // clientWidth = largura interna real, sem bordas — estável em mobile
+            return carrossel.clientWidth;
+        }
+
         function irPara(i) {
             atual = (i + imgs.length) % imgs.length;
-            slides.style.transform = `translateX(-${atual * 100}%)`;
+
+            // ✅ Usa pixels reais em vez de % (corrige o "torcer" no mobile)
+            slides.style.transform = `translate3d(-${atual * larguraContainer()}px, 0, 0)`;
+
             dots.forEach((d, j) => d.classList.toggle('active', j === atual));
 
-            // 👇 mantém o dot ativo visível no mobile
-            dots[atual]?.scrollIntoView({
-                inline: 'center',
-                block: 'nearest',
-                behavior: 'smooth'
-            });
+            // ✅ Centraliza o dot ativo rolando APENAS o container dos dots
+            //    (sem scrollIntoView, que rola a página inteira)
+            const dotAtivo = dots[atual];
+            if (dotAtivo && dotsBox) {
+                const alvo = dotAtivo.offsetLeft
+                    - dotsBox.clientWidth / 2
+                    + dotAtivo.offsetWidth / 2;
+                dotsBox.scrollTo({ left: alvo, behavior: 'smooth' });
+            }
         }
 
         prev.addEventListener('click', () => irPara(atual - 1));
         next.addEventListener('click', () => irPara(atual + 1));
         dots.forEach(d => d.addEventListener('click', () => irPara(parseInt(d.dataset.i))));
+
+        // ✅ Recalcula ao girar a tela / redimensionar (evita erro acumulado)
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => irPara(atual), 150);
+        });
 
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = lightbox.querySelector('img');
@@ -281,6 +300,9 @@
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') lightbox.classList.remove('active');
         });
+
+        // Inicializa na posição 0 correta
+        irPara(0);
     }
 
     if (document.readyState === 'loading') {
