@@ -35,10 +35,22 @@
 
     // ============================================
     // NORMALIZA PATH
+    // Aceita path relativo OU URL absoluta (extrai só o pathname)
+    // Remove .html, barra final e força minúsculas
     // ============================================
     function normalizarPath(path) {
         if (!path) return '/';
-        return path
+
+        let p = String(path);
+
+        // Se for URL absoluta, extrai só o pathname
+        try {
+            if (/^https?:\/\//i.test(p)) {
+                p = new URL(p).pathname;
+            }
+        } catch (_) { /* mantém como está */ }
+
+        return p
             .replace(/\.html$/, '')
             .replace(/\/$/, '')
             .toLowerCase() || '/';
@@ -63,7 +75,8 @@
 
     // ============================================
     // CARREGA KEYS.JSON (mapa de correlação de slugs)
-    // Estrutura: { "universe": { "pt": "/universo/", "en": "/en/universe/" }, ... }
+    // Aceita paths relativos ou URLs completas em cada entrada.
+    // Estrutura: { "universe": { "pt": "...", "en": "..." }, ... }
     // ============================================
     async function carregarKeysData() {
         if (window.__keysCache) return window.__keysCache;
@@ -359,21 +372,38 @@
     // TROCAR IDIOMA — via keys.json (mapa de correlação)
     // 1. Consulta keys.json pra achar o path equivalente no novo idioma
     // 2. Se não achar, cai no fallback de só trocar o prefixo
+    // Aceita links relativos OU absolutos no keys.json.
     // ============================================
     async function trocarIdioma(novoLang) {
         const langData = window.__langData || {};
         const langAtual = getIdiomaAtual();
 
         const pathAtual = normalizarPath(location.pathname);
+        const hostAtual = location.host;
 
         try {
             const keys = await carregarKeysData();
 
-            // Acha a key cujo path NO IDIOMA ATUAL bate com a URL atual
+            // Acha a key cujo path NO IDIOMA ATUAL bate com a URL atual.
+            // Compara pathname normalizado E host (quando a entry for absoluta).
             const keyAtual = Object.keys(keys).find(key => {
                 const entry = keys[key];
                 if (!entry || !entry[langAtual]) return false;
-                return normalizarPath(entry[langAtual]) === pathAtual;
+
+                const alvo = entry[langAtual];
+                const alvoPath = normalizarPath(alvo);
+
+                if (alvoPath !== pathAtual) return false;
+
+                // Se for URL absoluta, exige mesmo host
+                if (/^https?:\/\//i.test(alvo)) {
+                    try {
+                        return new URL(alvo).host === hostAtual;
+                    } catch (_) {
+                        return false;
+                    }
+                }
+                return true;
             });
 
             // Se achou e existe tradução pro novo idioma, navega
@@ -385,9 +415,6 @@
                 window.__langCache = null;
                 window.__langData = null;
                 window.__langReady = null;
-                // keys.json é independente de idioma, não precisa limpar,
-                // mas se quiser forçar refresh:
-                // window.__keysCache = null;
 
                 location.href = destino;
                 return;
