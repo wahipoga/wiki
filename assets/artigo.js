@@ -251,6 +251,13 @@
             atual = (i + imgs.length) % imgs.length;
             slides.style.transform = `translateX(-${atual * 100}%)`;
             dots.forEach((d, j) => d.classList.toggle('active', j === atual));
+
+            // 👇 mantém o dot ativo visível no mobile
+            dots[atual]?.scrollIntoView({
+                inline: 'center',
+                block: 'nearest',
+                behavior: 'smooth'
+            });
         }
 
         prev.addEventListener('click', () => irPara(atual - 1));
