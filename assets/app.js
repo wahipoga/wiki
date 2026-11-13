@@ -29,7 +29,7 @@
         const api = window.WikiAPI;
         const prefixo = (api.getPrefixoIdioma() || '').replace(/^\//, ''); // "en" ou ""
 
-        // Monta base com prefixo NO INÍCIO: /en/personagem/wahi/
+        // Base com prefixo NO INÍCIO: /en/personagem/wahi/
         const caminho = slug ? `/${tipo}/${slug}/` : `/${tipo}/`;
         const base = prefixo ? `/${prefixo}${caminho}` : caminho;
 
