@@ -62,6 +62,22 @@
     }
 
     // ============================================
+    // CARREGA KEYS.JSON (mapa de correlação de slugs)
+    // Estrutura: { "universe": { "pt": "/universo/", "en": "/en/universe/" }, ... }
+    // ============================================
+    async function carregarKeysData() {
+        if (window.__keysCache) return window.__keysCache;
+        try {
+            window.__keysCache = await fetch('/keys.json?v=' + Date.now()).then(r => r.json());
+            return window.__keysCache;
+        } catch (e) {
+            console.warn('Erro keys.json:', e);
+            window.__keysCache = {};
+            return {};
+        }
+    }
+
+    // ============================================
     // PREFIXO DO IDIOMA ATUAL — "" ou "en"
     // ============================================
     function getPrefixoLimpo() {
@@ -316,9 +332,9 @@
             }
 
             dropdownContent.querySelectorAll('a').forEach(a => {
-                a.addEventListener('click', e => {
+                a.addEventListener('click', async e => {
                     e.preventDefault();
-                    trocarIdioma(a.dataset.lang);
+                    await trocarIdioma(a.dataset.lang);
                 });
             });
 
@@ -340,18 +356,51 @@
     }
 
     // ============================================
-    // TROCAR IDIOMA — prefixo no INÍCIO, limpa cache
-    // Aceita url OU prefix, com ou sem barras
+    // TROCAR IDIOMA — via keys.json (mapa de correlação)
+    // 1. Consulta keys.json pra achar o path equivalente no novo idioma
+    // 2. Se não achar, cai no fallback de só trocar o prefixo
     // ============================================
-    function trocarIdioma(novoLang) {
+    async function trocarIdioma(novoLang) {
         const langData = window.__langData || {};
+        const langAtual = getIdiomaAtual();
 
-        // Todos os prefixos existentes (sem barras), ex: ["en", "ja"]
+        const pathAtual = normalizarPath(location.pathname);
+
+        try {
+            const keys = await carregarKeysData();
+
+            // Acha a key cujo path NO IDIOMA ATUAL bate com a URL atual
+            const keyAtual = Object.keys(keys).find(key => {
+                const entry = keys[key];
+                if (!entry || !entry[langAtual]) return false;
+                return normalizarPath(entry[langAtual]) === pathAtual;
+            });
+
+            // Se achou e existe tradução pro novo idioma, navega
+            if (keyAtual && keys[keyAtual][novoLang]) {
+                const destino = keys[keyAtual][novoLang];
+
+                // Limpa caches pra não vazar entre idiomas
+                __langCache = null;
+                window.__langCache = null;
+                window.__langData = null;
+                window.__langReady = null;
+                // keys.json é independente de idioma, não precisa limpar,
+                // mas se quiser forçar refresh:
+                // window.__keysCache = null;
+
+                location.href = destino;
+                return;
+            }
+        } catch (e) {
+            console.warn('Erro ao consultar keys.json:', e);
+        }
+
+        // FALLBACK — só troca o prefixo (páginas fora do keys.json)
         const prefixos = Object.keys(langData)
             .map(k => getPrefixoDoIdioma(k))
             .filter(Boolean);
 
-        // Remove o prefixo atual do path, se houver
         let path = location.pathname;
         for (const p of prefixos) {
             const alvo = '/' + p + '/';
@@ -362,11 +411,9 @@
             }
         }
 
-        // Adiciona prefixo do novo idioma NO INÍCIO
         const novoPrefixo = getPrefixoDoIdioma(novoLang);
         const destino = novoPrefixo ? `/${novoPrefixo}${path}` : path;
 
-        // Limpa cache em memória pra não vazar entre idiomas
         __langCache = null;
         window.__langCache = null;
         window.__langData = null;
