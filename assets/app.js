@@ -1,271 +1,459 @@
 (function () {
     'use strict';
 
-    // Espera:
-    //   window.ARTIGO_TIPO = "personagem"
-    //   window.ARTIGO_SLUG = "wahi"   (ou "" pra página única na própria pasta)
+    // ============================================
+    // ESTADO GLOBAL
+    // ============================================
+    let __langCache = null;
 
-    async function carregar() {
-        const tipo = window.ARTIGO_TIPO;
-        const slug = window.ARTIGO_SLUG ?? '';
-        if (!tipo) return;
+    // ============================================
+    // IDIOMA ATUAL — lê do <html id="lang-XX">
+    // ============================================
+    function getIdiomaAtual() {
+        const id = document.documentElement.id || 'lang-pt';
+        return id.replace('lang-', '');
+    }
 
-        const conteudoEl = document.getElementById('artigoConteudo');
-        const sidebarEl = document.getElementById('artigoSidebar');
+    // ============================================
+    // NORMALIZA UM PREFIXO — aceita "", "/", "en", "/en", "en/", "/en/"
+    // Retorna SEM barras: "" ou "en"
+    // ============================================
+    function limparPrefixo(valor) {
+        if (!valor) return '';
+        return String(valor).replace(/^\/+|\/+$/g, '');
+    }
 
-        // Espera WikiAPI
-        let tentativas = 0;
-        while (!window.WikiAPI && tentativas < 100) {
-            await new Promise(r => setTimeout(r, 10));
-            tentativas++;
-        }
-        if (!window.WikiAPI) {
-            console.warn('WikiAPI não disponível — app.js não carregou?');
-            return;
-        }
+    // ============================================
+    // NORMALIZA PATH
+    // ============================================
+    function normalizarPath(path) {
+        if (!path) return '/';
+        return path
+            .replace(/\.html$/, '')
+            .replace(/\/$/, '')
+            .toLowerCase() || '/';
+    }
 
-        if (window.__langReady) await window.__langReady;
-
-        const api = window.WikiAPI;
-        const prefixo = (api.getPrefixoIdioma() || '').replace(/^\//, ''); // "en" ou ""
-
-        // Base com prefixo NO INÍCIO: /en/personagem/wahi/
-        const caminho = slug ? `/${tipo}/${slug}/` : `/${tipo}/`;
-        const base = prefixo ? `/${prefixo}${caminho}` : caminho;
-
-        const jsonFile = slug ? `${slug}.json` : `${tipo}.json`;
-
+    // ============================================
+    // CARREGA LANG.JSON (sempre da raiz)
+    // ============================================
+    async function carregarLangData() {
+        if (__langCache) return __langCache;
         try {
-            const meta = await fetch(base + jsonFile + '?v=' + Date.now())
-                .then(r => r.ok ? r.json() : {})
-                .catch(() => ({}));
-
-            const md = await fetch(base + 'conteudo.md?v=' + Date.now())
-                .then(r => r.ok ? r.text() : '')
-                .catch(() => '');
-
-            const galeriaData = await fetch(base + 'galeria.json?v=' + Date.now())
-                .then(r => r.ok ? r.json() : { imagens: [] })
-                .catch(() => ({ imagens: [] }));
-
-            if (window.preconnectDeConteudo) {
-                window.preconnectDeConteudo(meta);
-                window.preconnectDeConteudo(md);
-                if (galeriaData?.imagens) window.preconnectDeConteudo(galeriaData.imagens);
-            }
-
-            const nome = meta.nome || capitalizar(slug || tipo);
-            const nomeCompleto = api.getTexto('nomeCompleto') || 'Wiki Laços Profanos';
-            document.title = `${nome} — ${nomeCompleto}`;
-
-            const nomeEl = document.getElementById('artigoNome');
-            if (nomeEl) nomeEl.textContent = nome;
-
-            const imgTopoEl = document.getElementById('artigoImagemTopo');
-            if (imgTopoEl && meta.imagem) {
-                imgTopoEl.innerHTML = `<img src="${meta.imagem}" alt="${nome}" fetchpriority="high">`;
-            }
-
-            if (sidebarEl && meta.infobox) {
-                sidebarEl.innerHTML = renderInfobox(meta.infobox, tipo);
-            }
-
-            const temInfobox = !!meta.infobox;
-            const temImagem = !!meta.imagem;
-            if (!temInfobox && !temImagem) {
-                document.querySelector('.artigo-layout')?.classList.add('sem-sidebar');
-            }
-
-            const temGaleria = !!galeriaData.imagens?.length;
-
-            if (conteudoEl) {
-                if (typeof marked !== 'undefined') {
-                    marked.setOptions({ breaks: true, gfm: true });
-                    conteudoEl.innerHTML = marked.parse(md);
-
-                    conteudoEl.querySelectorAll('img').forEach(img => {
-                        img.loading = 'lazy';
-                        img.decoding = 'async';
-                    });
-
-                    const introEl = document.getElementById('artigoIntro');
-                    if (introEl) {
-                        const primeiroH2 = conteudoEl.querySelector('h2');
-                        while (conteudoEl.firstChild && conteudoEl.firstChild !== primeiroH2) {
-                            introEl.appendChild(conteudoEl.firstChild);
-                        }
-                    }
-
-                    gerarIndice(conteudoEl, nome, temGaleria);
-                    converterLinksInternos(document.querySelector('.artigo-conteudo'), tipo, prefixo);
-                } else {
-                    conteudoEl.innerHTML = '<p class="vazio">Erro: marked.js não carregado.</p>';
-                }
-            }
-
-            const galeriaEl = document.getElementById('artigoGaleria');
-            const galeriaTitulo = document.getElementById('galeria-titulo');
-            if (galeriaEl && temGaleria) {
-                if (galeriaTitulo) {
-                    galeriaTitulo.textContent = api.getTexto('galeria') || 'Galeria';
-                    galeriaTitulo.style.display = '';
-                }
-                galeriaEl.innerHTML = renderGaleria(galeriaData.imagens);
-                setupGaleria();
-            }
+            __langCache = await fetch('/lang.json?v=' + Date.now()).then(r => r.json());
+            window.__langData = __langCache;
+            return __langCache;
         } catch (e) {
-            if (conteudoEl) {
-                conteudoEl.innerHTML = `<p class="vazio">Erro ao carregar artigo: ${e.message}</p>`;
-            }
+            console.warn('Erro lang.json:', e);
+            __langCache = {};
+            window.__langData = {};
+            return {};
         }
     }
 
-    function capitalizar(texto) {
-        return texto
-            .replace(/-/g, ' ')
-            .replace(/\b\w/g, l => l.toUpperCase());
+    // ============================================
+    // PREFIXO DO IDIOMA ATUAL — retorna "" ou "en"
+    // ============================================
+    function getPrefixoLimpo() {
+        const lang = getIdiomaAtual();
+        const cfg = window.__langData?.[lang];
+        if (!cfg) return '';
+        return limparPrefixo(cfg.url);
     }
 
-    function renderInfobox(info, tipoAtual) {
-        if (!info) return '';
-        let html = '<div class="wiki-container">';
+    // ============================================
+    // API GLOBAL
+    // ============================================
+    function exporAPI() {
+        window.WikiAPI = {
+            getIdioma: getIdiomaAtual,
 
-        html += `<div class="wiki-header-box">${info.titulo || 'Informações'}</div>`;
+            // "" ou "en", "ja", "ar" — SEM barras
+            getPrefixoIdioma: getPrefixoLimpo,
 
-        (info.campos || []).forEach(c => {
-            html += `<div class="wiki-item"><strong>${c.label}:</strong> ${c.valor}`;
-            if (c.nota) html += ` <span class="wiki-note">${c.nota}</span>`;
-            html += '</div>';
-        });
+            getTexto: (chave) => {
+                const lang = getIdiomaAtual();
+                return window.__langData?.[lang]?.wiki?.[chave] || '';
+            },
 
-        if (info.relacionamentos?.length) {
-            html += `<div class="wiki-item"><strong>Relacionamentos:</strong><br>`;
-            html += info.relacionamentos.map(r => {
-                const tipoRel = r.tipo || tipoAtual;
-                const slugRel = r.slug;
-                const api = window.WikiAPI;
-                const prefixo = (api?.getPrefixoIdioma() || '').replace(/^\//, '');
-                const href = slugRel
-                    ? (prefixo
-                        ? `/${prefixo}/${tipoRel}/${slugRel}/`
-                        : `/${tipoRel}/${slugRel}/`)
-                    : '#';
-                const link = slugRel
-                    ? `<a href="${href}" class="wiki-text-link">${r.nome}</a>`
-                    : r.nome;
-                const nota = r.nota ? ` <span class="wiki-note">(${r.nota})</span>` : '';
-                return `• ${link}${nota}`;
-            }).join('<br>');
-            html += '</div>';
-        }
+            getLink: (chave) => {
+                const lang = getIdiomaAtual();
+                return window.__langData?.[lang]?.links?.[chave] || '';
+            },
 
-        if (info.historias) {
-            html += `<div class="wiki-header-box">${info.historias.titulo || 'Histórias / Aparições'}</div>`;
-            (info.historias.campos || []).forEach(c => {
-                html += `<div class="wiki-item"><strong>${c.label}:</strong> ${c.valor}</div>`;
-            });
-        }
+            // Prefixo NO INÍCIO: /en/personagem/wahi/
+            montarUrl: (caminho) => {
+                const p = getPrefixoLimpo();
+                let base = caminho.startsWith('/') ? caminho : '/' + caminho;
+                if (!base.endsWith('/')) base += '/';
+                return p ? `/${p}${base}` : base;
+            },
 
-        html += '</div>';
-        return html;
+            normalizarPath
+        };
     }
 
-    function gerarIndice(container, nome, temGaleria) {
-        const indiceEl = document.getElementById('artigoIndice');
-        if (!indiceEl) return;
-        const h2s = container.querySelectorAll('h2');
-        if (!h2s.length && !temGaleria) { indiceEl.style.display = 'none'; return; }
-
-        const api = window.WikiAPI;
-        const tituloGaleria = api?.getTexto('galeria') || 'Galeria';
-
-        const itens = [`<li><a href="#artigoNome">${nome}</a></li>`];
-        h2s.forEach((h2, i) => {
-            const id = 'secao-' + i;
-            h2.id = id;
-            itens.push(`<li><a href="#${id}">${h2.textContent}</a></li>`);
-        });
-        if (temGaleria) itens.push(`<li><a href="#galeria-titulo">${tituloGaleria}</a></li>`);
-
-        const tituloIndice = api?.getTexto('indice') || 'Índice';
-        indiceEl.innerHTML = `<h3>${tituloIndice}</h3><ul>${itens.join('')}</ul>`;
-    }
-
-    function converterLinksInternos(container, tipo, prefixo) {
-        if (!container) return;
-        const p = (prefixo || '').replace(/^\//, '');
-        container.querySelectorAll('a').forEach(a => {
-            const href = a.getAttribute('href') || '';
-            if (/^[a-z0-9-]+$/i.test(href)) {
-                const base = `/${tipo}/${href}/`;
-                a.setAttribute('href', p ? `/${p}${base}` : base);
-            }
-        });
-    }
-
-    function renderGaleria(imagens) {
-        const slides = imagens.map(src =>
-            `<img src="${src}" alt="" loading="lazy">`
-        ).join('');
-        const dots = imagens.map((_, i) =>
-            `<button class="galeria-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="Imagem ${i + 1}"></button>`
-        ).join('');
-        return `
-            <div class="galeria-carrossel">
-                <div class="galeria-slides">${slides}</div>
-                <button class="galeria-prev" aria-label="Anterior">‹</button>
-                <button class="galeria-next" aria-label="Próximo">›</button>
-                <div class="galeria-dots">${dots}</div>
-            </div>
-            <div class="lightbox" id="lightbox">
-                <button class="lightbox-close" aria-label="Fechar">×</button>
-                <img src="" alt="">
-            </div>
+    // ============================================
+    // RENDER HEADER
+    // ============================================
+    function renderHeader() {
+        const el = document.querySelector('site-header');
+        if (!el) return;
+        el.innerHTML = `
+            <nav class="navbar" id="navbar">
+                <div class="nav-container">
+                    <a href="/" class="logo">
+                        <img src="" alt="" data-wiki="logo" style="height:36px;display:none">
+                        <span data-wiki="nome">Laços Profanos</span>
+                    </a>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <button class="language-btn" id="languageBtn">
+                            <i class="fas fa-globe"></i>
+                            <span id="current-language">Português</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content" id="dropdownContent"></div>
+                    </div>
+                    <ul class="nav-menu" id="navMenu"></ul>
+                    <button class="hamburger" id="hamburger" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </nav>
         `;
     }
 
-    function setupGaleria() {
-        const carrossel = document.querySelector('.galeria-carrossel');
-        if (!carrossel) return;
-        const slides = carrossel.querySelector('.galeria-slides');
-        const dots = carrossel.querySelectorAll('.galeria-dot');
-        const prev = carrossel.querySelector('.galeria-prev');
-        const next = carrossel.querySelector('.galeria-next');
-        const imgs = slides.querySelectorAll('img');
-        let atual = 0;
+    // ============================================
+    // RENDER FOOTER
+    // ============================================
+    function renderFooter() {
+        const el = document.querySelector('site-footer');
+        if (!el) return;
+        el.innerHTML = `
+            <footer>
+                <p>
+                    <span data-wiki="nomeCompleto">Wiki Laços Profanos</span> —
+                    <a href="#" data-wiki="contribua" data-wiki-link="contribua">Contribua</a>
+                </p>
+            </footer>
+        `;
+    }
 
-        function irPara(i) {
-            atual = (i + imgs.length) % imgs.length;
-            slides.style.transform = `translateX(-${atual * 100}%)`;
-            dots.forEach((d, j) => d.classList.toggle('active', j === atual));
+    // ============================================
+    // NORMALIZAR TEXTOS, LINKS, LANG E DIR
+    // ============================================
+    async function normalizar() {
+        const lang = getIdiomaAtual();
+
+        document.documentElement.setAttribute('lang', lang);
+        const rtlLangs = ['ar', 'he', 'fa', 'ur'];
+        document.documentElement.setAttribute('dir', rtlLangs.includes(lang) ? 'rtl' : 'ltr');
+
+        const cfg = window.__langData?.[lang];
+        if (!cfg) return;
+
+        if (cfg.wiki) {
+            document.querySelectorAll('[data-wiki]').forEach(el => {
+                const chave = el.dataset.wiki;
+                const valor = cfg.wiki[chave];
+                if (valor === undefined) return;
+                if (el.tagName === 'IMG') {
+                    el.src = valor;
+                    el.style.display = '';
+                } else if (el.tagName === 'A' && el.querySelector('img')) {
+                    el.querySelector('img').src = valor;
+                } else {
+                    el.textContent = valor;
+                }
+            });
         }
 
-        prev.addEventListener('click', () => irPara(atual - 1));
-        next.addEventListener('click', () => irPara(atual + 1));
-        dots.forEach(d => d.addEventListener('click', () => irPara(parseInt(d.dataset.i))));
+        if (cfg.links) {
+            document.querySelectorAll('[data-wiki-link]').forEach(el => {
+                const chave = el.dataset.wikiLink;
+                const valor = cfg.links[chave];
+                if (valor === undefined) return;
+                el.href = valor;
+            });
+        }
 
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('img');
-        const closeBtn = lightbox.querySelector('.lightbox-close');
+        const titleEl = document.querySelector('title[data-wiki-title]');
+        if (titleEl && cfg.wiki?.nomeCompleto) {
+            titleEl.textContent = `${titleEl.dataset.wikiTitle} — ${cfg.wiki.nomeCompleto}`;
+        }
+    }
 
-        imgs.forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightbox.classList.add('active');
+    // ============================================
+    // NAVBAR
+    // ============================================
+    async function carregarNavbar() {
+        const navMenu = document.getElementById('navMenu');
+        const navbar = document.getElementById('navbar');
+        if (!navMenu) return;
+
+        const currentLang = getIdiomaAtual();
+
+        try {
+            const navData = await fetch('/navbar.json?v=' + Date.now()).then(r => r.json());
+            const items = (navData[currentLang] || navData['pt'] || [])
+                .filter(item => item.active !== false);
+
+            if (!items.length) { navMenu.innerHTML = ''; return; }
+
+            const pathAtual = normalizarPath(location.pathname);
+            const host = location.host;
+
+            navMenu.innerHTML = items.map(item => {
+                let ativo = false;
+                try {
+                    const url = new URL(item.link, location.origin);
+                    ativo = url.host === host && normalizarPath(url.pathname) === pathAtual;
+                } catch (_) {
+                    ativo = normalizarPath(item.link) === pathAtual;
+                }
+                const classe = ativo ? 'disabled' : '';
+                return `<li class="nav-item">
+                    <a href="${item.link}" class="${classe}">
+                        <i class="fas ${item.icon || 'fa-link'}"></i>
+                        ${item.label}
+                    </a>
+                </li>`;
+            }).join('');
+
+            if (navbar) {
+                navbar.classList.toggle('force-hamburger', items.length > 6);
+            }
+
+            setupHamburger();
+        } catch (e) {
+            console.warn('Erro navbar:', e);
+            navMenu.innerHTML = '';
+        }
+    }
+
+    // ============================================
+    // HAMBURGER
+    // ============================================
+    function setupHamburger() {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        if (!hamburger || !navMenu) return;
+
+        const novo = hamburger.cloneNode(true);
+        hamburger.parentNode.replaceChild(novo, hamburger);
+        const hamb = document.getElementById('hamburger');
+
+        hamb.addEventListener('click', e => {
+            e.stopPropagation();
+            hamb.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                const navbar = document.getElementById('navbar');
+                const forcado = navbar && navbar.classList.contains('force-hamburger');
+                if (window.innerWidth <= 900 || forcado) {
+                    hamb.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
             });
         });
-        closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-        lightbox.addEventListener('click', e => {
-            if (e.target === lightbox) lightbox.classList.remove('active');
-        });
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') lightbox.classList.remove('active');
+
+        document.addEventListener('click', e => {
+            const navbar = document.getElementById('navbar');
+            const forcado = navbar && navbar.classList.contains('force-hamburger');
+            const mobile = window.innerWidth <= 900;
+
+            if ((mobile || forcado)
+                && navMenu.classList.contains('active')
+                && !navMenu.contains(e.target)
+                && !hamb.contains(e.target)) {
+                hamb.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
         });
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', carregar);
-    } else {
-        carregar();
+    // ============================================
+    // IDIOMAS — DROPDOWN (N idiomas, sem lista fixa)
+    // ============================================
+    async function carregarIdiomas() {
+        const wrap = document.getElementById('languageDropdown');
+        const dropdownContent = document.getElementById('dropdownContent');
+        const currentLanguageSpan = document.getElementById('current-language');
+        if (!wrap || !dropdownContent) return;
+
+        const currentLang = getIdiomaAtual();
+
+        try {
+            const langData = await carregarLangData();
+            const ativos = Object.entries(langData).filter(([_, l]) => l.active !== false);
+
+            if (ativos.length <= 1) {
+                wrap.style.display = 'none';
+                return;
+            }
+
+            dropdownContent.innerHTML = ativos.map(([key, lang]) => {
+                const isCurrent = key === currentLang;
+                const check = isCurrent ? '<i class="fas fa-check"></i> ' : '';
+                const classe = isCurrent ? 'active' : '';
+                return `<a href="#" class="language-option ${classe}" data-lang="${key}">
+                    ${check}${lang.name}
+                </a>`;
+            }).join('');
+
+            if (currentLanguageSpan && langData[currentLang]) {
+                currentLanguageSpan.textContent = langData[currentLang].name;
+            }
+
+            dropdownContent.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', e => {
+                    e.preventDefault();
+                    trocarIdioma(a.dataset.lang);
+                });
+            });
+
+            const btn = document.getElementById('languageBtn');
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                dropdownContent.classList.toggle('show');
+            });
+
+            document.addEventListener('click', e => {
+                if (!e.target.closest('.language-dropdown')) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
+        } catch (e) {
+            console.warn('Erro idiomas:', e);
+            wrap.style.display = 'none';
+        }
     }
+
+    // ============================================
+    // TROCAR IDIOMA — prefixo no INÍCIO, limpa cache
+    // Aceita url como "en", "/en", "en/", "/en/" ou "" pro pt
+    // ============================================
+    function trocarIdioma(novoLang) {
+        const langData = window.__langData || {};
+
+        // Todos os prefixos existentes (sem barras), ex: ["en", "ja"]
+        const prefixos = Object.values(langData)
+            .map(l => limparPrefixo(l.url))
+            .filter(Boolean);
+
+        // Remove o prefixo atual do path, se houver
+        let path = location.pathname;
+        for (const p of prefixos) {
+            const alvo = '/' + p + '/';
+            if (path === alvo || path.startsWith(alvo)) {
+                path = path.slice(alvo.length - 1); // mantém "/" final
+                if (!path.startsWith('/')) path = '/' + path;
+                break;
+            }
+        }
+
+        // Adiciona prefixo do novo idioma NO INÍCIO
+        const novoPrefixo = limparPrefixo(langData[novoLang]?.url);
+        const destino = novoPrefixo ? `/${novoPrefixo}${path}` : path;
+
+        // Limpa cache em memória pra não vazar entre idiomas
+        __langCache = null;
+        window.__langCache = null;
+        window.__langData = null;
+        window.__langReady = null;
+
+        location.href = destino;
+    }
+
+    // ============================================
+    // SCROLL
+    // ============================================
+    function setupScroll() {
+        const navbar = document.getElementById('navbar');
+        if (!navbar) return;
+        const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 30);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+
+    // ============================================
+    // PRECONNECT DINÂMICO
+    // ============================================
+    const __hostsPreconectados = new Set();
+
+    function preconnectHost(url) {
+        try {
+            const u = new URL(url, location.href);
+            if (!/^https?:$/.test(u.protocol)) return;
+            if (u.origin === location.origin) return;
+            if (__hostsPreconectados.has(u.origin)) return;
+            __hostsPreconectados.add(u.origin);
+
+            const l1 = document.createElement('link');
+            l1.rel = 'preconnect';
+            l1.href = u.origin;
+            l1.crossOrigin = 'anonymous';
+            document.head.appendChild(l1);
+
+            const l2 = document.createElement('link');
+            l2.rel = 'dns-prefetch';
+            l2.href = u.origin;
+            document.head.appendChild(l2);
+        } catch { /* ignora */ }
+    }
+
+    function preconnectDeConteudo(dados) {
+        const urls = [];
+
+        if (typeof dados === 'string') {
+            const reMd = /!\[[^\]]*\]\(([^)]+)\)/g;
+            const reHtml = /<img[^>]+src=["']([^"']+)["']/gi;
+            let m;
+            while ((m = reMd.exec(dados))) urls.push(m[1]);
+            while ((m = reHtml.exec(dados))) urls.push(m[1]);
+        } else if (dados && typeof dados === 'object') {
+            const varrer = (obj, chave) => {
+                if (!obj) return;
+                if (typeof obj === 'string') {
+                    if (/imagem|image|img|foto|photo|capa|cover|thumb|avatar|banner/i.test(chave || '') ||
+                        /^https?:\/\/.+\.(png|jpe?g|gif|webp|svg|avif|bmp)(\?.*)?$/i.test(obj)) {
+                        urls.push(obj);
+                    }
+                    return;
+                }
+                if (Array.isArray(obj)) {
+                    obj.forEach(v => varrer(v, chave));
+                    return;
+                }
+                for (const k in obj) varrer(obj[k], k);
+            };
+            varrer(dados, '');
+        }
+
+        urls.forEach(preconnectHost);
+    }
+
+    window.preconnectHost = preconnectHost;
+    window.preconnectDeConteudo = preconnectDeConteudo;
+
+    // ============================================
+    // INIT
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async () => {
+        renderHeader();
+        renderFooter();
+
+        exporAPI();
+
+        window.__langReady = carregarLangData();
+        await window.__langReady;
+
+        await normalizar();
+        carregarNavbar();
+        carregarIdiomas();
+        setupScroll();
+    });
 })();
