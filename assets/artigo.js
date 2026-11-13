@@ -20,7 +20,10 @@
             tentativas++;
         }
         if (!window.WikiAPI) {
-            console.warn('WikiAPI não disponível — app.js não carregou?');
+            console.error('WikiAPI não disponível — app.js não carregou?');
+            if (conteudoEl) {
+                conteudoEl.innerHTML = '<p class="vazio">Erro: WikiAPI não carregou (app.js).</p>';
+            }
             return;
         }
 
@@ -28,33 +31,35 @@
         if (window.__langReady) await window.__langReady;
 
         const api = window.WikiAPI;
-        const prefixo = api.getPrefixoIdioma();
 
-        // Monta o base:
-        //   slug preenchido → /tipo/slug/
-        //   slug vazio      → /tipo/
-        const caminho = slug ? `/${tipo}/${slug}/` : `/${tipo}/`;
-        const base = prefixo
-            ? caminho.replace(/\/$/, '') + prefixo + '/'
-            : caminho;
+        // Base SEMPRE via WikiAPI.montarUrl — ele já cuida do prefixo de idioma.
+        //   slug preenchido → /en/tipo/slug/
+        //   slug vazio      → /en/tipo/
+        const base = api.montarUrl(slug ? `/${tipo}/${slug}` : `/${tipo}`);
 
         // Arquivo JSON: slug.json (se tem slug) ou tipo.json (se não tem)
         const jsonFile = slug ? `${slug}.json` : `${tipo}.json`;
 
         try {
-            const meta = await fetch(base + jsonFile + '?v=' + Date.now())
+            const meta = await fetch(base + jsonFile)
                 .then(r => r.ok ? r.json() : {})
                 .catch(() => ({}));
 
-            const md = await fetch(base + 'conteudo.md?v=' + Date.now())
-                .then(r => r.ok ? r.text() : '')
-                .catch(() => '');
+            const mdUrl = base + 'conteudo.md';
+            const mdResp = await fetch(mdUrl);
+            if (!mdResp.ok) {
+                throw new Error(`conteudo.md não encontrado (HTTP ${mdResp.status}) em ${mdUrl}`);
+            }
+            const md = await mdResp.text();
+            if (!md.trim()) {
+                throw new Error(`conteudo.md está vazio em ${mdUrl}`);
+            }
 
-            const galeriaData = await fetch(base + 'galeria.json?v=' + Date.now())
+            const galeriaData = await fetch(base + 'galeria.json')
                 .then(r => r.ok ? r.json() : { imagens: [] })
                 .catch(() => ({ imagens: [] }));
 
-            // 👇 ADICIONADO — pré-conecta os hosts de imagem ANTES de montar o HTML
+            // Pré-conecta os hosts de imagem ANTES de montar o HTML
             if (window.preconnectDeConteudo) {
                 window.preconnectDeConteudo(meta);
                 window.preconnectDeConteudo(md);
@@ -71,7 +76,6 @@
 
             const imgTopoEl = document.getElementById('artigoImagemTopo');
             if (imgTopoEl && meta.imagem) {
-                // 👇 ADICIONADO — fetchpriority="high" na imagem de topo
                 imgTopoEl.innerHTML = `<img src="${meta.imagem}" alt="${nome}" fetchpriority="high">`;
             }
 
@@ -94,7 +98,7 @@
                     marked.setOptions({ breaks: true, gfm: true });
                     conteudoEl.innerHTML = marked.parse(md);
 
-                    // 👇 ADICIONADO — lazy loading nas imagens do markdown
+                    // Lazy loading nas imagens do markdown
                     conteudoEl.querySelectorAll('img').forEach(img => {
                         img.loading = 'lazy';
                         img.decoding = 'async';
@@ -129,6 +133,7 @@
             if (conteudoEl) {
                 conteudoEl.innerHTML = `<p class="vazio">Erro ao carregar artigo: ${e.message}</p>`;
             }
+            console.error('[artigo.js]', e);
         }
     }
 
@@ -140,6 +145,7 @@
 
     function renderInfobox(info, tipoAtual) {
         if (!info) return '';
+        const api = window.WikiAPI;
         let html = '<div class="wiki-container">';
 
         html += `<div class="wiki-header-box">${info.titulo || 'Informações'}</div>`;
@@ -154,7 +160,7 @@
             html += `<div class="wiki-item"><strong>Relacionamentos:</strong><br>`;
             html += info.relacionamentos.map(r => {
                 const tipoRel = r.tipo || tipoAtual;
-                const href = r.slug ? `/${tipoRel}/${r.slug}/` : '#';
+                const href = r.slug ? api.montarUrl(`/${tipoRel}/${r.slug}`) : '#';
                 const link = r.slug
                     ? `<a href="${href}" class="wiki-text-link">${r.nome}</a>`
                     : r.nome;
@@ -199,12 +205,13 @@
     function converterLinksInternos(container, tipo) {
         if (!container) return;
         const api = window.WikiAPI;
-        const prefixo = api?.getPrefixoIdioma() || '';
+        if (!api?.montarUrl) return;
+
         container.querySelectorAll('a').forEach(a => {
             const href = a.getAttribute('href') || '';
+            // Só converte links "puros" tipo "wahi" (slug simples)
             if (/^[a-z0-9-]+$/i.test(href)) {
-                const base = `/${tipo}/${href}/`;
-                a.setAttribute('href', prefixo ? base.replace(/\/$/, '') + prefixo + '/' : base);
+                a.setAttribute('href', api.montarUrl(`/${tipo}/${href}`));
             }
         });
     }
