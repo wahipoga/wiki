@@ -1,4 +1,4 @@
-shley ????? (sobrenome desconhecido) é a principal antagonista de Laços Profanos: O Fardo da Profecia. Ao longo da história, também é conhecida pelos apelidos e títulos de Ash, Mulher Mascarada, Patroa e A Líder.
+Ashley ????? (sobrenome desconhecido) é a principal antagonista de Laços Profanos: O Fardo da Profecia. Ao longo da história, também é conhecida pelos apelidos e títulos de Ash, Mulher Mascarada, Patroa e A Líder.
 
 Pouco se sabe sobre sua origem, passado ou identidade verdadeira. Ashley ocupa a posição de líder da CCED, organização cuja missão original foi alterada sob seu comando. As razões por trás dessa mudança permanecem desconhecidas.
 
