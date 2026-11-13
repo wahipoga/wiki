@@ -578,7 +578,7 @@ main { padding: 30px 0 60px; }
 .galeria-prev { left: 12px; }
 .galeria-next { right: 12px; }
 
-/* 👇 DOTS — corrigido pro mobile com muitas imagens */
+/* ===== DOTS (CORRIGIDO) ===== */
 .galeria-dots {
   position: absolute;
   bottom: 12px;
@@ -587,18 +587,18 @@ main { padding: 30px 0 60px; }
   display: flex;
   gap: 6px;
   z-index: 2;
-  max-width: calc(100% - 100px);   /* não encosta nas setas ‹ › */
+  max-width: calc(100% - 100px);
   overflow-x: auto;
   overflow-y: hidden;
   padding: 4px 6px;
-  scrollbar-width: none;           /* Firefox */
+  scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 }
 .galeria-dots::-webkit-scrollbar { display: none; }
 
 .galeria-dot {
-  flex: 0 0 auto;                  /* não encolhe nem some */
+  flex: 0 0 auto;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -609,4 +609,47 @@ main { padding: 30px 0 60px; }
 }
 .galeria-dot.active { background: #f01b85; width: 24px; border-radius: 5px; }
 
-.light
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; }
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  transition: all 0.3s;
+}
+.lightbox-close:hover { background: #f01b85; }
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid rgba(240, 27, 133, 0.15);
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 40px;
+}
+footer a { color: #f01b85; }
+
+.vazio {
+  text-align: center;
+  color: #888;
+  padding: 40px 20px;
+  font-size: 0.95rem;
+}
