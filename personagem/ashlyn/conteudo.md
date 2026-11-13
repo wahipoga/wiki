@@ -1,21 +1,21 @@
-**Ashlyn ????? (surname unknown)**, better known as Ashlyn, Ash, or Lyn, is one of the five protagonists of *Laços Profanos: O Fardo da Profecia* (*Profane Bonds: The Burden of Prophecy*).
+**Ashlyn ????? (sobrenome desconhecido)**, mais conhecido como Ashlyn, Ash ou Lyn, é um dos cinco protagonistas de *Laços Profanos: O Fardo da Profecia* (*Profane Bonds: The Burden of Prophecy*).
 
-Ashlyn is a sweet, kind, sensitive, and delicate young man, always willing to help those in need. His compassionate nature often leads him to place the well-being of others above his own.
+Ashlyn é um jovem doce, gentil, sensível e delicado, sempre disposto a ajudar quem precisa. Sua natureza compassiva frequentemente o leva a colocar o bem-estar dos outros acima do próprio.
 
-He previously worked as a jailer for the CCED, but for reasons still unknown, he abandons his former position and joins the protagonists on a journey toward the leader of the organization. His true intentions and the reasons behind this decision remain shrouded in mystery.
+Ele trabalhava anteriormente como carcereiro para o CCED, mas por razões ainda desconhecidas, abandona sua antiga posição e se junta aos protagonistas em uma jornada rumo ao líder da organização. Suas verdadeiras intenções e os motivos por trás dessa decisão permanecem envoltos em mistério.
 
-## Characteristics and traits
+## Características e traços
 
-Ashlyn is a cisgender man of unknown age, with fair skin and a height of 1.76 m. He has black, well-kept hair, usually styled neatly, with an ahoge standing out at the top of his head. The contrast between his dark hair and fair skin makes his appearance easily recognizable.
+Ashlyn é um homem cisgênero de idade desconhecida, com pele clara e 1,76 m de altura. Ele tem cabelos pretos e bem cuidados, geralmente arrumados de forma elegante, com um ahoge se destacando no topo da cabeça. O contraste entre seus cabelos escuros e a pele clara torna sua aparência facilmente reconhecível.
 
-On his forehead, there is a pair of horns of the same shade as his skin, a feature that reveals his hybrid origin between human and demon. One of these horns is broken for unknown reasons. However, it is not only the horns that betray his demonic nature: his gray eyes have vertical pupils similar to a cat's, further reinforcing his unusual appearance.
+Em sua testa, há um par de chifres da mesma tonalidade que sua pele, uma característica que revela sua origem híbrida entre humano e demônio. Um desses chifres está quebrado por razões desconhecidas. No entanto, não são apenas os chifres que denunciam sua natureza demoníaca: seus olhos cinzentos têm pupilas verticais semelhantes às de um gato, reforçando ainda mais sua aparência incomum.
 
-Ashlyn dresses in a casual, modern style. His outfit consists of a pink jacket with white details over a black shirt, accompanied by gray trousers of the same shade as his eyes. He completes the look with stylish sneakers matching the color of his trousers and white socks.
+Ashlyn se veste em um estilo casual e moderno. Seu traje consiste em uma jaqueta rosa com detalhes brancos sobre uma camisa preta, acompanhada de calças cinzentas da mesma tonalidade dos seus olhos. Ele completa o visual com tênis estilosos combinando com a cor das calças e meias brancas.
 
-His personality is marked by his kindness, sweetness, and sensitivity. Known for being someone reliable, Ashlyn is always willing to help those in need, easily earning the trust of the people around him.
+Sua personalidade é marcada por sua bondade, doçura e sensibilidade. Conhecido por ser alguém confiável, Ashlyn está sempre disposto a ajudar quem precisa, conquistando facilmente a confiança das pessoas ao seu redor.
 
-## Biography
+## Biografia
 
-Little is known about Ashlyn's past. Before the events of *Laços Profanos: O Fardo da Profecia*, he worked as a jailer for the CCED, although the circumstances that led him to hold that position remain unknown.
+Pouco se sabe sobre o passado de Ashlyn. Antes dos eventos de *Laços Profanos: O Fardo da Profecia*, ele trabalhava como carcereiro para o CCED, embora as circunstâncias que o levaram a ocupar essa posição permaneçam desconhecidas.
 
-At a certain point, for undisclosed reasons, Ashlyn abandons his former position and joins the protagonists on their journey. Despite showing great kindness and loyalty, several aspects of his life remain shrouded in mystery, including the origin of his broken horn, his true story, and the reasons that led him to distance himself from the organization.
+Em determinado momento, por motivos não revelados, Ashlyn abandona sua antiga posição e se junta aos protagonistas em sua jornada. Apesar de demonstrar grande bondade e lealdade, vários aspectos de sua vida permanecem envoltos em mistério, incluindo a origem de seu chifre quebrado, sua verdadeira história e as razões que o levaram a se afastar da organização.
