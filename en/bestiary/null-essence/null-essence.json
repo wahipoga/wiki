@@ -1,0 +1,13 @@
+{
+  "nome": "Null Essence Creatures",
+  "imagem": "https://cdn.imgchest.com/files/4f05cb916f9a.png",
+  "infobox": {
+    "campos": [
+      { "label": "Type", "valor": "Creature" },
+      { "label": "Composition", "valor": "Null energy" },
+      { "label": "Origin", "valor": "Places of chaos and suffering" },
+      { "label": "Diet", "valor": "Necrophagic" },
+      { "label": "Variations", "valor": "5 known" }
+    ]
+  }
+}
