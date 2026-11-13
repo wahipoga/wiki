@@ -1,0 +1,10 @@
+{
+  "nome": "Hybrids",
+  "imagem": "https://cdn.imgchest.com/files/82b2a8f64e33.png",
+  "infobox": {
+    "campos": [
+      { "label": "Type", "valor": "Creature" },
+      { "label": "Origin", "valor": "union between different species" }
+    ]
+  }
+}
