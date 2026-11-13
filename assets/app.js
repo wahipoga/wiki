@@ -24,6 +24,16 @@
     }
 
     // ============================================
+    // LÊ O PREFIXO DO IDIOMA — aceita "url" OU "prefix"
+    // (compatível com lang.json antigo e novo)
+    // ============================================
+    function getPrefixoDoIdioma(lang) {
+        const cfg = window.__langData?.[lang];
+        if (!cfg) return '';
+        return limparPrefixo(cfg.url ?? cfg.prefix ?? '');
+    }
+
+    // ============================================
     // NORMALIZA PATH
     // ============================================
     function normalizarPath(path) {
@@ -52,13 +62,10 @@
     }
 
     // ============================================
-    // PREFIXO DO IDIOMA ATUAL — retorna "" ou "en"
+    // PREFIXO DO IDIOMA ATUAL — "" ou "en"
     // ============================================
     function getPrefixoLimpo() {
-        const lang = getIdiomaAtual();
-        const cfg = window.__langData?.[lang];
-        if (!cfg) return '';
-        return limparPrefixo(cfg.url);
+        return getPrefixoDoIdioma(getIdiomaAtual());
     }
 
     // ============================================
@@ -334,14 +341,14 @@
 
     // ============================================
     // TROCAR IDIOMA — prefixo no INÍCIO, limpa cache
-    // Aceita url como "en", "/en", "en/", "/en/" ou "" pro pt
+    // Aceita url OU prefix, com ou sem barras
     // ============================================
     function trocarIdioma(novoLang) {
         const langData = window.__langData || {};
 
         // Todos os prefixos existentes (sem barras), ex: ["en", "ja"]
-        const prefixos = Object.values(langData)
-            .map(l => limparPrefixo(l.url))
+        const prefixos = Object.keys(langData)
+            .map(k => getPrefixoDoIdioma(k))
             .filter(Boolean);
 
         // Remove o prefixo atual do path, se houver
@@ -356,7 +363,7 @@
         }
 
         // Adiciona prefixo do novo idioma NO INÍCIO
-        const novoPrefixo = limparPrefixo(langData[novoLang]?.url);
+        const novoPrefixo = getPrefixoDoIdioma(novoLang);
         const destino = novoPrefixo ? `/${novoPrefixo}${path}` : path;
 
         // Limpa cache em memória pra não vazar entre idiomas
