@@ -1,0 +1,11 @@
+{
+  "nome": "Dragons",
+  "imagem": "https://cdn.imgchest.com/files/34dee6925217.png",
+  "infobox": {
+    "campos": [
+      { "label": "Type", "valor": "Creature" },
+      { "label": "Origin", "valor": "Varied" },
+      { "label": "Diet", "valor": "Omnivore" }
+    ]
+  }
+}
