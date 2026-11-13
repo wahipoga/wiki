@@ -36,5 +36,43 @@
       "link": "https://lacosprofanos.com.br/",
       "active": true
     }
+  ],
+  "en": [
+    {
+      "icon": "fa-home",
+      "label": "Home",
+      "link": "/en",
+      "active": true
+    },
+    {
+      "icon": "fa-atom",
+      "label": "Universe",
+      "link": "https://wiki.lacosprofanos.com.br/en/universe/",
+      "active": true
+    },
+    {
+      "icon": "fa-user",
+      "label": "Characters",
+      "link": "https://wiki.lacosprofanos.com.br/en/characters/",
+      "active": true
+    },
+    {
+      "icon": "fa-paw",
+      "label": "Bestiary",
+      "link": "https://wiki.lacosprofanos.com.br/en/bestiary/",
+      "active": true
+    },
+    {
+      "icon": "fa-hands-helping",
+      "label": "Contribute to the wiki",
+      "link": "https://wahipogo.gitbook.io/wiki",
+      "active": true
+    },
+     {
+      "icon": "fa-globe",
+      "label": "Main site",
+      "link": "https://lacosprofanos.com.br/en",
+      "active": true
+    }
   ]
 }
