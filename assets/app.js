@@ -57,6 +57,37 @@
     }
 
     // ============================================
+    // MATCH DE PADRÃO COM {slug}
+    // "/en/characters/{slug}/" vs "/en/characters/ashley/" → { slug: "ashley" }
+    // Template sem {slug} → match literal normalizado
+    // ============================================
+    function matchComSlug(template, path) {
+        const p = normalizarPath(path);
+        const t = String(template);
+
+        if (!t.includes('{slug}')) {
+            return normalizarPath(t) === p ? {} : null;
+        }
+
+        const [pre, pos] = t.split('{slug}');
+        const preN = normalizarPath(pre);
+        const posN = normalizarPath(pos || '');
+
+        if (!p.startsWith(preN)) return null;
+
+        let resto = p.slice(preN.length);
+        if (posN) {
+            if (!resto.endsWith(posN)) return null;
+            resto = resto.slice(0, resto.length - posN.length);
+        }
+
+        const slug = resto.replace(/^\/+|\/+$/g, '');
+        if (!slug || slug.includes('/')) return null;
+
+        return { slug };
+    }
+
+    // ============================================
     // CARREGA LANG.JSON (sempre da raiz)
     // ============================================
     async function carregarLangData() {
@@ -76,7 +107,7 @@
     // ============================================
     // CARREGA KEYS.JSON (mapa de correlação de slugs)
     // Aceita paths relativos ou URLs completas em cada entrada.
-    // Estrutura: { "universe": { "pt": "...", "en": "..." }, ... }
+    // Suporta {slug} como placeholder nas rotas de conteúdo.
     // ============================================
     async function carregarKeysData() {
         if (window.__keysCache) return window.__keysCache;
@@ -369,48 +400,40 @@
     }
 
     // ============================================
-    // TROCAR IDIOMA — via keys.json (mapa de correlação)
-    // 1. Consulta keys.json pra achar o path equivalente no novo idioma
-    // 2. Se não achar, cai no fallback de só trocar o prefixo
-    // Aceita links relativos OU absolutos no keys.json.
+    // TROCAR IDIOMA
+    // 1. keys.json com {slug} → match por padrão (conteúdo)
+    // 2. keys.json literal → match exato (institucional)
+    // 3. fallback → só troca o prefixo
     // ============================================
     async function trocarIdioma(novoLang) {
         const langData = window.__langData || {};
         const langAtual = getIdiomaAtual();
-
-        const pathAtual = normalizarPath(location.pathname);
-        const hostAtual = location.host;
+        const pathAtual = location.pathname;
 
         try {
             const keys = await carregarKeysData();
 
-            // Acha a key cujo path NO IDIOMA ATUAL bate com a URL atual.
-            // Compara pathname normalizado E host (quando a entry for absoluta).
-            const keyAtual = Object.keys(keys).find(key => {
-                const entry = keys[key];
-                if (!entry || !entry[langAtual]) return false;
-
-                const alvo = entry[langAtual];
-                const alvoPath = normalizarPath(alvo);
-
-                if (alvoPath !== pathAtual) return false;
-
-                // Se for URL absoluta, exige mesmo host
-                if (/^https?:\/\//i.test(alvo)) {
-                    try {
-                        return new URL(alvo).host === hostAtual;
-                    } catch (_) {
-                        return false;
-                    }
-                }
-                return true;
+            // Específicas (com ":") antes das genéricas
+            const chaves = Object.keys(keys).sort((a, b) => {
+                const aEsp = a.includes(':') ? 0 : 1;
+                const bEsp = b.includes(':') ? 0 : 1;
+                return aEsp - bEsp;
             });
 
-            // Se achou e existe tradução pro novo idioma, navega
-            if (keyAtual && keys[keyAtual][novoLang]) {
-                const destino = keys[keyAtual][novoLang];
+            for (const key of chaves) {
+                const entry = keys[key];
+                if (!entry || !entry[langAtual]) continue;
 
-                // Limpa caches pra não vazar entre idiomas
+                const m = matchComSlug(entry[langAtual], pathAtual);
+                if (!m) continue;
+
+                const alvo = entry[novoLang];
+                if (!alvo) continue;
+
+                const destino = alvo.includes('{slug}')
+                    ? alvo.replace('{slug}', m.slug)
+                    : alvo;
+
                 __langCache = null;
                 window.__langCache = null;
                 window.__langData = null;
@@ -432,7 +455,7 @@
         for (const p of prefixos) {
             const alvo = '/' + p + '/';
             if (path === alvo || path.startsWith(alvo)) {
-                path = path.slice(alvo.length - 1); // mantém "/" final
+                path = path.slice(alvo.length - 1);
                 if (!path.startsWith('/')) path = '/' + path;
                 break;
             }
