@@ -8,7 +8,14 @@
         if (window.__langReady) await window.__langReady;
 
         try {
-            const categorias = await fetch('/categorias.json?v=' + Date.now())
+            // 👇 CORRIGIDO — busca o categorias.json do idioma atual
+            const api = window.WikiAPI;
+            const prefixo = (api?.getPrefixoIdioma() || '').replace(/^\//, '');
+            const urlCat = prefixo
+                ? `/${prefixo}/categorias.json?v=` + Date.now()
+                : `/categorias.json?v=` + Date.now();
+
+            const categorias = await fetch(urlCat)
                 .then(r => r.json());
 
             // 👇 ADICIONADO — pré-conecta os hosts das imagens das categorias
@@ -21,12 +28,10 @@
                 return;
             }
 
-            const api = window.WikiAPI;
-            const prefixo = api?.getPrefixoIdioma() || '';
-
             grid.innerHTML = categorias.map(cat => {
+                // 👇 CORRIGIDO — prefixo no INÍCIO: /en/personagem/
                 const base = `/${cat.slug}/`;
-                const href = prefixo ? base.replace(/\/$/, '') + prefixo + '/' : base;
+                const href = prefixo ? `/${prefixo}${base}` : base;
                 return `
                     <a class="categoria-card" href="${href}">
                         <img src="${cat.imagem}" alt="${cat.nome}" loading="lazy"
