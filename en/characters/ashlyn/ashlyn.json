@@ -1,0 +1,21 @@
+{
+  "name": "Ashlyn",
+  "image": "https://cdn.imgchest.com/files/bdf9c0d3fd58.jpg",
+  "infobox": {
+    "title": "Information",
+    "fields": [
+      { "label": "Full name", "value": "Ashlyn ????" },
+      { "label": "Age", "value": "??" },
+      { "label": "Gender", "value": "Cis male" },
+      { "label": "Species", "value": "Human-demon hybrid" },
+      { "label": "Date of birth", "value": "July 5" }
+    ],
+    "stories": {
+      "title": "Stories / Appearances",
+      "fields": [
+        { "label": "Story", "value": "Profane Bonds: The Burden of Prophecy" },
+        { "label": "Role", "value": "Protagonist" }
+      ]
+    }
+  }
+}
