@@ -30,7 +30,7 @@
                 )
             )).filter(Boolean);
 
-            // 👇 ADICIONADO — pré-conecta os hosts das imagens dos cards
+            // 👇 pré-conecta os hosts das imagens dos cards
             if (window.preconnectDeConteudo) {
                 window.preconnectDeConteudo(artigos);
             }
@@ -67,11 +67,12 @@
         }
 
         const api = window.WikiAPI;
-        const prefixo = api?.getPrefixoIdioma() || '';
 
         grid.innerHTML = lista.map(a => {
-            const base = `/${window.CATEGORIA_SLUG}/${a.slug}/`;
-            const href = prefixo ? base.replace(/\/$/, '') + prefixo + '/' : base;
+            const caminho = `/${window.CATEGORIA_SLUG}/${a.slug}`;
+            const href = api
+                ? api.montarUrl(caminho)
+                : caminho + '/';
             return `
                 <a class="artigo-card" href="${href}">
                     <img src="${a.imagem || 'https://placehold.co/300/1a1a1a/666?text=?'}"
