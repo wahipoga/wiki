@@ -1,0 +1,21 @@
+{
+  "nome": "Askot",
+  "imagem": "https://cdn.imgchest.com/files/d48a0a826539.png",
+  "infobox": {
+    "titulo": "Informações",
+    "campos": [
+      { "label": "Full name", "valor": "Askot Zequeri" },
+      { "label": "Age", "valor": "??" },
+      { "label": "Gender", "valor": "Cis male" },
+      { "label": "Species", "valor": "Human" },
+      { "label": "Date of birth", "valor": "October 6" }
+    ],
+    "historias": {
+      "titulo": "Histórias / Aparições",
+      "campos": [
+        { "label": "Story", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Role", "valor": "Protagonist" }
+      ]
+    }
+  }
+}
