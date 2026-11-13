@@ -1,8 +1,4 @@
-Aqui está a tradução para o inglês do conteúdo do arquivo:
-
----
-
-Askot Zequeri, better known as Askot or Kot, is one of the five protagonists of Profane Bonds: The Burden of Prophecy.
+**Askot Zequeri**, better known as Askot or Kot, is one of the five protagonists of Profane Bonds: The Burden of Prophecy.
 
 Initially, Askot is portrayed as a fearful, curious, and kind young man who frequently shows caution in the face of the unknown. However, after unrevealed events, his personality undergoes a drastic change. He begins to act in a more serious, reserved, and mysterious manner, carrying evident signs of past trauma.
 
