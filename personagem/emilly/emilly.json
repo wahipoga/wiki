@@ -4,21 +4,21 @@
   "infobox": {
     "titulo": "Informações",
     "campos": [
-      { "label": "Full name", "valor": "Emilly Tewiah" },
-      { "label": "Age", "valor": "??" },
-      { "label": "Gender", "valor": "Cis female" },
-      { "label": "Species", "valor": "Human" },
-      { "label": "Date of birth", "valor": "June 11" }
+      { "label": "Nome completo", "valor": "Emilly Tewiah" },
+      { "label": "Idade", "valor": "??" },
+      { "label": "Gênero", "valor": "Cis femenino" },
+      { "label": "Espécie", "valor": "Humana" },
+      { "label": "Data de nascimento", "valor": "11 de junho" }
     ],
     "relacionamentos": [
-      { "nome": "Yaziell", "slug": "yaziell", "nota": "ex-boyfriend" },
-      { "nome": "Wahi", "slug": "wahi", "nota": "childhood friend" }
+      { "nome": "Yaziell", "slug": "yaziell", "nota": "ex namorado" },
+      { "nome": "Wahi", "slug": "wahi", "nota": "amiga de infância" }
     ],
     "historias": {
       "titulo": "Histórias / Aparições",
       "campos": [
-        { "label": "Story", "valor": "Laços Profanos: O fardo da profecia" },
-        { "label": "Role", "valor": "Protagonist" }
+        { "label": "História", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Papel", "valor": "Protagonista" }
       ]
     }
   }
