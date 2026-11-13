@@ -1,0 +1,25 @@
+{
+  "nome": "Yaziell",
+  "imagem": "https://cdn.imgchest.com/files/568a115d632e.jpg",
+  "infobox": {
+    "titulo": "Informações",
+    "campos": [
+      { "label": "Full name", "valor": "Yaziell Thobela" },
+      { "label": "Age", "valor": "??" },
+      { "label": "Gender", "valor": "Cis male" },
+      { "label": "Species", "valor": "Human-dragon hybrid" },
+      { "label": "Date of birth", "valor": "February 13" }
+    ],
+    "relacionamentos": [
+      { "nome": "Wahi", "slug": "wahi", "nota": "childhood friend" },
+      { "nome": "Emilly", "slug": "emilly", "nota": "ex-girlfriend" }
+    ],
+    "historias": {
+      "titulo": "Histórias / Aparições",
+      "campos": [
+        { "label": "Story", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Role", "valor": "Protagonist" }
+      ]
+    }
+  }
+}
