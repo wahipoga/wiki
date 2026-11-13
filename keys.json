@@ -5,5 +5,10 @@
   "characters_":  { "pt": "/personagem/",          "en": "/en/characters/" },
   "bestiary":     { "pt": "/bestiario/{slug}/",     "en": "/en/bestiary/{slug}/" },
   "bestiary_":    { "pt": "/bestiario/",           "en": "/en/bestiary/" },
-  "main":         { "pt": "https://lacosprofanos.com.br/", "en": "https://lacosprofanos.com.br/en/" }
+  "main":         { "pt": "https://lacosprofanos.com.br/", "en": "https://lacosprofanos.com.br/en/" },
+  "bestiary_dragons":    { "pt": "/bestiario/dragoes",           "en": "/en/bestiary/dragons" },
+  "bestiary_demons":    { "pt": "/bestiario/demonios",           "en": "/en/bestiary/demons" },
+  "bestiary_null":    { "pt": "/bestiario/essencia-nula",           "en": "/en/bestiary/null-essence" },
+  "bestiary_shape":    { "pt": "/bestiario/metamorfos",           "en": "/en/bestiary/shapeshifters" },
+  "bestiary_hybrids":    { "pt": "/bestiario/hibridos",           "en": "/en/bestiary/hybrids" },
 }
