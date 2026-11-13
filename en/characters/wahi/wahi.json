@@ -1,0 +1,24 @@
+{
+  "nome": "Wahi",
+  "imagem": "https://cdn.imgchest.com/files/f660ab4328c5.jpg",
+  "infobox": {
+    "titulo": "Informações",
+    "campos": [
+      { "label": "Full name", "valor": "Wahipogo" },
+      { "label": "Age", "valor": "??" },
+      { "label": "Gender", "valor": "Undefined" },
+      { "label": "Species", "valor": "Shapeshifter" },
+      { "label": "Date of birth", "valor": "April 7" }
+    ],
+    "relacionamentos": [
+      { "nome": "Yaziell", "slug": "yaziell", "nota": "childhood friend" }
+    ],
+    "historias": {
+      "titulo": "Histórias / Aparições",
+      "campos": [
+        { "label": "Story", "valor": "Laços Profanos: O fardo da profecia" },
+        { "label": "Role", "valor": "Protagonist" }
+      ]
+    }
+  }
+}
