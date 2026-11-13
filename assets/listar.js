@@ -19,7 +19,10 @@
                 .then(r => r.json());
 
             const slugs = Array.isArray(lista) ? lista : (lista.itens || []);
-            const base = '/' + window.CATEGORIA_SLUG + '/';
+
+            // 👇 CORRIGIDO: prefixo de idioma no base
+            // pt → "/personagem/"   |   en → "/en/characters/"
+            const base = window.WikiAPI.montarUrl(`/${window.CATEGORIA_SLUG}`);
 
             artigos = (await Promise.all(
                 slugs.map(slug =>
