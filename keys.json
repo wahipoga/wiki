@@ -10,5 +10,5 @@
   "bestiary_demons":    { "pt": "/bestiario/demonios",           "en": "/en/bestiary/demons" },
   "bestiary_null":    { "pt": "/bestiario/essencia-nula",           "en": "/en/bestiary/null-essence" },
   "bestiary_shape":    { "pt": "/bestiario/metamorfos",           "en": "/en/bestiary/shapeshifters" },
-  "bestiary_hybrids":    { "pt": "/bestiario/hibridos",           "en": "/en/bestiary/hybrids" },
+  "bestiary_hybrids":    { "pt": "/bestiario/hibridos",           "en": "/en/bestiary/hybrids" }
 }
