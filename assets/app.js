@@ -70,10 +70,17 @@
         }
 
         const [pre, pos] = t.split('{slug}');
-        const preN = normalizarPath(pre);
-        const posN = normalizarPath(pos || '');
 
-        if (!p.startsWith(preN)) return null;
+        // normaliza e trata "/" como vazio (normalizarPath("/") === "/")
+        const limpa = (s) => {
+            const n = normalizarPath(s);
+            return n === '/' ? '' : n;
+        };
+
+        const preN = limpa(pre);
+        const posN = limpa(pos || '');
+
+        if (preN && !p.startsWith(preN)) return null;
 
         let resto = p.slice(preN.length);
         if (posN) {
