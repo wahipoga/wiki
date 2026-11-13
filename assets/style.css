@@ -74,10 +74,20 @@ input { font-family: inherit; }
   transition: all 0.3s;
 }
 .language-btn:hover { background: #f01b85; color: #000; }
+
+/* 👇 CORRIGIDO — mostra o nome do idioma no mobile (truncado com …) */
 @media (max-width: 480px) {
-  .language-btn { padding: 5px 10px; font-size: 0.7rem; }
-  .language-btn span { display: none; }
+  .language-btn { padding: 5px 10px; font-size: 0.7rem; gap: 4px; }
+  .language-btn span {
+    display: inline;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .language-btn .fa-chevron-down { display: none; }
 }
+
 .dropdown-content {
   display: none;
   position: absolute;
