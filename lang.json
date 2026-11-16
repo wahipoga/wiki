@@ -26,5 +26,19 @@
     "links": {
       "contribua": "https://wahipogo.gitbook.io/wiki"
     }
+  },
+    "es": {
+    "name": "Español",
+    "active": true,
+    "prefix": "es",
+    "wiki": {
+      "nome": "Profane Bonds Wiki",
+      "nomeCompleto": "Wiki Profane Bonds",
+      "logo": "",
+      "galeria": "Galería"
+    },
+    "links": {
+      "contribua": "https://wahipogo.gitbook.io/wiki"
+    }
   }
 }
