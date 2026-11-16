@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" id="lang-es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-wiki-title="Bestiario">Bestiario — Wiki Laços Profanos</title>
+    <link rel="icon" href="https://i.imgur.com/mgxXSto.png" type="image/png">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<site-header></site-header>
+
+<main class="container">
+    <h1 class="page-title">Bestiario</h1>
+    <p class="page-subtitle">Criaturas, demonios, dragones y otras entidades del universo.</p>
+
+    <div class="toolbar">
+        <input type="search" id="filtroLocal" placeholder="Filtrar criaturas..." autocomplete="off">
+        <button id="toggleAZ">Orden alfabético</button>
+    </div>
+
+    <div class="artigos-grid" id="artigosGrid">
+        <p class="vazio">Cargando...</p>
+    </div>
+</main>
+
+<site-footer></site-footer>
+
+<script src="/assets/app.js"></script>
+<script>
+    window.CATEGORIA_SLUG = 'bestiario';
+    window.CATEGORIA_JSON = 'bestiario.json';
+</script>
+<script src="/assets/listar.js"></script>
+
+</body>
+</html>
