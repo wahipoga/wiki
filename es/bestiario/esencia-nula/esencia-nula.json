@@ -1,0 +1,13 @@
+{
+  "nome": "Criaturas de esencia nula",
+  "imagem": "https://cdn.imgchest.com/files/4f05cb916f9a.png",
+  "infobox": {
+    "campos": [
+      { "label": "Tipo", "valor": "Criatura" },
+      { "label": "Composición", "valor": "Energía nula" },
+      { "label": "Origen", "valor": "Lugares de caos y sufrimiento" },
+      { "label": "Dieta", "valor": "Necrófaga" },
+      { "label": "Variaciones", "valor": "5 conocidas" }
+    ]
+  }
+}
