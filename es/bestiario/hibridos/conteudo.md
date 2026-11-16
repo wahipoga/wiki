@@ -5,6 +5,6 @@ Esas características pueden variar de acuerdo con las especies involucradas, ma
 La intensidad con que las características de cada especie se manifiestan varía de individuo a individuo, volviendo a cada híbrido único en su apariencia y capacidades.
 
 ## Ejemplos conocidos:
-[Ashlyn](/personagem/ashlyn) — híbrido de demonio y humano. A pesar de su apariencia mayoritariamente humana, heredó los cuernos y los ojos verticales característicos de su linaje demoníaco.
+[Ashlyn](es/personajes/ashlyn) — híbrido de demonio y humano. A pesar de su apariencia mayoritariamente humana, heredó los cuernos y los ojos verticales característicos de su linaje demoníaco.
 
-[Yaziell](/personagem/yaziell) — híbrido de dragón y humano. Además de los cuernos, posee una cola y heredó algunas habilidades propias de los dragones.
+[Yaziell](es/personajes/yaziell) — híbrido de dragón y humano. Además de los cuernos, posee una cola y heredó algunas habilidades propias de los dragones.
