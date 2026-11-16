@@ -174,6 +174,14 @@
     }
 
     // ============================================
+    // HOME DO IDIOMA ATUAL — "/" no PT, "/en/" no EN
+    // ============================================
+    function getHomeDoIdioma() {
+        const lang = getIdiomaAtual();
+        return lang === 'pt' ? '/' : `/${lang}/`;
+    }
+
+    // ============================================
     // API GLOBAL
     // ============================================
     function exporAPI() {
@@ -212,15 +220,10 @@
     function renderHeader() {
         const el = document.querySelector('site-header');
         if (!el) return;
-
-        // CORREÇÃO: href do logo deriva do idioma atual (lido via <html id="lang-XX">)
-        const prefixo = getPrefixoLimpo();               // "" ou "en", "es"...
-        const homeUrl = prefixo ? `/${prefixo}/` : '/';  // "/" ou "/en/"
-
         el.innerHTML = `
             <nav class="navbar" id="navbar">
                 <div class="nav-container">
-                    <a href="${homeUrl}" class="logo">
+                    <a href="${getHomeDoIdioma()}" class="logo">
                         <img src="" alt="" data-wiki="logo" style="height:36px;display:none">
                         <span data-wiki="nome">Laços Profanos</span>
                     </a>
