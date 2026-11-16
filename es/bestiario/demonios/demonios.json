@@ -1,0 +1,12 @@
+{
+  "nome": "Demonios",
+  "imagem": "https://cdn.imgchest.com/files/09d893b256f1.png",
+  "infobox": {
+    "campos": [
+      { "label": "Tipo", "valor": "Criatura" },
+      { "label": "Origen", "valor": "Variado" },
+      { "label": "Dieta", "valor": "Omnívoro" },
+      { "label": "Variaciones", "valor": "4 conocidas" }
+    ]
+  }
+}
