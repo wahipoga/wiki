@@ -85,19 +85,19 @@
     {
       "icon": "fa-atom",
       "label": "Universo",
-      "link": "es/universo/",
+      "link": "/universo/",
       "active": true
     },
     {
       "icon": "fa-user",
       "label": "Personajes",
-      "link": "es/personajes/",
+      "link": "/personajes/",
       "active": true
     },
     {
       "icon": "fa-paw",
       "label": "Bestiario",
-      "link": "es/bestiario/",
+      "link": "/bestiario/",
       "active": true
     },
     {
