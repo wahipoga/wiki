@@ -79,25 +79,25 @@
     {
       "icon": "fa-home",
       "label": "Inicio",
-      "link": "/es/",
+      "link": "/es",
       "active": true
     },
     {
       "icon": "fa-atom",
       "label": "Universo",
-      "link": "/universo/",
+      "link": "https://wiki.lacosprofanos.com.br/es/universo/",
       "active": true
     },
     {
       "icon": "fa-user",
       "label": "Personajes",
-      "link": "/personajes/",
+      "link": "https://wiki.lacosprofanos.com.br/es/personajes/",
       "active": true
     },
     {
       "icon": "fa-paw",
       "label": "Bestiario",
-      "link": "/bestiario/",
+      "link": "https://wiki.lacosprofanos.com.br/es/bestiario/",
       "active": true
     },
     {
@@ -109,7 +109,7 @@
      {
       "icon": "fa-globe",
       "label": "Sitio principal",
-      "link": "https://lacosprofanos.com.br/",
+      "link": "https://lacosprofanos.com.br/es/",
       "active": true
     }
   ]
