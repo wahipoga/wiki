@@ -8,4 +8,4 @@ Una excepción ocurre con los llamados Metamorfos de Esencia Nula, que poseen ma
 Para que los metamorfos comunes consigan mantener o reproducir con estabilidad la forma de seres con inteligencia equivalente a la humana, es necesario un vínculo biológico con el objetivo. Ese vínculo se establece mediante la obtención de una parte del cuerpo del ser original — como cabello, uña, piel o vestimenta. Sin embargo, esas transformaciones son temporales. Para que el metamorfo consiga asumir esa forma de manera permanente y recurrente, es necesario el consumo de la sangre del individuo.
 
 ## Ejemplos conocidos:
-[Wahi](/personagem/wahi) — Metamorfa de esencia nula
+[Wahi](es/personajes/wahi) — Metamorfa de esencia nula
