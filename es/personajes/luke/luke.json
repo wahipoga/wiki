@@ -1,0 +1,26 @@
+{
+  "nome": "Luke",
+  "imagem": "https://cdn.imgchest.com/files/0a460937caab.png",
+  "infobox": {
+    "titulo": "Información",
+    "campos": [
+      { "label": "Nombre completo", "valor": "Luke Zequeri" },
+      { "label": "Edad", "valor": "??" },
+      { "label": "Género", "valor": "Cis masculino" },
+      { "label": "Especie", "valor": "Humano" },
+      { "label": "Fecha de nacimiento", "valor": "01 de noviembre" },
+      { "label": "Ocupación", "valor": "Detective voluntario (conocido como: 'vigilante')" }
+    ],
+    "relacionamentos": [
+      { "nome": "Sarah", "slug": "sarah", "nota": "esposa" },
+      { "nome": "Ethan", "slug": "ethan", "nota": "amigo de la infancia" }
+    ],
+    "historias": {
+      "titulo": "Historias / Apariciones",
+      "campos": [
+        { "label": "Historia", "valor": "Laços Profanos: El peso de la profecía" },
+        { "label": "Papel", "valor": "personaje de trasfondo" }
+      ]
+    }
+  }
+}
