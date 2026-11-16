@@ -1,0 +1,24 @@
+{
+  "nome": "Wahi",
+  "imagem": "https://cdn.imgchest.com/files/f660ab4328c5.jpg",
+  "infobox": {
+    "titulo": "Información",
+    "campos": [
+      { "label": "Nombre completo", "valor": "Wahipogo" },
+      { "label": "Edad", "valor": "??" },
+      { "label": "Género", "valor": "Indefinido" },
+      { "label": "Especie", "valor": "Metamorfa" },
+      { "label": "Fecha de nacimiento", "valor": "07 de abril" }
+    ],
+    "relacionamentos": [
+      { "nome": "Yaziell", "slug": "yaziell", "nota": "amigo de la infancia" }
+    ],
+    "historias": {
+      "titulo": "Historias / Apariciones",
+      "campos": [
+        { "label": "Historia", "valor": "Laços Profanos: El peso de la profecía" },
+        { "label": "Papel", "valor": "Protagonista" }
+      ]
+    }
+  }
+}
