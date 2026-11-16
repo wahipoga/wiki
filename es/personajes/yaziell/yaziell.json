@@ -1,0 +1,25 @@
+{
+  "nome": "Yaziell",
+  "imagem": "https://cdn.imgchest.com/files/568a115d632e.jpg",
+  "infobox": {
+    "titulo": "Información",
+    "campos": [
+      { "label": "Nombre completo", "valor": "Yaziell Thobela" },
+      { "label": "Edad", "valor": "??" },
+      { "label": "Género", "valor": "Cis masculino" },
+      { "label": "Especie", "valor": "Híbrido humano-dragón" },
+      { "label": "Fecha de nacimiento", "valor": "13 de febrero" }
+    ],
+    "relacionamentos": [
+      { "nome": "Wahi", "slug": "wahi", "nota": "amigo de la infancia" },
+      { "nome": "Emilly", "slug": "emilly", "nota": "exnovia" }
+    ],
+    "historias": {
+      "titulo": "Historias / Apariciones",
+      "campos": [
+        { "label": "Historia", "valor": "Laços Profanos: El peso de la profecía" },
+        { "label": "Papel", "valor": "Protagonista" }
+      ]
+    }
+  }
+}
