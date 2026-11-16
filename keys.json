@@ -8,7 +8,7 @@
   "main":         { "pt": "https://lacosprofanos.com.br/", "en": "https://lacosprofanos.com.br/en/", "es": "https://lacosprofanos.com.br/es/" },
   "bestiary_dragons":    { "pt": "/bestiario/dragoes",           "en": "/en/bestiary/dragons", "es": "/es/bestiario/dragones"},
   "bestiary_demons":    { "pt": "/bestiario/demonios",           "en": "/en/bestiary/demons" },
-  "bestiary_null":    { "pt": "/bestiario/essencia-nula",           "en": "/en/bestiary/null-essence" },
+  "bestiary_null":    { "pt": "/bestiario/essencia-nula",           "en": "/en/bestiary/null-essence", "es": "/bestiario/esencia-nula"},
   "bestiary_shape":    { "pt": "/bestiario/metamorfos",           "en": "/en/bestiary/shapeshifters" },
   "bestiary_hybrids":    { "pt": "/bestiario/hibridos",           "en": "/en/bestiary/hybrids" }
 }
