@@ -7,7 +7,8 @@
       "nome": "Laços Profanos Wiki",
       "nomeCompleto": "Wiki Laços Profanos",
       "logo": "",
-      "galeria": "Galeria"
+      "galeria": "Galeria",
+      "indice": "Índice"
     },
     "links": {
       "contribua": "https://wahipogo.gitbook.io/wiki"
@@ -21,13 +22,14 @@
       "nome": "Profane Bonds Wiki",
       "nomeCompleto": "Profane Bonds Wiki",
       "logo": "",
-      "galeria": "Gallery"
+      "galeria": "Gallery",
+      "indice": "Index"
     },
     "links": {
       "contribua": "https://wahipogo.gitbook.io/wiki"
     }
   },
-    "es": {
+  "es": {
     "name": "Español",
     "active": true,
     "prefix": "es",
@@ -35,7 +37,8 @@
       "nome": "Profane Bonds Wiki",
       "nomeCompleto": "Wiki Profane Bonds",
       "logo": "",
-      "galeria": "Galería"
+      "galeria": "Galería",
+      "indice": "Índice"
     },
     "links": {
       "contribua": "https://wahipogo.gitbook.io/wiki"
