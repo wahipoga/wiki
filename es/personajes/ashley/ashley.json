@@ -1,0 +1,22 @@
+{
+  "nome": "Ashley",
+  "imagem": "https://cdn.imgchest.com/files/d94b28f0f929.png",
+  "infobox": {
+    "titulo": "Información",
+    "campos": [
+      { "label": "Nombre completo", "valor": "Ashley ?????" },
+      { "label": "Edad", "valor": "??" },
+      { "label": "Género", "valor": "Cis femenino" },
+      { "label": "Especie", "valor": "Humana" },
+      { "label": "Fecha de nacimiento", "valor": "01 de enero" },
+      { "label": "Ocupación", "valor": "Líder de la CCED", "slug": "cced", "tipo": "organizacoes" }
+    ],
+    "historias": {
+      "titulo": "Historias / Apariciones",
+      "campos": [
+        { "label": "Historia", "valor": "Laços Profanos: El peso de la profecía" },
+        { "label": "Papel", "valor": "Villana" }
+      ]
+    }
+  }
+}
